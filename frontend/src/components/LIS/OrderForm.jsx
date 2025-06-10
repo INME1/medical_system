@@ -80,7 +80,7 @@ const OrderForm = () => {
 
   return (
     <form onSubmit={handleSubmit} style={{ padding: '2rem' }}>
-      <h2>📝 주문 생성</h2>
+      <h2>📝 오더 생성</h2>
 
       <label>👤 환자 ID</label><br />
       <input value={patientId} onChange={e => setPatientId(e.target.value)} required /><br />

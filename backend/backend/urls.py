@@ -39,7 +39,11 @@ urlpatterns = [
     path('api/openmrs-vitals/', openmrs_vitals, name='openmrs_vitals'),
     path('api/openmrs-encounters/', openmrs_encounters, name='openmrs_encounters'),
     # path('api/openmrs-patients/', views.get_all_openmrs_patients),
-    
+    # RIS 기능
+    path('webhook/', include('webhook_handler.urls')),
+    path('api/ai/', include('ai_analysis.urls')),
+    path('api/annotations/', include('dr_annotations.urls')),
+    path('api/reports/', include('dr_reports.urls')),
 
 ]
 

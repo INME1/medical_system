@@ -12,7 +12,7 @@ import Medicalemployee from './Medicalemployee';
 import DicomViewer from './OHIF/OHIFViewer'
 import 'react-calendar/dist/Calendar.css';
 import './MainPage.css';
-
+import RISPage from '../pacsapp';
 export default function MainPage() {
   const [currentTab, setCurrentTab] = useState('order');
   const [username, setUsername] = useState('홍길동'); // 실제 로그인 상태에 따라 변경 필요
@@ -27,7 +27,9 @@ export default function MainPage() {
       case 'logins': return <LoginPage />;
       case 'patientsList': return <PatientsList />;
       case 'Medicalemployee': return <Medicalemployee />;
+      case 'RISPage': return <RISPage />;  // ✅ pacsapp 탭 추가
       default: return <OrderForm />;
+      
     }
   };
 
@@ -51,6 +53,8 @@ export default function MainPage() {
           <button onClick={() => setCurrentTab('logins')}>🔐 로그인</button>
           <button onClick={() => setCurrentTab('patientsList')}>🧑‍🤝‍🧑 환자 목록</button>
           <button onClick={() => setCurrentTab('Medicalemployee')}>👨‍⚕️ 의료인 정보</button>
+          <button onClick={() => window.open('/RISPage', '_blank')}>RISPage</button>
+
           
           {/* EMR 이동 버튼 */}
           <Link to="/emr"><button>📁 EMR 이동</button></Link>

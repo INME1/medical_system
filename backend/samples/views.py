@@ -139,9 +139,6 @@ def delete_sample(requlest, sample_id):
         sample = Sample.objects.get(id=sample_id)
         order = sample.order
         
-        # CDSS 결과 먼저 삭제
-        CDSSResult.objects.filter(sample__id=sample_id).delete()
-        
         # 샘플 삭제
         sample.delete()
         

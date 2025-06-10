@@ -17,7 +17,7 @@ import MainPage from './components/MainPage';
 import EmrMainPage from './components/EMR/EmrMainPage';
 import PatientList from './components/patientsList'; // 기존 환자 목록 (경로 확인 필요)
 import SettingsPage from './components/EMR/SettingsPage';
-import RISPage from './pacsapp/App.js';
+import RISPage from './pacsapp/';
 // ---------------------------
 
 

@@ -5,5 +5,5 @@ urlpatterns = [
     path('predict/', receive_test_result),
     path('receive/', receive_test_result), 
     path('results/', get_cdss_results),
-    path('cdss/delete/<int:sample_id>', delete_cdss_result),
+    path('delete/<int:sample_id>', delete_cdss_result),
 ]

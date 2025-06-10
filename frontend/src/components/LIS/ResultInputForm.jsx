@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { saveLog } from '../utils/saveLog';
 
@@ -23,6 +24,7 @@ const componentUnits = {
 };
 
 const ResultInputForm = () => {
+  const navigate = useNavigate();
   const [selectedPanel, setSelectedPanel] = useState('');
   const [results, setResults] = useState({});
   const [sampleId, setSampleId] = useState('');
@@ -138,6 +140,7 @@ const ResultInputForm = () => {
       } //
 
       alert('모든 결과가 성공적으로 등록 및 CDSS 전송되었습니다.');
+      navigate('/lis/result-list');
     } catch (error) {
       console.error('등록 또는 전송 실패:', error);
       alert('일부 또는 전체 결과 등록 실패');

@@ -1,3 +1,3 @@
 // src/pacsapp/index.js
-import ViewerApp from './App';
-export default ViewerApp;
+import RISPage from './App';
+export default RISPage;

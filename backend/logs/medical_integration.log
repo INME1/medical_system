@@ -1,0 +1,501 @@
+INFO 2025-06-10 10:29:48,783 autoreload 777424 136353725038848 Watching for file changes with StatReloader
+INFO 2025-06-10 10:33:10,060 autoreload 777424 136353725038848 /home/medical_system/backend/worklist/__init__.py changed, reloading.
+INFO 2025-06-10 10:33:10,507 autoreload 777950 137655686217984 Watching for file changes with StatReloader
+INFO 2025-06-10 10:34:37,284 autoreload 777950 137655686217984 /home/medical_system/backend/backend/settings.py changed, reloading.
+INFO 2025-06-10 10:34:37,808 autoreload 778202 134785766203648 Watching for file changes with StatReloader
+INFO 2025-06-10 10:34:53,484 basehttp 778202 134781541717696 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 10:35:12,544 basehttp 778202 134781531227840 "GET /api/integration/openmrs-patients/ HTTP/1.1" 200 292
+INFO 2025-06-10 10:35:12,996 basehttp 778202 134781531227840 "GET /api/integration/openmrs-patients/ HTTP/1.1" 200 292
+INFO 2025-06-10 10:35:53,303 basehttp 778202 134781541717696 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 10:36:00,927 basehttp 778202 134781522835136 "OPTIONS /api/worklist/study-requests/ HTTP/1.1" 200 0
+WARNING 2025-06-10 10:36:01,113 log 778202 134781522835136 Bad Request: /api/worklist/study-requests/
+WARNING 2025-06-10 10:36:01,113 basehttp 778202 134781522835136 "POST /api/worklist/study-requests/ HTTP/1.1" 400 110
+ERROR 2025-06-10 10:36:26,147 log 778202 134781522835136 Internal Server Error: /api/worklist/study-requests/
+Traceback (most recent call last):
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/db/backends/mysql/base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/MySQLdb/cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/MySQLdb/cursors.py", line 330, in _query
+    db.query(q)
+    ~~~~~~~~^^^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/MySQLdb/connections.py", line 255, in query
+    _mysql.connection.query(self, query)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+MySQLdb.ProgrammingError: (1146, "Table 'medical_platform.worklist_studyrequest' doesn't exist")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/home/medical_system/backend/worklist/views.py", line 17, in create
+    serializer.save()
+    ~~~~~~~~~~~~~~~^^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 212, in save
+    self.instance = self.create(validated_data)
+                    ~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 962, in create
+    instance = ModelClass._default_manager.create(**validated_data)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/db/models/query.py", line 658, in create
+    obj.save(force_insert=True, using=self.db)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/db/models/base.py", line 814, in save
+    self.save_base(
+    ~~~~~~~~~~~~~~^
+        using=using,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        update_fields=update_fields,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/db/models/base.py", line 877, in save_base
+    updated = self._save_table(
+        raw,
+    ...<4 lines>...
+        update_fields,
+    )
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/db/models/base.py", line 1020, in _save_table
+    results = self._do_insert(
+        cls._base_manager, using, fields, returning_fields, raw
+    )
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/db/models/base.py", line 1061, in _do_insert
+    return manager._insert(
+           ~~~~~~~~~~~~~~~^
+        [self],
+        ^^^^^^^
+    ...<3 lines>...
+        raw=raw,
+        ^^^^^^^^
+    )
+    ^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1805, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/db/models/sql/compiler.py", line 1820, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/db/backends/mysql/base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/MySQLdb/cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/MySQLdb/cursors.py", line 330, in _query
+    db.query(q)
+    ~~~~~~~~^^^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/MySQLdb/connections.py", line 255, in query
+    _mysql.connection.query(self, query)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+django.db.utils.ProgrammingError: (1146, "Table 'medical_platform.worklist_studyrequest' doesn't exist")
+ERROR 2025-06-10 10:36:26,155 basehttp 778202 134781522835136 "POST /api/worklist/study-requests/ HTTP/1.1" 500 252578
+ERROR 2025-06-10 10:36:32,692 log 778202 134781308237504 Internal Server Error: /api/worklist/work-list/
+ERROR 2025-06-10 10:36:32,692 basehttp 778202 134781308237504 "GET /api/worklist/work-list/ HTTP/1.1" 500 79
+ERROR 2025-06-10 10:36:32,884 log 778202 134781308237504 Internal Server Error: /api/worklist/work-list/
+ERROR 2025-06-10 10:36:32,884 basehttp 778202 134781308237504 "GET /api/worklist/work-list/ HTTP/1.1" 500 79
+INFO 2025-06-10 10:36:53,313 basehttp 778202 134781541717696 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 10:37:53,302 basehttp 778202 134781541717696 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+ERROR 2025-06-10 10:38:02,770 log 778202 134781308237504 Internal Server Error: /api/worklist/work-list/
+ERROR 2025-06-10 10:38:02,770 basehttp 778202 134781308237504 "GET /api/worklist/work-list/ HTTP/1.1" 500 79
+ERROR 2025-06-10 10:38:02,954 log 778202 134781308237504 Internal Server Error: /api/worklist/work-list/
+ERROR 2025-06-10 10:38:02,955 basehttp 778202 134781308237504 "GET /api/worklist/work-list/ HTTP/1.1" 500 79
+INFO 2025-06-10 10:38:53,313 basehttp 778202 134781541717696 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 10:39:53,316 basehttp 778202 134781541717696 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+ERROR 2025-06-10 10:40:52,590 log 778202 134781308237504 Internal Server Error: /api/worklist/work-list/
+ERROR 2025-06-10 10:40:52,591 basehttp 778202 134781308237504 "GET /api/worklist/work-list/ HTTP/1.1" 500 79
+ERROR 2025-06-10 10:40:52,773 log 778202 134781308237504 Internal Server Error: /api/worklist/work-list/
+ERROR 2025-06-10 10:40:52,774 basehttp 778202 134781308237504 "GET /api/worklist/work-list/ HTTP/1.1" 500 79
+INFO 2025-06-10 10:40:53,320 basehttp 778202 134781541717696 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 10:41:41,017 autoreload 778202 134785766203648 /home/medical_system/backend/worklist/migrations/__init__.py changed, reloading.
+INFO 2025-06-10 10:41:42,481 autoreload 779659 125113398296832 Watching for file changes with StatReloader
+INFO 2025-06-10 10:41:53,507 basehttp 779659 125109172606656 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 10:42:53,309 basehttp 779659 125109172606656 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 10:43:53,322 basehttp 779659 125109172606656 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 10:44:53,313 basehttp 779659 125109172606656 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 10:45:53,325 basehttp 779659 125109172606656 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+WARNING 2025-06-10 10:46:39,362 log 779659 125109162116800 Not Found: /
+WARNING 2025-06-10 10:46:39,362 basehttp 779659 125109162116800 "GET / HTTP/1.1" 404 4292
+WARNING 2025-06-10 10:46:39,745 log 779659 125109153724096 Not Found: /favicon.ico
+WARNING 2025-06-10 10:46:39,746 basehttp 779659 125109153724096 "GET /favicon.ico HTTP/1.1" 404 4348
+INFO 2025-06-10 10:46:53,326 basehttp 779659 125109172606656 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 10:47:53,324 basehttp 779659 125109172606656 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 10:48:53,323 basehttp 779659 125109172606656 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 10:49:53,336 basehttp 779659 125109172606656 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 10:50:53,333 basehttp 779659 125109172606656 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 10:51:53,330 basehttp 779659 125109172606656 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 10:52:53,344 basehttp 779659 125109172606656 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 10:53:53,343 basehttp 779659 125109172606656 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 10:54:22,535 autoreload 779659 125113398296832 /home/medical_system/backend/dr_annotations/migrations/0001_initial.py changed, reloading.
+INFO 2025-06-10 10:54:24,022 autoreload 781900 125359334461696 Watching for file changes with StatReloader
+INFO 2025-06-10 10:54:53,538 basehttp 781900 125355109816000 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 10:55:53,349 basehttp 781900 125355109816000 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 10:56:53,358 basehttp 781900 125355109816000 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 10:57:53,342 basehttp 781900 125355109816000 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 10:58:54,148 autoreload 783033 129834188886272 Watching for file changes with StatReloader
+ERROR 2025-06-10 10:59:03,995 log 783033 129829964519104 Internal Server Error: /api/worklist/work-list/
+ERROR 2025-06-10 10:59:03,995 basehttp 783033 129829964519104 "GET /api/worklist/work-list/ HTTP/1.1" 500 79
+ERROR 2025-06-10 10:59:04,195 log 783033 129829964519104 Internal Server Error: /api/worklist/work-list/
+ERROR 2025-06-10 10:59:04,196 basehttp 783033 129829964519104 "GET /api/worklist/work-list/ HTTP/1.1" 500 79
+INFO 2025-06-10 10:59:53,532 basehttp 783033 129829873641152 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:00:25,042 autoreload 783033 129834188886272 /home/medical_system/backend/backend/urls.py changed, reloading.
+INFO 2025-06-10 11:00:26,532 autoreload 783425 127444834636032 Watching for file changes with StatReloader
+INFO 2025-06-10 11:00:53,536 basehttp 783425 127440610039488 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:01:53,535 basehttp 783425 127440610039488 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:02:34,247 autoreload 783425 127444834636032 /home/medical_system/backend/worklist/migrations/__init__.py changed, reloading.
+INFO 2025-06-10 11:02:36,256 autoreload 783884 126081889992960 Watching for file changes with StatReloader
+INFO 2025-06-10 11:02:53,550 basehttp 783884 126077664663232 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:03:53,363 basehttp 783884 126077664663232 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:04:53,361 basehttp 783884 126077664663232 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:05:53,377 basehttp 783884 126077664663232 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:06:53,374 basehttp 783884 126077664663232 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:07:23,726 basehttp 783884 126077654173376 "GET /api/samples/alias-mapping/ HTTP/1.1" 200 246
+INFO 2025-06-10 11:07:24,136 basehttp 783884 126077654173376 "GET /api/samples/alias-mapping/ HTTP/1.1" 200 246
+INFO 2025-06-10 11:07:50,128 basehttp 783884 126077654173376 "GET /api/samples/alias-mapping/ HTTP/1.1" 200 246
+INFO 2025-06-10 11:07:50,536 basehttp 783884 126077654173376 "GET /api/samples/alias-mapping/ HTTP/1.1" 200 246
+INFO 2025-06-10 11:07:53,382 basehttp 783884 126077664663232 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:08:09,906 basehttp 783884 126077654173376 "GET /api/samples/alias-mapping/ HTTP/1.1" 200 246
+INFO 2025-06-10 11:08:10,319 basehttp 783884 126077654173376 "GET /api/samples/alias-mapping/ HTTP/1.1" 200 246
+INFO 2025-06-10 11:08:11,964 basehttp 783884 126077654173376 "GET /api/samples/alias-mapping/ HTTP/1.1" 200 246
+INFO 2025-06-10 11:08:12,375 basehttp 783884 126077654173376 "GET /api/samples/alias-mapping/ HTTP/1.1" 200 246
+INFO 2025-06-10 11:08:13,342 basehttp 783884 126077654173376 "GET /api/samples/alias-mapping/ HTTP/1.1" 200 246
+INFO 2025-06-10 11:08:13,755 basehttp 783884 126077654173376 "GET /api/samples/alias-mapping/ HTTP/1.1" 200 246
+INFO 2025-06-10 11:08:52,397 basehttp 783884 126077654173376 "GET /api/samples/alias-mapping/ HTTP/1.1" 200 246
+INFO 2025-06-10 11:08:52,812 basehttp 783884 126077654173376 "GET /api/samples/alias-mapping/ HTTP/1.1" 200 246
+INFO 2025-06-10 11:08:53,396 basehttp 783884 126077664663232 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:09:53,389 basehttp 783884 126077664663232 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:09:58,231 basehttp 783884 126077645780672 "GET /api/ai/pacs-studies/ HTTP/1.1" 200 1601
+INFO 2025-06-10 11:09:58,451 basehttp 783884 126077645780672 "GET /api/ai/pacs-studies/ HTTP/1.1" 200 1601
+ERROR 2025-06-10 11:09:58,460 log 783884 126077637387968 Internal Server Error: /api/worklist/work-list/
+ERROR 2025-06-10 11:09:58,460 basehttp 783884 126077637387968 "GET /api/worklist/work-list/ HTTP/1.1" 500 79
+ERROR 2025-06-10 11:09:58,654 log 783884 126077637387968 Internal Server Error: /api/worklist/work-list/
+ERROR 2025-06-10 11:09:58,655 basehttp 783884 126077637387968 "GET /api/worklist/work-list/ HTTP/1.1" 500 79
+INFO 2025-06-10 11:10:53,374 basehttp 783884 126077664663232 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:11:09,300 basehttp 783884 126077654173376 "GET /api/samples/alias-mapping/ HTTP/1.1" 200 246
+INFO 2025-06-10 11:11:09,708 basehttp 783884 126077654173376 "GET /api/samples/alias-mapping/ HTTP/1.1" 200 246
+WARNING 2025-06-10 11:11:12,167 log 783884 126077654173376 Not Found: /api/api/integration/openmrs/patients/
+WARNING 2025-06-10 11:11:12,168 basehttp 783884 126077654173376 "GET /api/api/integration/openmrs/patients/ HTTP/1.1" 404 4313
+WARNING 2025-06-10 11:11:12,341 log 783884 126077414401728 Not Found: /api/api/integration/openmrs/providers/
+WARNING 2025-06-10 11:11:12,341 basehttp 783884 126077414401728 "GET /api/api/integration/openmrs/providers/ HTTP/1.1" 404 4316
+ERROR 2025-06-10 11:11:12,368 log 783884 126077406009024 Internal Server Error: /api/logs/combined/
+Traceback (most recent call last):
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "/home/medical_system/backend/ocs/views.py", line 105, in combined_log_view
+    for p in Patient.objects.select_related('patient_id').all():
+             ^^^^^^^
+NameError: name 'Patient' is not defined
+WARNING 2025-06-10 11:11:12,531 log 783884 126077654173376 Not Found: /api/api/integration/openmrs/patients/
+WARNING 2025-06-10 11:11:12,536 basehttp 783884 126077654173376 "GET /api/api/integration/openmrs/patients/ HTTP/1.1" 404 4313
+WARNING 2025-06-10 11:11:12,539 log 783884 126077397616320 Not Found: /api/api/integration/openmrs/providers/
+WARNING 2025-06-10 11:11:12,540 basehttp 783884 126077397616320 "GET /api/api/integration/openmrs/providers/ HTTP/1.1" 404 4316
+ERROR 2025-06-10 11:11:12,547 basehttp 783884 126077406009024 "GET /api/logs/combined/ HTTP/1.1" 500 109606
+ERROR 2025-06-10 11:11:12,722 log 783884 126077414401728 Internal Server Error: /api/logs/combined/
+Traceback (most recent call last):
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "/home/medical_system/backend/ocs/views.py", line 105, in combined_log_view
+    for p in Patient.objects.select_related('patient_id').all():
+             ^^^^^^^
+NameError: name 'Patient' is not defined
+ERROR 2025-06-10 11:11:12,902 basehttp 783884 126077414401728 "GET /api/logs/combined/ HTTP/1.1" 500 109606
+WARNING 2025-06-10 11:11:16,227 log 783884 126077406009024 Not Found: /api/api/integration/openmrs/patients/
+WARNING 2025-06-10 11:11:16,229 basehttp 783884 126077406009024 "GET /api/api/integration/openmrs/patients/ HTTP/1.1" 404 4313
+WARNING 2025-06-10 11:11:16,231 log 783884 126077397616320 Not Found: /api/api/integration/openmrs/providers/
+WARNING 2025-06-10 11:11:16,232 basehttp 783884 126077397616320 "GET /api/api/integration/openmrs/providers/ HTTP/1.1" 404 4316
+ERROR 2025-06-10 11:11:16,250 log 783884 126077414401728 Internal Server Error: /api/logs/combined/
+Traceback (most recent call last):
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "/home/medical_system/backend/ocs/views.py", line 105, in combined_log_view
+    for p in Patient.objects.select_related('patient_id').all():
+             ^^^^^^^
+NameError: name 'Patient' is not defined
+ERROR 2025-06-10 11:11:16,252 basehttp 783884 126077414401728 "GET /api/logs/combined/ HTTP/1.1" 500 109606
+WARNING 2025-06-10 11:11:16,414 log 783884 126077654173376 Not Found: /api/api/integration/openmrs/patients/
+WARNING 2025-06-10 11:11:16,416 basehttp 783884 126077654173376 "GET /api/api/integration/openmrs/patients/ HTTP/1.1" 404 4313
+WARNING 2025-06-10 11:11:16,419 log 783884 126077389223616 Not Found: /api/api/integration/openmrs/providers/
+WARNING 2025-06-10 11:11:16,419 basehttp 783884 126077389223616 "GET /api/api/integration/openmrs/providers/ HTTP/1.1" 404 4316
+ERROR 2025-06-10 11:11:16,457 log 783884 126077380830912 Internal Server Error: /api/logs/combined/
+Traceback (most recent call last):
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "/home/medical_system/backend/ocs/views.py", line 105, in combined_log_view
+    for p in Patient.objects.select_related('patient_id').all():
+             ^^^^^^^
+NameError: name 'Patient' is not defined
+ERROR 2025-06-10 11:11:16,636 basehttp 783884 126077380830912 "GET /api/logs/combined/ HTTP/1.1" 500 109606
+INFO 2025-06-10 11:11:53,390 basehttp 783884 126077664663232 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:12:53,382 basehttp 783884 126077664663232 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:13:39,028 autoreload 783884 126081889992960 /home/medical_system/backend/lis_cdss/migrations/0001_initial.py changed, reloading.
+INFO 2025-06-10 11:13:40,635 autoreload 787630 139603981672704 Watching for file changes with StatReloader
+INFO 2025-06-10 11:13:53,578 basehttp 787630 139599756826304 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:14:53,384 basehttp 787630 139599756826304 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:14:56,965 basehttp 787630 139599746336448 "GET /api/ai/pacs-studies/ HTTP/1.1" 200 1601
+INFO 2025-06-10 11:14:57,173 basehttp 787630 139599746336448 "GET /api/ai/pacs-studies/ HTTP/1.1" 200 1601
+ERROR 2025-06-10 11:14:57,198 log 787630 139599737943744 Internal Server Error: /api/worklist/work-list/
+ERROR 2025-06-10 11:14:57,198 basehttp 787630 139599737943744 "GET /api/worklist/work-list/ HTTP/1.1" 500 79
+ERROR 2025-06-10 11:14:57,382 log 787630 139599737943744 Internal Server Error: /api/worklist/work-list/
+ERROR 2025-06-10 11:14:57,383 basehttp 787630 139599737943744 "GET /api/worklist/work-list/ HTTP/1.1" 500 79
+INFO 2025-06-10 11:15:53,380 basehttp 787630 139599756826304 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:16:53,392 basehttp 787630 139599756826304 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:17:15,169 basehttp 787630 139599514953408 "GET /api/samples/alias-mapping/ HTTP/1.1" 200 246
+INFO 2025-06-10 11:17:15,575 basehttp 787630 139599514953408 "GET /api/samples/alias-mapping/ HTTP/1.1" 200 246
+ERROR 2025-06-10 11:17:34,667 log 787630 139599514953408 Internal Server Error: /api/logs/combined/
+Traceback (most recent call last):
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "/home/medical_system/backend/ocs/views.py", line 105, in combined_log_view
+    for p in Patient.objects.select_related('patient_id').all():
+             ^^^^^^^
+NameError: name 'Patient' is not defined
+WARNING 2025-06-10 11:17:34,815 log 787630 139599506560704 Not Found: /api/api/integration/openmrs/patients/
+WARNING 2025-06-10 11:17:34,817 basehttp 787630 139599506560704 "GET /api/api/integration/openmrs/patients/ HTTP/1.1" 404 4313
+WARNING 2025-06-10 11:17:34,820 log 787630 139599498168000 Not Found: /api/api/integration/openmrs/providers/
+WARNING 2025-06-10 11:17:34,820 basehttp 787630 139599498168000 "GET /api/api/integration/openmrs/providers/ HTTP/1.1" 404 4316
+ERROR 2025-06-10 11:17:34,848 basehttp 787630 139599514953408 "GET /api/logs/combined/ HTTP/1.1" 500 109606
+ERROR 2025-06-10 11:17:35,054 log 787630 139599489775296 Internal Server Error: /api/logs/combined/
+Traceback (most recent call last):
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "/home/medical_system/backend/ocs/views.py", line 105, in combined_log_view
+    for p in Patient.objects.select_related('patient_id').all():
+             ^^^^^^^
+NameError: name 'Patient' is not defined
+WARNING 2025-06-10 11:17:35,183 log 787630 139599506560704 Not Found: /api/api/integration/openmrs/patients/
+WARNING 2025-06-10 11:17:35,185 basehttp 787630 139599506560704 "GET /api/api/integration/openmrs/patients/ HTTP/1.1" 404 4313
+WARNING 2025-06-10 11:17:35,187 log 787630 139599481382592 Not Found: /api/api/integration/openmrs/providers/
+WARNING 2025-06-10 11:17:35,188 basehttp 787630 139599481382592 "GET /api/api/integration/openmrs/providers/ HTTP/1.1" 404 4316
+ERROR 2025-06-10 11:17:35,233 basehttp 787630 139599489775296 "GET /api/logs/combined/ HTTP/1.1" 500 109606
+INFO 2025-06-10 11:17:39,150 basehttp 787630 139599489775296 "GET /api/samples/alias-mapping/ HTTP/1.1" 200 2
+INFO 2025-06-10 11:17:39,559 basehttp 787630 139599489775296 "GET /api/samples/alias-mapping/ HTTP/1.1" 200 2
+INFO 2025-06-10 11:17:53,403 basehttp 787630 139599756826304 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:18:53,399 basehttp 787630 139599756826304 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:19:53,402 basehttp 787630 139599756826304 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:20:53,397 basehttp 787630 139599756826304 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:21:53,411 basehttp 787630 139599756826304 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+WARNING 2025-06-10 11:21:58,631 log 787630 139599481382592 Not Found: /api/api/integration/openmrs/providers/
+WARNING 2025-06-10 11:21:58,631 basehttp 787630 139599481382592 "GET /api/api/integration/openmrs/providers/ HTTP/1.1" 404 4316
+WARNING 2025-06-10 11:21:58,634 log 787630 139599498168000 Not Found: /api/api/integration/openmrs/patients/
+WARNING 2025-06-10 11:21:58,635 basehttp 787630 139599498168000 "GET /api/api/integration/openmrs/patients/ HTTP/1.1" 404 4313
+ERROR 2025-06-10 11:21:58,654 log 787630 139599514953408 Internal Server Error: /api/logs/combined/
+Traceback (most recent call last):
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "/home/medical_system/backend/ocs/views.py", line 105, in combined_log_view
+    for p in Patient.objects.select_related('patient_id').all():
+             ^^^^^^^
+NameError: name 'Patient' is not defined
+ERROR 2025-06-10 11:21:58,832 basehttp 787630 139599514953408 "GET /api/logs/combined/ HTTP/1.1" 500 109606
+WARNING 2025-06-10 11:21:59,013 log 787630 139599481382592 Not Found: /api/api/integration/openmrs/providers/
+WARNING 2025-06-10 11:21:59,015 log 787630 139599498168000 Not Found: /api/api/integration/openmrs/patients/
+WARNING 2025-06-10 11:21:59,017 basehttp 787630 139599481382592 "GET /api/api/integration/openmrs/providers/ HTTP/1.1" 404 4316
+WARNING 2025-06-10 11:21:59,018 basehttp 787630 139599498168000 "GET /api/api/integration/openmrs/patients/ HTTP/1.1" 404 4313
+ERROR 2025-06-10 11:21:59,039 log 787630 139599506560704 Internal Server Error: /api/logs/combined/
+Traceback (most recent call last):
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "/home/medical_system/backend/ocs/views.py", line 105, in combined_log_view
+    for p in Patient.objects.select_related('patient_id').all():
+             ^^^^^^^
+NameError: name 'Patient' is not defined
+ERROR 2025-06-10 11:21:59,218 basehttp 787630 139599506560704 "GET /api/logs/combined/ HTTP/1.1" 500 109606
+INFO 2025-06-10 11:22:05,171 basehttp 787630 139599506560704 "GET /api/integration/openmrs-patients/ HTTP/1.1" 200 292
+INFO 2025-06-10 11:22:05,605 basehttp 787630 139599506560704 "GET /api/integration/openmrs-patients/ HTTP/1.1" 200 292
+INFO 2025-06-10 11:22:10,104 basehttp 787630 139598986475200 "GET /api/integration/openmrs/providers/ HTTP/1.1" 200 932
+INFO 2025-06-10 11:22:10,332 basehttp 787630 139598986475200 "GET /api/integration/openmrs/providers/ HTTP/1.1" 200 932
+INFO 2025-06-10 11:22:23,383 basehttp 787630 139599506560704 "GET /api/samples/alias-mapping/ HTTP/1.1" 200 2
+INFO 2025-06-10 11:22:23,791 basehttp 787630 139599506560704 "GET /api/samples/alias-mapping/ HTTP/1.1" 200 2
+INFO 2025-06-10 11:22:24,736 basehttp 787630 139598969689792 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:22:33,254 basehttp 787630 139598969689792 "GET /api/samples/alias-mapping/ HTTP/1.1" 200 2
+INFO 2025-06-10 11:22:33,658 basehttp 787630 139598969689792 "GET /api/samples/alias-mapping/ HTTP/1.1" 200 2
+INFO 2025-06-10 11:22:34,545 autoreload 787630 139603981672704 /home/medical_system/backend/backend/settings.py changed, reloading.
