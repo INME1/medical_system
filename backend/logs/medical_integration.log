@@ -499,3 +499,881 @@ INFO 2025-06-10 11:22:24,736 basehttp 787630 139598969689792 "GET /api/integrati
 INFO 2025-06-10 11:22:33,254 basehttp 787630 139598969689792 "GET /api/samples/alias-mapping/ HTTP/1.1" 200 2
 INFO 2025-06-10 11:22:33,658 basehttp 787630 139598969689792 "GET /api/samples/alias-mapping/ HTTP/1.1" 200 2
 INFO 2025-06-10 11:22:34,545 autoreload 787630 139603981672704 /home/medical_system/backend/backend/settings.py changed, reloading.
+INFO 2025-06-10 11:28:13,384 autoreload 791560 129959103049984 Watching for file changes with StatReloader
+INFO 2025-06-10 11:28:53,595 basehttp 791560 129954877183680 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:29:53,431 basehttp 791560 129954877183680 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:30:53,421 basehttp 791560 129954877183680 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:31:53,608 basehttp 791560 129954866693824 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:32:53,427 basehttp 791560 129954866693824 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:33:53,428 basehttp 791560 129954866693824 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:34:03,455 basehttp 791560 129954858301120 "GET /api/ai/pacs-studies/ HTTP/1.1" 200 1601
+INFO 2025-06-10 11:34:03,666 basehttp 791560 129954858301120 "GET /api/ai/pacs-studies/ HTTP/1.1" 200 1601
+INFO 2025-06-10 11:34:53,428 basehttp 791560 129954866693824 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+WARNING 2025-06-10 11:35:33,989 log 791560 129954849908416 Not Found: /www.google.com:443
+WARNING 2025-06-10 11:35:33,990 basehttp 791560 129954849908416 "CONNECT www.google.com:443 HTTP/1.1" 404 1807
+INFO 2025-06-10 11:35:53,432 basehttp 791560 129954866693824 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:36:53,442 basehttp 791560 129954866693824 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:37:53,436 basehttp 791560 129954866693824 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:38:53,446 basehttp 791560 129954866693824 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+WARNING 2025-06-10 11:39:17,204 log 791560 129954637412032 Not Found: /
+WARNING 2025-06-10 11:39:17,205 basehttp 791560 129954637412032 "GET / HTTP/1.1" 404 4184
+INFO 2025-06-10 11:39:20,253 basehttp 791560 129954637412032 - Broken pipe from ('205.210.31.43', 60762)
+INFO 2025-06-10 11:39:53,436 basehttp 791560 129954866693824 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+ERROR 2025-06-10 11:40:22,273 log 791560 129954629019328 Internal Server Error: /api/worklist/work-list/
+ERROR 2025-06-10 11:40:22,274 basehttp 791560 129954629019328 "GET /api/worklist/work-list/ HTTP/1.1" 500 79
+ERROR 2025-06-10 11:40:22,459 log 791560 129954629019328 Internal Server Error: /api/worklist/work-list/
+ERROR 2025-06-10 11:40:22,459 basehttp 791560 129954629019328 "GET /api/worklist/work-list/ HTTP/1.1" 500 79
+INFO 2025-06-10 11:40:30,789 basehttp 791560 129954629019328 "GET /api/ai/pacs-studies/ HTTP/1.1" 200 1601
+INFO 2025-06-10 11:40:30,997 basehttp 791560 129954629019328 "GET /api/ai/pacs-studies/ HTTP/1.1" 200 1601
+INFO 2025-06-10 11:40:53,445 basehttp 791560 129954866693824 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:40:57,093 basehttp 791560 129954629019328 "GET /api/ai/check/1.2.826.0.1.3680043.8.1055.1.20111103112244831.40200514.30965937/YOLO/ HTTP/1.1" 200 100
+INFO 2025-06-10 11:40:57,274 basehttp 791560 129954629019328 "OPTIONS /api/ai/analyze/ HTTP/1.1" 200 0
+ERROR 2025-06-10 11:40:57,475 log 791560 129954629019328 Internal Server Error: /api/ai/analyze/
+ERROR 2025-06-10 11:40:57,475 basehttp 791560 129954629019328 "POST /api/ai/analyze/ HTTP/1.1" 500 104
+INFO 2025-06-10 11:40:59,283 basehttp 791560 129954629019328 "GET /api/ai/check/1.2.826.0.1.3680043.8.1055.1.20111103112244831.40200514.30965937/YOLO/ HTTP/1.1" 200 100
+ERROR 2025-06-10 11:40:59,487 log 791560 129954629019328 Internal Server Error: /api/ai/analyze/
+ERROR 2025-06-10 11:40:59,488 basehttp 791560 129954629019328 "POST /api/ai/analyze/ HTTP/1.1" 500 104
+INFO 2025-06-10 11:41:00,030 basehttp 791560 129954629019328 "GET /api/ai/check/1.2.826.0.1.3680043.8.1055.1.20111103112244831.40200514.30965937/SSD/ HTTP/1.1" 200 100
+INFO 2025-06-10 11:41:00,219 basehttp 791560 129954629019328 "OPTIONS /api/ai/analyze-ssd/ HTTP/1.1" 200 0
+ERROR 2025-06-10 11:41:00,419 log 791560 129954629019328 Internal Server Error: /api/ai/analyze-ssd/
+ERROR 2025-06-10 11:41:00,420 basehttp 791560 129954629019328 "POST /api/ai/analyze-ssd/ HTTP/1.1" 500 104
+INFO 2025-06-10 11:41:01,240 basehttp 791560 129954629019328 "GET /api/ai/check/1.2.826.0.1.3680043.8.1055.1.20111103112244831.40200514.30965937/SSD/ HTTP/1.1" 200 100
+ERROR 2025-06-10 11:41:01,442 log 791560 129954629019328 Internal Server Error: /api/ai/analyze-ssd/
+ERROR 2025-06-10 11:41:01,442 basehttp 791560 129954629019328 "POST /api/ai/analyze-ssd/ HTTP/1.1" 500 104
+ERROR 2025-06-10 11:41:03,574 log 791560 129954629019328 Internal Server Error: /api/worklist/work-list/
+ERROR 2025-06-10 11:41:03,575 basehttp 791560 129954629019328 "GET /api/worklist/work-list/ HTTP/1.1" 500 79
+ERROR 2025-06-10 11:41:03,763 log 791560 129954629019328 Internal Server Error: /api/worklist/work-list/
+ERROR 2025-06-10 11:41:03,763 basehttp 791560 129954629019328 "GET /api/worklist/work-list/ HTTP/1.1" 500 79
+INFO 2025-06-10 11:41:03,936 basehttp 791560 129954637412032 "GET /api/ai/pacs-studies/ HTTP/1.1" 200 1601
+INFO 2025-06-10 11:41:04,158 basehttp 791560 129954637412032 "GET /api/ai/pacs-studies/ HTTP/1.1" 200 1601
+INFO 2025-06-10 11:41:53,457 basehttp 791560 129954866693824 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:42:53,454 basehttp 791560 129954866693824 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:43:53,456 basehttp 791560 129954866693824 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:44:53,456 basehttp 791560 129954866693824 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:45:53,461 basehttp 791560 129954866693824 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:46:53,459 basehttp 791560 129954866693824 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:47:53,468 basehttp 791560 129954866693824 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:48:53,473 basehttp 791560 129954866693824 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:49:53,465 basehttp 791560 129954866693824 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:50:53,465 basehttp 791560 129954866693824 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:51:53,476 basehttp 791560 129954866693824 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:51:54,412 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:51:54,820 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:52:04,248 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:52:14,235 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:52:18,670 basehttp 791560 129954849908416 "OPTIONS /api/integration/openmrs/patients/create/ HTTP/1.1" 200 0
+INFO 2025-06-10 11:52:19,080 views 791560 129954849908416 환자 생성 요청 데이터: {'givenName': 'legend', 'familyName': 'kim', 'gender': 'M', 'birthdate': '2017-01-31', 'patient_identifier': 'ABCD111', 'middleName': '', 'address': {'address1': 'seoul', 'address2': '', 'cityVillage': '', 'stateProvince': '', 'country': 'South Korea', 'postalCode': ''}}
+INFO 2025-06-10 11:52:19,081 views 791560 129954849908416 React에서 입력받은 Patient Identifier: ABCD111
+INFO 2025-06-10 11:52:19,081 openmrs_api 791560 129954849908416 Patient Identifier로 검색: ABCD111
+INFO 2025-06-10 11:52:19,379 openmrs_api 791560 129954849908416 Patient Identifier 검색 결과: 0명
+INFO 2025-06-10 11:52:19,380 openmrs_api 791560 129954849908416 환자 생성 요청 (사용자 지정 identifier): {'givenName': 'legend', 'familyName': 'kim', 'gender': 'M', 'birthdate': '2017-01-31', 'patient_identifier': 'ABCD111', 'middleName': '', 'address': {'address1': 'seoul', 'address2': '', 'cityVillage': '', 'stateProvince': '', 'country': 'South Korea', 'postalCode': ''}}
+INFO 2025-06-10 11:52:19,380 openmrs_api 791560 129954849908416 사용자 지정 Patient Identifier 사용: ABCD111
+INFO 2025-06-10 11:52:19,381 openmrs_api 791560 129954849908416 Patient Identifier로 검색: ABCD111
+INFO 2025-06-10 11:52:19,421 openmrs_api 791560 129954849908416 Patient Identifier 검색 결과: 0명
+INFO 2025-06-10 11:52:19,595 openmrs_api 791560 129954849908416 Patient Identifier 설정: ABCD111
+INFO 2025-06-10 11:52:19,595 openmrs_api 791560 129954849908416 OpenMRS로 전송할 데이터: {'person': {'names': [{'givenName': 'legend', 'familyName': 'kim', 'middleName': '', 'preferred': True}], 'gender': 'M', 'birthdate': '2017-01-31', 'addresses': [{'address1': 'seoul', 'address2': '', 'cityVillage': '', 'stateProvince': '', 'country': 'South Korea', 'postalCode': '', 'preferred': True}]}, 'identifiers': [{'identifier': 'ABCD111', 'identifierType': '05a29f94-c0ed-11e2-94be-8c13b969e334', 'location': 'aff27d58-a15c-49a6-9beb-d30dcfc0c66e', 'preferred': True}]}
+INFO 2025-06-10 11:52:19,596 openmrs_api 791560 129954849908416 환자 생성 요청: {'person': {'names': [{'givenName': 'legend', 'familyName': 'kim', 'middleName': '', 'preferred': True}], 'gender': 'M', 'birthdate': '2017-01-31', 'addresses': [{'address1': 'seoul', 'address2': '', 'cityVillage': '', 'stateProvince': '', 'country': 'South Korea', 'postalCode': '', 'preferred': True}]}, 'identifiers': [{'identifier': 'ABCD111', 'identifierType': '05a29f94-c0ed-11e2-94be-8c13b969e334', 'location': 'aff27d58-a15c-49a6-9beb-d30dcfc0c66e', 'preferred': True}]}
+INFO 2025-06-10 11:52:20,032 openmrs_api 791560 129954849908416 OpenMRS 응답 상태: 500
+INFO 2025-06-10 11:52:20,032 openmrs_api 791560 129954849908416 OpenMRS 응답 내용: <!doctype html><html lang="en"><head><title>HTTP Status 500 – Internal Server Error</title><style type="text/css">H1 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:22px;} H2 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:16px;} H3 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:14px;} BODY {font-family:Tahoma,Arial,sans-serif;color:black;background-color:white;} B {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;} P {font-family:Tahoma,Arial,sans-serif;background:white;color:black;font-size:12px;}A {color : black;}A.name {color : black;}HR {color : #525D76;}</style></head><body><h1>HTTP Status 500 – Internal Server Error</h1><hr class="line" /><p><b>Type</b> Exception Report</p><p><b>Message</b> No serializer found for class org.springframework.validation.DefaultMessageCodesResolver and no properties discovered to create BeanSerializer (to avoid exception, disable SerializationFeature.FAIL_ON_EMPTY_BEANS) (through reference chain: org.openmrs.module.webservices.validation.ValidationException[&quot;errors&quot;]-&gt;org.springframework.validation.BindException[&quot;bindingResult&quot;]-&gt;org.springframework.validation.BeanPropertyBindingResult[&quot;messageCodesResolver&quot;])</p><p><b>Description</b> The server encountered an unexpected condition that prevented it from fulfilling the request.</p><p><b>Exception</b> <pre>com.fasterxml.jackson.databind.exc.InvalidDefinitionException: No serializer found for class org.springframework.validation.DefaultMessageCodesResolver and no properties discovered to create BeanSerializer (to avoid exception, disable SerializationFeature.FAIL_ON_EMPTY_BEANS) (through reference chain: org.openmrs.module.webservices.validation.ValidationException[&quot;errors&quot;]-&gt;org.springframework.validation.BindException[&quot;bindingResult&quot;]-&gt;org.springframework.validation.BeanPropertyBindingResult[&quot;messageCodesResolver&quot;])
+	com.fasterxml.jackson.databind.exc.InvalidDefinitionException.from(InvalidDefinitionException.java:77)
+	com.fasterxml.jackson.databind.SerializerProvider.reportBadDefinition(SerializerProvider.java:1277)
+	com.fasterxml.jackson.databind.DatabindContext.reportBadDefinition(DatabindContext.java:400)
+	com.fasterxml.jackson.databind.ser.impl.UnknownSerializer.failForEmpty(UnknownSerializer.java:71)
+	com.fasterxml.jackson.databind.ser.impl.UnknownSerializer.serialize(UnknownSerializer.java:33)
+	com.fasterxml.jackson.databind.ser.BeanPropertyWriter.serializeAsField(BeanPropertyWriter.java:728)
+	com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.serializeFields(BeanSerializerBase.java:755)
+	com.fasterxml.jackson.databind.ser.BeanSerializer.serialize(BeanSerializer.java:178)
+	com.fasterxml.jackson.databind.ser.BeanPropertyWriter.serializeAsField(BeanPropertyWriter.java:728)
+	com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.serializeFields(BeanSerializerBase.java:755)
+	com.fasterxml.jackson.databind.ser.BeanSerializer.serialize(BeanSerializer.java:178)
+	com.fasterxml.jackson.databind.ser.BeanPropertyWriter.serializeAsField(BeanPropertyWriter.java:728)
+	com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.serializeFields(BeanSerializerBase.java:755)
+	com.fasterxml.jackson.databind.ser.BeanSerializer.serialize(BeanSerializer.java:178)
+	com.fasterxml.jackson.databind.ser.DefaultSerializerProvider._serialize(DefaultSerializerProvider.java:480)
+	com.fasterxml.jackson.databind.ser.DefaultSerializerProvider.serializeValue(DefaultSerializerProvider.java:319)
+	com.fasterxml.jackson.databind.ObjectWriter$Prefetch.serialize(ObjectWriter.java:1516)
+	com.fasterxml.jackson.databind.ObjectWriter.writeValue(ObjectWriter.java:1006)
+	org.springframework.web.servlet.view.json.AbstractJackson2View.writeContent(AbstractJackson2View.java:228)
+	org.springframework.web.servlet.view.json.AbstractJackson2View.renderMergedOutputModel(AbstractJackson2View.java:172)
+	org.springframework.web.servlet.view.AbstractView.render(AbstractView.java:316)
+	org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1373)
+	org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1118)
+	org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1057)
+	org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	javax.servlet.http.HttpServlet.service(HttpServlet.java:650)
+	org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	javax.servlet.http.HttpServlet.service(HttpServlet.java:731)
+	org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	org.openmrs.module.web.filter.ModuleFilterChain.doFilter(ModuleFilterChain.java:73)
+	org.openmrs.web.filter.GZIPFilter.doFilterInternal(GZIPFilter.java:65)
+	org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	org.openmrs.module.web.filter.ModuleFilterChain.doFilter(ModuleFilterChain.java:71)
+	org.openmrs.module.webservices.rest.web.filter.AuthorizationFilter.doFilter(AuthorizationFilter.java:105)
+	org.openmrs.module.web.filter.ModuleFilterChain.doFilter(ModuleFilterChain.java:71)
+	org.openmrs.module.webservices.rest.web.filter.ContentTypeFilter.doFilter(ContentTypeFilter.java:64)
+	org.openmrs.module.web.filter.ModuleFilterChain.doFilter(ModuleFilterChain.java:71)
+	org.springframework.web.filter.ShallowEtagHeaderFilter.doFilterInternal(ShallowEtagHeaderFilter.java:106)
+	org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	org.openmrs.module.web.filter.ModuleFilterChain.doFilter(ModuleFilterChain.java:71)
+	org.openmrs.module.owa.filter.OwaFilter.doFilter(OwaFilter.java:93)
+	org.openmrs.module.owa.filter.OwaFilter.doFilter(OwaFilter.java:71)
+	org.openmrs.module.web.filter.ModuleFilterChain.doFilter(ModuleFilterChain.java:71)
+	org.openmrs.module.spa.filter.SpaFilter.doFilter(SpaFilter.java:53)
+	org.openmrs.module.web.filter.ModuleFilterChain.doFilter(ModuleFilterChain.java:71)
+	org.openmrs.module.web.filter.ModuleFilter.doFilter(ModuleFilter.java:57)
+	org.openmrs.web.filter.OpenmrsFilter.doFilterInternal(OpenmrsFilter.java:105)
+	org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	org.springframework.orm.hibernate5.support.OpenSessionInViewFilter.doFilterInternal(OpenSessionInViewFilter.java:156)
+	org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	org.openmrs.web.filter.StartupFilter.doFilter(StartupFilter.java:108)
+	org.openmrs.web.filter.StartupFilter.doFilter(StartupFilter.java:108)
+	org.openmrs.web.filter.StartupFilter.doFilter(StartupFilter.java:108)
+	org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+</pre></p><p><b>Note</b> The full stack trace of the root cause is available in the server logs.</p><hr class="line" /><h3>Apache Tomcat/7.0.94</h3></body></html>
+ERROR 2025-06-10 11:52:20,033 openmrs_api 791560 129954849908416 HTTP 오류 - 상태코드: 500
+ERROR 2025-06-10 11:52:20,034 openmrs_api 791560 129954849908416 HTTP 오류 - 응답 내용: <!doctype html><html lang="en"><head><title>HTTP Status 500 – Internal Server Error</title><style type="text/css">H1 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:22px;} H2 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:16px;} H3 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:14px;} BODY {font-family:Tahoma,Arial,sans-serif;color:black;background-color:white;} B {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;} P {font-family:Tahoma,Arial,sans-serif;background:white;color:black;font-size:12px;}A {color : black;}A.name {color : black;}HR {color : #525D76;}</style></head><body><h1>HTTP Status 500 – Internal Server Error</h1><hr class="line" /><p><b>Type</b> Exception Report</p><p><b>Message</b> No serializer found for class org.springframework.validation.DefaultMessageCodesResolver and no properties discovered to create BeanSerializer (to avoid exception, disable SerializationFeature.FAIL_ON_EMPTY_BEANS) (through reference chain: org.openmrs.module.webservices.validation.ValidationException[&quot;errors&quot;]-&gt;org.springframework.validation.BindException[&quot;bindingResult&quot;]-&gt;org.springframework.validation.BeanPropertyBindingResult[&quot;messageCodesResolver&quot;])</p><p><b>Description</b> The server encountered an unexpected condition that prevented it from fulfilling the request.</p><p><b>Exception</b> <pre>com.fasterxml.jackson.databind.exc.InvalidDefinitionException: No serializer found for class org.springframework.validation.DefaultMessageCodesResolver and no properties discovered to create BeanSerializer (to avoid exception, disable SerializationFeature.FAIL_ON_EMPTY_BEANS) (through reference chain: org.openmrs.module.webservices.validation.ValidationException[&quot;errors&quot;]-&gt;org.springframework.validation.BindException[&quot;bindingResult&quot;]-&gt;org.springframework.validation.BeanPropertyBindingResult[&quot;messageCodesResolver&quot;])
+	com.fasterxml.jackson.databind.exc.InvalidDefinitionException.from(InvalidDefinitionException.java:77)
+	com.fasterxml.jackson.databind.SerializerProvider.reportBadDefinition(SerializerProvider.java:1277)
+	com.fasterxml.jackson.databind.DatabindContext.reportBadDefinition(DatabindContext.java:400)
+	com.fasterxml.jackson.databind.ser.impl.UnknownSerializer.failForEmpty(UnknownSerializer.java:71)
+	com.fasterxml.jackson.databind.ser.impl.UnknownSerializer.serialize(UnknownSerializer.java:33)
+	com.fasterxml.jackson.databind.ser.BeanPropertyWriter.serializeAsField(BeanPropertyWriter.java:728)
+	com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.serializeFields(BeanSerializerBase.java:755)
+	com.fasterxml.jackson.databind.ser.BeanSerializer.serialize(BeanSerializer.java:178)
+	com.fasterxml.jackson.databind.ser.BeanPropertyWriter.serializeAsField(BeanPropertyWriter.java:728)
+	com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.serializeFields(BeanSerializerBase.java:755)
+	com.fasterxml.jackson.databind.ser.BeanSerializer.serialize(BeanSerializer.java:178)
+	com.fasterxml.jackson.databind.ser.BeanPropertyWriter.serializeAsField(BeanPropertyWriter.java:728)
+	com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.serializeFields(BeanSerializerBase.java:755)
+	com.fasterxml.jackson.databind.ser.BeanSerializer.serialize(BeanSerializer.java:178)
+	com.fasterxml.jackson.databind.ser.DefaultSerializerProvider._serialize(DefaultSerializerProvider.java:480)
+	com.fasterxml.jackson.databind.ser.DefaultSerializerProvider.serializeValue(DefaultSerializerProvider.java:319)
+	com.fasterxml.jackson.databind.ObjectWriter$Prefetch.serialize(ObjectWriter.java:1516)
+	com.fasterxml.jackson.databind.ObjectWriter.writeValue(ObjectWriter.java:1006)
+	org.springframework.web.servlet.view.json.AbstractJackson2View.writeContent(AbstractJackson2View.java:228)
+	org.springframework.web.servlet.view.json.AbstractJackson2View.renderMergedOutputModel(AbstractJackson2View.java:172)
+	org.springframework.web.servlet.view.AbstractView.render(AbstractView.java:316)
+	org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1373)
+	org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1118)
+	org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1057)
+	org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	javax.servlet.http.HttpServlet.service(HttpServlet.java:650)
+	org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	javax.servlet.http.HttpServlet.service(HttpServlet.java:731)
+	org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	org.openmrs.module.web.filter.ModuleFilterChain.doFilter(ModuleFilterChain.java:73)
+	org.openmrs.web.filter.GZIPFilter.doFilterInternal(GZIPFilter.java:65)
+	org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	org.openmrs.module.web.filter.ModuleFilterChain.doFilter(ModuleFilterChain.java:71)
+	org.openmrs.module.webservices.rest.web.filter.AuthorizationFilter.doFilter(AuthorizationFilter.java:105)
+	org.openmrs.module.web.filter.ModuleFilterChain.doFilter(ModuleFilterChain.java:71)
+	org.openmrs.module.webservices.rest.web.filter.ContentTypeFilter.doFilter(ContentTypeFilter.java:64)
+	org.openmrs.module.web.filter.ModuleFilterChain.doFilter(ModuleFilterChain.java:71)
+	org.springframework.web.filter.ShallowEtagHeaderFilter.doFilterInternal(ShallowEtagHeaderFilter.java:106)
+	org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	org.openmrs.module.web.filter.ModuleFilterChain.doFilter(ModuleFilterChain.java:71)
+	org.openmrs.module.owa.filter.OwaFilter.doFilter(OwaFilter.java:93)
+	org.openmrs.module.owa.filter.OwaFilter.doFilter(OwaFilter.java:71)
+	org.openmrs.module.web.filter.ModuleFilterChain.doFilter(ModuleFilterChain.java:71)
+	org.openmrs.module.spa.filter.SpaFilter.doFilter(SpaFilter.java:53)
+	org.openmrs.module.web.filter.ModuleFilterChain.doFilter(ModuleFilterChain.java:71)
+	org.openmrs.module.web.filter.ModuleFilter.doFilter(ModuleFilter.java:57)
+	org.openmrs.web.filter.OpenmrsFilter.doFilterInternal(OpenmrsFilter.java:105)
+	org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	org.springframework.orm.hibernate5.support.OpenSessionInViewFilter.doFilterInternal(OpenSessionInViewFilter.java:156)
+	org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	org.openmrs.web.filter.StartupFilter.doFilter(StartupFilter.java:108)
+	org.openmrs.web.filter.StartupFilter.doFilter(StartupFilter.java:108)
+	org.openmrs.web.filter.StartupFilter.doFilter(StartupFilter.java:108)
+	org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+</pre></p><p><b>Note</b> The full stack trace of the root cause is available in the server logs.</p><hr class="line" /><h3>Apache Tomcat/7.0.94</h3></body></html>
+ERROR 2025-06-10 11:52:20,035 log 791560 129954849908416 Internal Server Error: /api/integration/openmrs/patients/create/
+ERROR 2025-06-10 11:52:20,035 basehttp 791560 129954849908416 "POST /api/integration/openmrs/patients/create/ HTTP/1.1" 500 64
+INFO 2025-06-10 11:52:24,359 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:52:34,358 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:52:44,369 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:52:53,469 basehttp 791560 129954866693824 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:52:54,374 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:53:04,373 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:53:14,359 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:53:45,361 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:53:53,473 basehttp 791560 129954866693824 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:53:54,292 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:54:04,364 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:54:14,365 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:54:24,369 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+ERROR 2025-06-10 11:54:25,340 log 791560 129954620626624 Internal Server Error: /api/worklist/work-list/
+ERROR 2025-06-10 11:54:25,340 basehttp 791560 129954620626624 "GET /api/worklist/work-list/ HTTP/1.1" 500 79
+INFO 2025-06-10 11:54:27,144 basehttp 791560 129954620626624 "GET /api/ai/pacs-studies/ HTTP/1.1" 200 1601
+INFO 2025-06-10 11:54:27,351 basehttp 791560 129954620626624 "GET /api/ai/pacs-studies/ HTTP/1.1" 200 1601
+INFO 2025-06-10 11:54:34,369 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:54:44,376 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:54:53,486 basehttp 791560 129954866693824 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:54:54,363 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:55:09,686 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:55:11,738 views 791560 129954849908416 환자 생성 요청 데이터: {'givenName': 'legend', 'familyName': 'kim', 'gender': 'M', 'birthdate': '2017-01-31', 'patient_identifier': 'ABCD111', 'middleName': '', 'address': {'address1': 'seoul', 'address2': '', 'cityVillage': '', 'stateProvince': '', 'country': 'South Korea', 'postalCode': ''}}
+INFO 2025-06-10 11:55:11,738 views 791560 129954849908416 React에서 입력받은 Patient Identifier: ABCD111
+INFO 2025-06-10 11:55:11,738 openmrs_api 791560 129954849908416 Patient Identifier로 검색: ABCD111
+INFO 2025-06-10 11:55:11,827 openmrs_api 791560 129954849908416 Patient Identifier 검색 결과: 0명
+INFO 2025-06-10 11:55:11,827 openmrs_api 791560 129954849908416 환자 생성 요청 (사용자 지정 identifier): {'givenName': 'legend', 'familyName': 'kim', 'gender': 'M', 'birthdate': '2017-01-31', 'patient_identifier': 'ABCD111', 'middleName': '', 'address': {'address1': 'seoul', 'address2': '', 'cityVillage': '', 'stateProvince': '', 'country': 'South Korea', 'postalCode': ''}}
+INFO 2025-06-10 11:55:11,828 openmrs_api 791560 129954849908416 사용자 지정 Patient Identifier 사용: ABCD111
+INFO 2025-06-10 11:55:11,828 openmrs_api 791560 129954849908416 Patient Identifier로 검색: ABCD111
+INFO 2025-06-10 11:55:11,871 openmrs_api 791560 129954849908416 Patient Identifier 검색 결과: 0명
+INFO 2025-06-10 11:55:11,976 openmrs_api 791560 129954849908416 Patient Identifier 설정: ABCD111
+INFO 2025-06-10 11:55:11,976 openmrs_api 791560 129954849908416 OpenMRS로 전송할 데이터: {'person': {'names': [{'givenName': 'legend', 'familyName': 'kim', 'middleName': '', 'preferred': True}], 'gender': 'M', 'birthdate': '2017-01-31', 'addresses': [{'address1': 'seoul', 'address2': '', 'cityVillage': '', 'stateProvince': '', 'country': 'South Korea', 'postalCode': '', 'preferred': True}]}, 'identifiers': [{'identifier': 'ABCD111', 'identifierType': '05a29f94-c0ed-11e2-94be-8c13b969e334', 'location': 'aff27d58-a15c-49a6-9beb-d30dcfc0c66e', 'preferred': True}]}
+INFO 2025-06-10 11:55:11,977 openmrs_api 791560 129954849908416 환자 생성 요청: {'person': {'names': [{'givenName': 'legend', 'familyName': 'kim', 'middleName': '', 'preferred': True}], 'gender': 'M', 'birthdate': '2017-01-31', 'addresses': [{'address1': 'seoul', 'address2': '', 'cityVillage': '', 'stateProvince': '', 'country': 'South Korea', 'postalCode': '', 'preferred': True}]}, 'identifiers': [{'identifier': 'ABCD111', 'identifierType': '05a29f94-c0ed-11e2-94be-8c13b969e334', 'location': 'aff27d58-a15c-49a6-9beb-d30dcfc0c66e', 'preferred': True}]}
+INFO 2025-06-10 11:55:12,178 openmrs_api 791560 129954849908416 OpenMRS 응답 상태: 201
+INFO 2025-06-10 11:55:12,178 openmrs_api 791560 129954849908416 OpenMRS 응답 내용: {"uuid":"069bc68b-1610-4282-a0ee-468720168f6c","display":"ABCD111 - legend kim","identifiers":[{"uuid":"b7138f2d-9c80-483c-bd77-5c5087062a11","display":"OpenMRS ID = ABCD111","links":[{"rel":"self","uri":"http://35.225.63.41:8082/openmrs/ws/rest/v1/patient/069bc68b-1610-4282-a0ee-468720168f6c/identifier/b7138f2d-9c80-483c-bd77-5c5087062a11","resourceAlias":"identifier"}]}],"person":{"uuid":"069bc68b-1610-4282-a0ee-468720168f6c","display":"legend kim","gender":"M","age":8,"birthdate":"2017-01-31T00:00:00.000+0000","birthdateEstimated":false,"dead":false,"deathDate":null,"causeOfDeath":null,"preferredName":{"uuid":"070a7c94-ccd7-40e5-b1ba-7a62766caf7a","display":"legend kim","links":[{"rel":"self","uri":"http://35.225.63.41:8082/openmrs/ws/rest/v1/person/069bc68b-1610-4282-a0ee-468720168f6c/name/070a7c94-ccd7-40e5-b1ba-7a62766caf7a","resourceAlias":"name"}]},"preferredAddress":{"uuid":"8693b282-864b-4a52-8b46-d07f892aa943","display":"seoul","links":[{"rel":"self","uri":"http://35.225.63.41:8082/openmrs/ws/rest/v1/person/069bc68b-1610-4282-a0ee-468720168f6c/address/8693b282-864b-4a52-8b46-d07f892aa943","resourceAlias":"address"}]},"attributes":[],"voided":false,"birthtime":null,"deathdateEstimated":false,"links":[{"rel":"self","uri":"http://35.225.63.41:8082/openmrs/ws/rest/v1/person/069bc68b-1610-4282-a0ee-468720168f6c","resourceAlias":"person"},{"rel":"full","uri":"http://35.225.63.41:8082/openmrs/ws/rest/v1/person/069bc68b-1610-4282-a0ee-468720168f6c?v=full","resourceAlias":"person"}],"resourceVersion":"1.11"},"voided":false,"links":[{"rel":"self","uri":"http://35.225.63.41:8082/openmrs/ws/rest/v1/patient/069bc68b-1610-4282-a0ee-468720168f6c","resourceAlias":"patient"},{"rel":"full","uri":"http://35.225.63.41:8082/openmrs/ws/rest/v1/patient/069bc68b-1610-4282-a0ee-468720168f6c?v=full","resourceAlias":"patient"}],"resourceVersion":"1.8"}
+INFO 2025-06-10 11:55:12,178 openmrs_api 791560 129954849908416 생성된 식별자들: [None]
+INFO 2025-06-10 11:55:12,179 openmrs_api 791560 129954849908416 환자 생성 성공 - Patient Identifier: ABCD111
+INFO 2025-06-10 11:55:12,180 views 791560 129954849908416 환자 생성 완료 - OpenMRS UUID: 069bc68b-1610-4282-a0ee-468720168f6c, Patient Identifier: ABCD111
+INFO 2025-06-10 11:55:12,182 basehttp 791560 129954849908416 "POST /api/integration/openmrs/patients/create/ HTTP/1.1" 201 547
+ERROR 2025-06-10 11:55:13,230 log 791560 129954620626624 Internal Server Error: /api/worklist/work-list/
+ERROR 2025-06-10 11:55:13,230 basehttp 791560 129954620626624 "GET /api/worklist/work-list/ HTTP/1.1" 500 79
+ERROR 2025-06-10 11:55:13,414 log 791560 129954620626624 Internal Server Error: /api/worklist/work-list/
+ERROR 2025-06-10 11:55:13,414 basehttp 791560 129954620626624 "GET /api/worklist/work-list/ HTTP/1.1" 500 79
+INFO 2025-06-10 11:55:14,241 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+ERROR 2025-06-10 11:55:14,780 log 791560 129954620626624 Internal Server Error: /api/worklist/work-list/
+ERROR 2025-06-10 11:55:14,781 basehttp 791560 129954620626624 "GET /api/worklist/work-list/ HTTP/1.1" 500 79
+ERROR 2025-06-10 11:55:14,969 log 791560 129954620626624 Internal Server Error: /api/worklist/work-list/
+ERROR 2025-06-10 11:55:14,970 basehttp 791560 129954620626624 "GET /api/worklist/work-list/ HTTP/1.1" 500 79
+INFO 2025-06-10 11:55:24,240 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:55:28,486 openmrs_api 791560 129954849908416 Patient Identifier로 검색: ABCD111
+INFO 2025-06-10 11:55:28,784 openmrs_api 791560 129954849908416 Patient Identifier 검색 결과: 1명
+INFO 2025-06-10 11:55:28,785 openmrs_api 791560 129954849908416 Patient Identifier 검색 성공: 1명
+INFO 2025-06-10 11:55:28,785 views 791560 129954849908416 환자 검색 결과: 1명 (검색어: ABCD111)
+INFO 2025-06-10 11:55:28,786 basehttp 791560 129954849908416 "GET /api/integration/openmrs/patients/search/?q=ABCD111 HTTP/1.1" 200 566
+INFO 2025-06-10 11:55:34,248 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:55:44,374 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:55:53,476 basehttp 791560 129954866693824 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:55:54,372 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:56:04,376 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:56:14,379 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:56:24,368 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:56:34,372 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:56:44,375 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:56:53,491 basehttp 791560 129954866693824 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:56:54,370 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:57:04,371 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:57:14,376 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:57:24,379 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:57:45,385 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:57:53,486 basehttp 791560 129954866693824 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:58:40,691 basehttp 791560 129954603841216 "GET /api/ai/pacs-studies/ HTTP/1.1" 200 1601
+INFO 2025-06-10 11:58:40,900 basehttp 791560 129954603841216 "GET /api/ai/pacs-studies/ HTTP/1.1" 200 1601
+INFO 2025-06-10 11:58:45,377 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:58:53,490 basehttp 791560 129954866693824 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:58:55,683 basehttp 791560 129954620626624 "GET /api/ai/pacs-studies/ HTTP/1.1" 200 1601
+INFO 2025-06-10 11:58:55,889 basehttp 791560 129954620626624 "GET /api/ai/pacs-studies/ HTTP/1.1" 200 1601
+ERROR 2025-06-10 11:58:58,119 log 791560 129954620626624 Internal Server Error: /api/worklist/work-list/
+ERROR 2025-06-10 11:58:58,119 basehttp 791560 129954620626624 "GET /api/worklist/work-list/ HTTP/1.1" 500 79
+ERROR 2025-06-10 11:58:58,302 log 791560 129954620626624 Internal Server Error: /api/worklist/work-list/
+ERROR 2025-06-10 11:58:58,302 basehttp 791560 129954620626624 "GET /api/worklist/work-list/ HTTP/1.1" 500 79
+INFO 2025-06-10 11:59:45,376 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 11:59:53,492 basehttp 791560 129954866693824 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:00:45,376 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:00:53,489 basehttp 791560 129954866693824 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:01:45,389 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:01:53,674 basehttp 791560 129954587055808 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:02:13,195 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:02:14,254 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:02:16,233 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:02:16,647 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:02:20,920 basehttp 791560 129954849908416 "GET /api/integration/waiting-board/ HTTP/1.1" 200 37
+INFO 2025-06-10 12:02:21,330 basehttp 791560 129954849908416 "GET /api/integration/waiting-board/ HTTP/1.1" 200 37
+INFO 2025-06-10 12:02:21,738 basehttp 791560 129954849908416 "GET /api/integration/identifier-waiting/ HTTP/1.1" 200 2
+INFO 2025-06-10 12:02:22,141 basehttp 791560 129954849908416 "GET /api/integration/identifier-waiting/ HTTP/1.1" 200 2
+INFO 2025-06-10 12:02:26,387 basehttp 791560 129954849908416 "GET /api/samples/alias-mapping/ HTTP/1.1" 200 2
+INFO 2025-06-10 12:02:26,793 basehttp 791560 129954849908416 "GET /api/samples/alias-mapping/ HTTP/1.1" 200 2
+INFO 2025-06-10 12:02:53,502 basehttp 791560 129954587055808 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:03:53,503 basehttp 791560 129954587055808 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:04:53,494 basehttp 791560 129954587055808 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:05:53,504 basehttp 791560 129954587055808 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:06:53,514 basehttp 791560 129954587055808 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:07:53,501 basehttp 791560 129954587055808 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:08:53,507 basehttp 791560 129954587055808 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:09:53,513 basehttp 791560 129954587055808 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:10:53,515 basehttp 791560 129954587055808 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:11:53,521 basehttp 791560 129954587055808 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:12:53,531 basehttp 791560 129954587055808 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:13:53,515 basehttp 791560 129954587055808 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:14:53,520 basehttp 791560 129954587055808 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:15:53,524 basehttp 791560 129954587055808 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:16:53,523 basehttp 791560 129954587055808 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+WARNING 2025-06-10 12:16:55,756 log 791560 129954849908416 Not Found: /
+WARNING 2025-06-10 12:16:55,757 basehttp 791560 129954849908416 "GET / HTTP/1.1" 404 4184
+INFO 2025-06-10 12:17:53,525 basehttp 791560 129954587055808 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:18:53,533 basehttp 791560 129954587055808 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:19:53,540 basehttp 791560 129954587055808 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:20:53,538 basehttp 791560 129954587055808 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:21:53,545 basehttp 791560 129954587055808 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:22:53,547 basehttp 791560 129954587055808 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:23:53,540 basehttp 791560 129954587055808 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:24:53,549 basehttp 791560 129954587055808 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:25:53,551 basehttp 791560 129954587055808 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:26:53,555 basehttp 791560 129954587055808 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:27:53,552 basehttp 791560 129954587055808 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:28:53,558 basehttp 791560 129954587055808 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:29:53,554 basehttp 791560 129954587055808 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:30:53,547 basehttp 791560 129954587055808 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:31:53,740 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:32:53,566 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+ERROR 2025-06-10 12:33:04,113 log 791560 129954033432256 Internal Server Error: /api/worklist/work-list/
+ERROR 2025-06-10 12:33:04,114 basehttp 791560 129954033432256 "GET /api/worklist/work-list/ HTTP/1.1" 500 79
+WARNING 2025-06-10 12:33:04,327 log 791560 129954033432256 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-06-10 12:33:04,328 basehttp 791560 129954033432256 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4343
+WARNING 2025-06-10 12:33:04,336 log 791560 129954866693824 Not Found: /favicon.ico
+WARNING 2025-06-10 12:33:04,337 basehttp 791560 129954866693824 "GET /favicon.ico HTTP/1.1" 404 4232
+INFO 2025-06-10 12:33:53,558 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:34:53,565 basehttp 791560 129954849908416 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:35:28,856 autoreload 791560 129959103049984 /home/medical_system/venv/lib/python3.13/site-packages/django/db/migrations/__init__.py changed, reloading.
+INFO 2025-06-10 12:35:30,727 autoreload 804486 125342161387776 Watching for file changes with StatReloader
+INFO 2025-06-10 12:35:53,756 basehttp 804486 125337936238272 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:36:53,566 basehttp 804486 125337936238272 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:37:48,780 autoreload 804486 125342161387776 /home/medical_system/backend/worklist/migrations/0001_initial.py changed, reloading.
+INFO 2025-06-10 12:37:50,378 autoreload 805330 134456914166016 Watching for file changes with StatReloader
+INFO 2025-06-10 12:37:54,684 basehttp 805330 134452691506880 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:38:53,576 basehttp 805330 134452691506880 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:39:53,578 basehttp 805330 134452691506880 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:40:53,581 basehttp 805330 134452691506880 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:41:53,585 basehttp 805330 134452691506880 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:42:53,580 basehttp 805330 134452691506880 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:43:53,581 basehttp 805330 134452691506880 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:44:53,588 basehttp 805330 134452691506880 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:45:53,587 basehttp 805330 134452691506880 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:46:53,597 basehttp 805330 134452691506880 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:47:53,599 basehttp 805330 134452691506880 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+WARNING 2025-06-10 12:48:42,915 log 805330 134452609021632 Not Found: /www.google.com:443
+WARNING 2025-06-10 12:48:42,915 basehttp 805330 134452609021632 "CONNECT www.google.com:443 HTTP/1.1" 404 1807
+INFO 2025-06-10 12:48:53,602 basehttp 805330 134452691506880 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:48:56,980 basehttp 805330 134452600628928 "GET /api/samples/alias-mapping/ HTTP/1.1" 200 2
+INFO 2025-06-10 12:48:57,385 basehttp 805330 134452600628928 "GET /api/samples/alias-mapping/ HTTP/1.1" 200 2
+INFO 2025-06-10 12:49:01,561 basehttp 805330 134452600628928 "GET /api/integration/openmrs-patients/ HTTP/1.1" 200 583
+INFO 2025-06-10 12:49:01,991 basehttp 805330 134452600628928 "GET /api/integration/openmrs-patients/ HTTP/1.1" 200 583
+INFO 2025-06-10 12:49:53,600 basehttp 805330 134452691506880 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:50:53,594 basehttp 805330 134452691506880 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:51:53,605 basehttp 805330 134452691506880 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:52:53,608 basehttp 805330 134452691506880 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:53:53,609 basehttp 805330 134452691506880 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:54:53,614 basehttp 805330 134452691506880 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:55:45,266 autoreload 805330 134456914166016 /home/medical_system/backend/db_router.py changed, reloading.
+INFO 2025-06-10 12:55:46,755 autoreload 809016 138935081152768 Watching for file changes with StatReloader
+INFO 2025-06-10 12:55:53,795 basehttp 809016 138930855515840 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:56:53,622 basehttp 809016 138930855515840 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:57:13,929 basehttp 809016 138930845025984 "GET /api/worklist/work-list/ HTTP/1.1" 200 40
+INFO 2025-06-10 12:57:53,616 basehttp 809016 138930855515840 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:58:53,613 basehttp 809016 138930855515840 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 12:59:53,616 basehttp 809016 138930855515840 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:00:53,625 basehttp 809016 138930855515840 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:01:27,089 basehttp 809016 138930828240576 "GET /api/ai/pacs-studies/ HTTP/1.1" 200 468
+INFO 2025-06-10 13:01:27,281 basehttp 809016 138930828240576 "GET /api/ai/pacs-studies/ HTTP/1.1" 200 468
+INFO 2025-06-10 13:01:27,629 autoreload 809016 138935081152768 /home/medical_system/backend/worklist/migrations/0001_initial.py changed, reloading.
+INFO 2025-06-10 13:01:29,159 autoreload 810207 132495792566528 Watching for file changes with StatReloader
+ERROR 2025-06-10 13:01:36,356 log 810207 132491567077056 Internal Server Error: /api/ai/results/1.2.826.0.1.3680043.8.1055.1.20111103112244831.40200514.30965937/
+ERROR 2025-06-10 13:01:36,356 basehttp 810207 132491567077056 "GET /api/ai/results/1.2.826.0.1.3680043.8.1055.1.20111103112244831.40200514.30965937/ HTTP/1.1" 500 104
+INFO 2025-06-10 13:01:50,633 basehttp 810207 132491478296256 "GET /api/worklist/work-list/ HTTP/1.1" 200 40
+INFO 2025-06-10 13:01:53,806 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:02:03,859 basehttp 810207 132491478296256 "GET /api/ai/pacs-studies/ HTTP/1.1" 200 468
+INFO 2025-06-10 13:02:04,598 basehttp 810207 132491567077056 "GET /api/worklist/work-list/ HTTP/1.1" 200 40
+INFO 2025-06-10 13:02:04,791 basehttp 810207 132491567077056 "GET /api/worklist/work-list/ HTTP/1.1" 200 40
+INFO 2025-06-10 13:02:06,688 basehttp 810207 132491567077056 "GET /api/ai/pacs-studies/ HTTP/1.1" 200 468
+INFO 2025-06-10 13:02:06,881 basehttp 810207 132491567077056 "GET /api/ai/pacs-studies/ HTTP/1.1" 200 468
+INFO 2025-06-10 13:02:32,463 basehttp 810207 132491567077056 "GET /api/worklist/work-list/ HTTP/1.1" 200 40
+INFO 2025-06-10 13:02:32,688 basehttp 810207 132491567077056 "GET /api/worklist/work-list/ HTTP/1.1" 200 40
+INFO 2025-06-10 13:02:53,635 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:03:23,584 basehttp 810207 132491461510848 "GET /api/worklist/work-list/ HTTP/1.1" 200 40
+INFO 2025-06-10 13:03:23,585 basehttp 810207 132491453118144 "GET /api/worklist/work-list/ HTTP/1.1" 200 40
+INFO 2025-06-10 13:03:27,798 basehttp 810207 132491453118144 "GET /api/worklist/work-list/ HTTP/1.1" 200 40
+INFO 2025-06-10 13:03:27,800 basehttp 810207 132491461510848 "GET /api/worklist/work-list/ HTTP/1.1" 200 40
+INFO 2025-06-10 13:03:45,790 basehttp 810207 132491567077056 "GET /api/worklist/work-list/ HTTP/1.1" 200 40
+INFO 2025-06-10 13:03:46,017 basehttp 810207 132491567077056 "GET /api/worklist/work-list/ HTTP/1.1" 200 40
+INFO 2025-06-10 13:03:48,486 basehttp 810207 132491567077056 "GET /api/ai/pacs-studies/ HTTP/1.1" 200 468
+INFO 2025-06-10 13:03:48,678 basehttp 810207 132491567077056 "GET /api/ai/pacs-studies/ HTTP/1.1" 200 468
+INFO 2025-06-10 13:03:50,057 basehttp 810207 132491567077056 "GET /api/ai/pacs-studies/ HTTP/1.1" 200 468
+INFO 2025-06-10 13:03:50,460 basehttp 810207 132491567077056 "GET /api/ai/pacs-studies/ HTTP/1.1" 200 468
+INFO 2025-06-10 13:03:53,637 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+ERROR 2025-06-10 13:04:07,644 log 810207 132491567077056 Internal Server Error: /api/ai/results/1.2.826.0.1.3680043.8.1055.1.20111103112244831.40200514.30965937/
+ERROR 2025-06-10 13:04:07,644 basehttp 810207 132491567077056 "GET /api/ai/results/1.2.826.0.1.3680043.8.1055.1.20111103112244831.40200514.30965937/ HTTP/1.1" 500 104
+INFO 2025-06-10 13:04:53,637 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:05:53,632 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:06:53,630 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:07:53,632 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:08:53,633 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:09:53,641 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:10:53,644 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:11:53,653 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:12:53,649 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:13:53,648 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:14:53,652 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:15:53,647 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:16:53,670 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:17:53,665 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:18:06,007 basehttp 810207 132491444725440 "OPTIONS /api/worklist/study-requests/ HTTP/1.1" 200 0
+INFO 2025-06-10 13:18:06,199 basehttp 810207 132491444725440 "POST /api/worklist/study-requests/ HTTP/1.1" 201 378
+INFO 2025-06-10 13:18:29,133 basehttp 810207 132491436332736 "GET /api/worklist/work-list/ HTTP/1.1" 200 377
+INFO 2025-06-10 13:18:29,151 basehttp 810207 132490949818048 "GET /api/worklist/work-list/ HTTP/1.1" 200 377
+INFO 2025-06-10 13:18:53,660 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:19:53,659 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:20:53,670 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:21:53,676 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:22:53,678 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:23:53,679 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:24:53,685 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:25:53,676 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:26:53,679 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:27:53,685 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:28:53,685 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+WARNING 2025-06-10 13:29:27,600 log 810207 132490941425344 Not Found: /www.google.com:443
+WARNING 2025-06-10 13:29:27,601 basehttp 810207 132490941425344 "CONNECT www.google.com:443 HTTP/1.1" 404 1807
+INFO 2025-06-10 13:29:53,685 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:30:53,702 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:31:53,876 basehttp 810207 132490933032640 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:32:53,685 basehttp 810207 132490933032640 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:33:53,700 basehttp 810207 132490933032640 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:34:53,701 basehttp 810207 132490933032640 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:35:53,699 basehttp 810207 132490933032640 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:36:53,701 basehttp 810207 132490933032640 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:37:53,713 basehttp 810207 132490933032640 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:38:53,700 basehttp 810207 132490933032640 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:39:53,707 basehttp 810207 132490933032640 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:40:53,710 basehttp 810207 132490933032640 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:41:53,719 basehttp 810207 132490933032640 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:42:18,016 basehttp 810207 132491469903552 "GET /api/worklist/work-list/ HTTP/1.1" 200 377
+INFO 2025-06-10 13:42:53,708 basehttp 810207 132490933032640 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:43:53,713 basehttp 810207 132490933032640 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:44:53,719 basehttp 810207 132490933032640 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:45:53,728 basehttp 810207 132490933032640 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:46:53,723 basehttp 810207 132490933032640 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:47:53,723 basehttp 810207 132490933032640 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:48:53,733 basehttp 810207 132490933032640 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:49:53,731 basehttp 810207 132490933032640 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:50:53,746 basehttp 810207 132490933032640 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:51:53,731 basehttp 810207 132490933032640 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:52:53,740 basehttp 810207 132490933032640 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:53:53,732 basehttp 810207 132490933032640 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:54:53,741 basehttp 810207 132490933032640 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:55:53,748 basehttp 810207 132490933032640 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:56:53,752 basehttp 810207 132490933032640 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:57:53,744 basehttp 810207 132490933032640 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:58:53,763 basehttp 810207 132490933032640 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 13:59:53,760 basehttp 810207 132490933032640 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:00:53,758 basehttp 810207 132490933032640 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:01:53,940 basehttp 810207 132490941425344 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:02:53,951 basehttp 810207 132490924639936 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:03:53,759 basehttp 810207 132490924639936 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:04:53,801 basehttp 810207 132490924639936 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:05:53,764 basehttp 810207 132490924639936 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:06:53,760 basehttp 810207 132490924639936 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:07:53,774 basehttp 810207 132490924639936 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:08:53,767 basehttp 810207 132490924639936 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:09:53,765 basehttp 810207 132490924639936 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:10:53,781 basehttp 810207 132490924639936 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:11:53,787 basehttp 810207 132490924639936 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+WARNING 2025-06-10 14:12:07,855 log 810207 132490941425344 Not Found: /www.google.com:443
+WARNING 2025-06-10 14:12:07,856 basehttp 810207 132490941425344 "CONNECT www.google.com:443 HTTP/1.1" 404 1807
+INFO 2025-06-10 14:12:53,781 basehttp 810207 132490924639936 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:13:53,789 basehttp 810207 132490924639936 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:14:53,792 basehttp 810207 132490924639936 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:15:53,789 basehttp 810207 132490924639936 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:16:53,794 basehttp 810207 132490924639936 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:17:53,789 basehttp 810207 132490924639936 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:18:53,790 basehttp 810207 132490924639936 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:19:53,795 basehttp 810207 132490924639936 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:20:53,794 basehttp 810207 132490924639936 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:21:53,798 basehttp 810207 132490924639936 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:22:53,800 basehttp 810207 132490924639936 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:23:53,802 basehttp 810207 132490924639936 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:24:53,816 basehttp 810207 132490924639936 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:25:53,812 basehttp 810207 132490924639936 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:26:53,811 basehttp 810207 132490924639936 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:27:53,823 basehttp 810207 132490924639936 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:28:53,811 basehttp 810207 132490924639936 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:29:53,822 basehttp 810207 132490924639936 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:30:53,839 basehttp 810207 132490924639936 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:31:53,995 basehttp 810207 132490941425344 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:32:53,830 basehttp 810207 132490941425344 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:33:53,822 basehttp 810207 132490941425344 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:34:53,834 basehttp 810207 132490941425344 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:35:53,836 basehttp 810207 132490941425344 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:36:53,840 basehttp 810207 132490941425344 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:37:53,835 basehttp 810207 132490941425344 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:38:53,858 basehttp 810207 132490941425344 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:39:53,848 basehttp 810207 132490941425344 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:40:53,839 basehttp 810207 132490941425344 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:41:53,839 basehttp 810207 132490941425344 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:42:53,847 basehttp 810207 132490941425344 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:43:53,846 basehttp 810207 132490941425344 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:44:53,843 basehttp 810207 132490941425344 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:45:53,847 basehttp 810207 132490941425344 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:46:53,851 basehttp 810207 132490941425344 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:47:53,855 basehttp 810207 132490941425344 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:48:53,853 basehttp 810207 132490941425344 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:49:53,864 basehttp 810207 132490941425344 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:50:53,858 basehttp 810207 132490941425344 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:51:53,864 basehttp 810207 132490941425344 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:52:53,864 basehttp 810207 132490941425344 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:53:53,872 basehttp 810207 132490941425344 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:54:53,870 basehttp 810207 132490941425344 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:55:53,871 basehttp 810207 132490941425344 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:56:53,873 basehttp 810207 132490941425344 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:57:53,881 basehttp 810207 132490941425344 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:58:53,874 basehttp 810207 132490941425344 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 14:59:53,885 basehttp 810207 132490941425344 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:00:53,887 basehttp 810207 132490941425344 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:01:54,061 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:02:53,887 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:03:53,889 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:04:53,891 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:05:53,895 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:06:53,901 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:07:53,891 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:08:53,898 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:09:53,909 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+WARNING 2025-06-10 15:10:16,526 log 810207 132490941425344 Not Found: /
+WARNING 2025-06-10 15:10:16,526 basehttp 810207 132490941425344 "GET / HTTP/1.1" 404 4184
+INFO 2025-06-10 15:10:53,910 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:11:53,906 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:12:53,907 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+WARNING 2025-06-10 15:13:48,158 log 810207 132490941425344 Not Found: /
+WARNING 2025-06-10 15:13:48,159 basehttp 810207 132490941425344 "GET / HTTP/1.1" 404 4184
+INFO 2025-06-10 15:13:53,917 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:14:53,915 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:15:53,917 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:16:53,924 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:17:53,923 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:18:53,924 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:19:53,931 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:20:53,929 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:21:53,929 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+WARNING 2025-06-10 15:22:12,075 log 810207 132490941425344 Not Found: /www.google.com:443
+WARNING 2025-06-10 15:22:12,075 basehttp 810207 132490941425344 "CONNECT www.google.com:443 HTTP/1.1" 404 1807
+INFO 2025-06-10 15:22:53,934 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:23:53,957 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:24:53,935 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:25:53,947 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:26:53,937 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:27:53,937 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:28:53,942 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:29:53,955 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:30:53,950 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:31:06,868 basehttp 810207 132490941425344 "GET /api/samples/alias-mapping/ HTTP/1.1" 200 2
+INFO 2025-06-10 15:31:07,273 basehttp 810207 132490941425344 "GET /api/samples/alias-mapping/ HTTP/1.1" 200 2
+WARNING 2025-06-10 15:31:14,283 log 810207 132491436332736 Not Found: /api/api/integration/openmrs/patients/
+WARNING 2025-06-10 15:31:14,285 basehttp 810207 132491436332736 "GET /api/api/integration/openmrs/patients/ HTTP/1.1" 404 4313
+ERROR 2025-06-10 15:31:14,303 log 810207 132490941425344 Internal Server Error: /api/logs/combined/
+Traceback (most recent call last):
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "/home/medical_system/backend/ocs/views.py", line 105, in combined_log_view
+    for p in Patient.objects.select_related('patient_id').all():
+             ^^^^^^^
+NameError: name 'Patient' is not defined
+WARNING 2025-06-10 15:31:14,460 log 810207 132491461510848 Not Found: /api/api/integration/openmrs/providers/
+WARNING 2025-06-10 15:31:14,461 basehttp 810207 132491461510848 "GET /api/api/integration/openmrs/providers/ HTTP/1.1" 404 4316
+ERROR 2025-06-10 15:31:14,486 basehttp 810207 132490941425344 "GET /api/logs/combined/ HTTP/1.1" 500 109612
+WARNING 2025-06-10 15:31:14,662 log 810207 132491436332736 Not Found: /api/api/integration/openmrs/patients/
+WARNING 2025-06-10 15:31:14,674 basehttp 810207 132491436332736 "GET /api/api/integration/openmrs/patients/ HTTP/1.1" 404 4313
+ERROR 2025-06-10 15:31:14,680 log 810207 132491444725440 Internal Server Error: /api/logs/combined/
+Traceback (most recent call last):
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "/home/medical_system/backend/ocs/views.py", line 105, in combined_log_view
+    for p in Patient.objects.select_related('patient_id').all():
+             ^^^^^^^
+NameError: name 'Patient' is not defined
+WARNING 2025-06-10 15:31:14,690 log 810207 132491478296256 Not Found: /api/api/integration/openmrs/providers/
+WARNING 2025-06-10 15:31:14,691 basehttp 810207 132491478296256 "GET /api/api/integration/openmrs/providers/ HTTP/1.1" 404 4316
+ERROR 2025-06-10 15:31:14,865 basehttp 810207 132491444725440 "GET /api/logs/combined/ HTTP/1.1" 500 109612
+INFO 2025-06-10 15:31:50,095 basehttp 810207 132491444725440 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:31:50,501 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:31:54,127 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:32:00,099 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:32:10,518 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:32:20,524 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:32:30,515 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:32:40,522 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:32:50,522 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:32:53,978 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:32:57,875 basehttp 810207 132491453118144 "GET /api/worklist/ HTTP/1.1" 200 74
+WARNING 2025-06-10 15:32:58,340 log 810207 132491453118144 Not Found: /favicon.ico
+WARNING 2025-06-10 15:32:58,341 basehttp 810207 132491453118144 "GET /favicon.ico HTTP/1.1" 404 4235
+INFO 2025-06-10 15:33:00,519 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:33:23,516 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:33:53,949 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:34:23,516 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:34:53,959 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:35:23,531 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:35:53,983 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:36:23,530 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:36:53,962 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:37:23,526 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:37:53,954 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:38:23,523 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:38:53,959 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:39:23,517 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:39:53,975 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:40:23,514 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:40:53,974 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:41:23,529 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:41:53,974 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:42:23,521 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:42:53,979 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:43:23,521 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:43:53,979 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:44:23,516 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:44:53,993 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:45:23,521 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:45:47,521 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:45:53,990 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:46:23,527 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:46:53,989 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:47:23,524 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:47:53,990 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:48:23,531 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:48:53,986 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:49:07,436 basehttp 810207 132491453118144 code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x00u\x01\x00\x00q\x03\x03¦h\xadpSõôÉEç\x8ca\x10ö¬\x01Ë8¥Ùta+ÒÙN\x9c\x8eÃß3\x03\x00\x00\x1aÀ/À+À\x11À\x07À\x13À')
+ERROR 2025-06-10 15:49:07,437 basehttp 810207 132491453118144 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-06-10 15:49:07,520 basehttp 810207 132491453118144 code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x00u\x01\x00\x00q\x03\x03\x9e2ñj;\x9a\x84*:j¸]#j¾\x97=äÜ\x8c´Û\x90\x80r\x94sGµäå¦\x00\x00\x1aÀ/À+À\x11À\x07À\x13À')
+ERROR 2025-06-10 15:49:07,520 basehttp 810207 132491453118144 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-06-10 15:49:07,612 basehttp 810207 132491453118144 code 400, message Bad request syntax ('\x16\x03\x01\x00u\x01\x00\x00q\x03\x03´é÷;ÕB\x8að\x02ûE,â\x16\x1bB4\x1bÄ¬')
+ERROR 2025-06-10 15:49:07,612 basehttp 810207 132491453118144 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-06-10 15:49:07,695 basehttp 810207 132491453118144 code 400, message Bad request version ('À\x14À')
+ERROR 2025-06-10 15:49:07,695 basehttp 810207 132491453118144 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-06-10 15:49:23,517 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:49:54,011 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+WARNING 2025-06-10 15:50:04,792 log 810207 132491453118144 Not Found: /google.com:443
+WARNING 2025-06-10 15:50:04,792 basehttp 810207 132491453118144 "CONNECT google.com:443 HTTP/1.1" 404 1791
+INFO 2025-06-10 15:50:23,523 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:50:53,991 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:51:23,527 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:51:53,993 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:52:23,518 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:52:53,998 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:53:23,524 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:53:54,002 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:54:23,529 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:54:54,005 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:55:23,526 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:55:54,003 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:56:23,521 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:56:53,992 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:57:23,523 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:57:54,010 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:58:23,528 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:58:54,003 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:59:23,527 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 15:59:54,005 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:00:23,529 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:00:54,011 basehttp 810207 132491469903552 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+WARNING 2025-06-10 16:00:54,541 log 810207 132491453118144 Not Found: /www.google.com:443
+WARNING 2025-06-10 16:00:54,541 basehttp 810207 132491453118144 "CONNECT www.google.com:443 HTTP/1.1" 404 1807
+INFO 2025-06-10 16:01:23,528 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:01:54,198 basehttp 810207 132491444725440 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:02:23,529 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:02:54,025 basehttp 810207 132491444725440 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:03:23,524 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:03:54,023 basehttp 810207 132491444725440 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:04:23,524 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:04:49,067 autoreload 839501 123975046316288 Watching for file changes with StatReloader
+INFO 2025-06-10 16:04:54,018 basehttp 810207 132491444725440 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:05:23,529 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:05:34,244 autoreload 839759 129286399897856 Watching for file changes with StatReloader
+INFO 2025-06-10 16:05:54,021 basehttp 810207 132491444725440 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:06:23,533 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:06:54,024 basehttp 810207 132491444725440 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:07:23,523 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:07:54,028 basehttp 810207 132491444725440 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:08:23,523 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:08:54,040 basehttp 810207 132491444725440 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:09:23,526 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:09:54,038 basehttp 810207 132491444725440 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:10:23,534 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:10:54,040 basehttp 810207 132491444725440 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:11:23,521 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:11:54,045 basehttp 810207 132491444725440 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:12:23,532 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:12:54,039 basehttp 810207 132491444725440 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:13:23,520 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:13:29,363 autoreload 841366 139702917472512 Watching for file changes with StatReloader
+INFO 2025-06-10 16:13:54,034 basehttp 810207 132491444725440 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:14:23,521 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:14:54,040 basehttp 810207 132491444725440 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:15:23,533 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:15:54,049 basehttp 810207 132491444725440 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:16:23,524 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:16:54,041 basehttp 810207 132491444725440 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:17:23,524 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:17:54,058 basehttp 810207 132491444725440 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:18:23,529 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:18:54,049 basehttp 810207 132491444725440 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:19:23,537 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:19:54,057 basehttp 810207 132491444725440 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:20:23,534 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:20:49,134 basehttp 810207 132491486688960 "GET /api/ai/pacs-studies/ HTTP/1.1" 200 468
+INFO 2025-06-10 16:20:49,326 basehttp 810207 132491486688960 "GET /api/ai/pacs-studies/ HTTP/1.1" 200 468
+INFO 2025-06-10 16:20:54,064 basehttp 810207 132491444725440 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:21:23,535 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:21:54,066 basehttp 810207 132491444725440 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:22:01,101 basehttp 810207 132491486688960 "GET /api/ai/pacs-studies/ HTTP/1.1" 200 468
+INFO 2025-06-10 16:22:01,294 basehttp 810207 132491486688960 "GET /api/ai/pacs-studies/ HTTP/1.1" 200 468
+ERROR 2025-06-10 16:22:05,353 log 810207 132491486688960 Internal Server Error: /api/ai/results/1.2.826.0.1.3680043.8.1055.1.20111103112244831.40200514.30965937/
+ERROR 2025-06-10 16:22:05,354 basehttp 810207 132491486688960 "GET /api/ai/results/1.2.826.0.1.3680043.8.1055.1.20111103112244831.40200514.30965937/ HTTP/1.1" 500 104
+INFO 2025-06-10 16:22:13,310 basehttp 810207 132491486688960 "GET /api/ai/check/1.2.276.0.7230010.3.1.2.313264128.1.1749527269.233364/YOLO/ HTTP/1.1" 200 100
+INFO 2025-06-10 16:22:13,491 basehttp 810207 132491486688960 "OPTIONS /api/ai/analyze/ HTTP/1.1" 200 0
+ERROR 2025-06-10 16:22:13,695 log 810207 132491486688960 Internal Server Error: /api/ai/analyze/
+ERROR 2025-06-10 16:22:13,696 basehttp 810207 132491486688960 "POST /api/ai/analyze/ HTTP/1.1" 500 104
+INFO 2025-06-10 16:22:23,527 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:22:54,061 basehttp 810207 132491444725440 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:23:23,538 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:23:54,059 basehttp 810207 132491444725440 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:24:23,533 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:24:54,065 basehttp 810207 132491444725440 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:25:23,530 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:25:54,067 basehttp 810207 132491444725440 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:26:23,523 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:26:54,064 basehttp 810207 132491444725440 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:27:23,534 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:27:54,064 basehttp 810207 132491444725440 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:28:23,531 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:28:54,063 basehttp 810207 132491444725440 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:29:23,529 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:29:54,067 basehttp 810207 132491444725440 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:30:23,531 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:30:54,082 basehttp 810207 132491444725440 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:31:23,526 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:31:54,252 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:32:23,538 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:32:54,071 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:33:54,092 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:34:54,086 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:35:54,089 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:36:54,094 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:37:54,084 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:38:54,089 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:39:54,097 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:40:54,092 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:41:54,107 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:42:54,108 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:43:54,105 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:44:54,112 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:45:54,102 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:46:54,106 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:47:54,117 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:48:54,128 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+WARNING 2025-06-10 16:48:55,156 log 810207 132491478296256 Not Found: /www.google.com:443
+WARNING 2025-06-10 16:48:55,156 basehttp 810207 132491478296256 "CONNECT www.google.com:443 HTTP/1.1" 404 1807
+INFO 2025-06-10 16:49:54,125 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:50:54,135 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:51:54,122 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:52:54,131 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:53:54,130 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:54:54,125 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:55:54,141 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:56:54,144 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:57:54,137 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:58:54,145 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 16:59:54,145 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:00:54,143 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:01:54,321 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:02:54,143 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:03:54,158 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:04:54,149 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:05:54,158 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:06:54,161 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:07:54,155 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:08:54,159 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:09:54,171 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:10:54,168 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:11:54,169 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:12:54,163 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:13:54,178 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:14:54,165 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:15:54,184 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:16:54,174 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:17:54,194 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:18:54,186 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:19:54,174 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:20:54,180 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:21:54,183 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:22:54,201 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:23:54,184 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:24:54,194 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:25:54,191 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:26:54,195 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:27:54,202 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:28:54,201 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:29:54,204 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:30:54,208 basehttp 810207 132491478296256 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:31:54,393 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:32:54,218 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:33:54,219 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:34:54,249 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:35:34,416 basehttp 810207 132491478296256 code 400, message Bad request version ('OÑËÜ®Ëd')
+WARNING 2025-06-10 17:35:34,416 basehttp 810207 132491478296256 "   TZ         .    I¨À )z» zÚf Ò~Uñi»©                ÃÐ¢|¦v½óOÑËÜ®Ëd" 400 -
+INFO 2025-06-10 17:35:54,228 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:36:54,230 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:37:54,227 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:38:54,229 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:39:54,235 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:40:54,228 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:41:54,229 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:42:54,244 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+WARNING 2025-06-10 17:43:48,524 log 810207 132491478296256 Not Found: /
+WARNING 2025-06-10 17:43:48,524 basehttp 810207 132491478296256 "GET / HTTP/1.1" 404 4184
+INFO 2025-06-10 17:43:54,235 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+WARNING 2025-06-10 17:44:08,543 log 810207 132491444725440 Not Found: /favicon.ico
+WARNING 2025-06-10 17:44:08,543 basehttp 810207 132491444725440 "GET /favicon.ico HTTP/1.1" 404 4235
+WARNING 2025-06-10 17:44:12,660 log 810207 132491469903552 Not Found: /http:/api.ipify.org/
+WARNING 2025-06-10 17:44:12,661 basehttp 810207 132491469903552 "GET http://api.ipify.org/?format=json HTTP/1.1" 404 1818
+WARNING 2025-06-10 17:44:15,762 log 810207 132491436332736 Not Found: /www.shadowserver.org:443
+WARNING 2025-06-10 17:44:15,763 basehttp 810207 132491436332736 "CONNECT www.shadowserver.org:443 HTTP/1.1" 404 1827
+INFO 2025-06-10 17:44:54,247 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:45:54,241 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:46:54,252 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:47:54,241 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:48:54,257 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:49:54,433 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:50:54,247 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-10 17:51:54,261 basehttp 810207 132491453118144 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11

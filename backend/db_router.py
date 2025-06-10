@@ -41,5 +41,5 @@ class DatabaseRouter:
         elif db == 'orthanc':
             return app_label == 'orthanc_models'
         elif db == 'default':
-            return app_label in ['auth', 'contenttypes', 'sessions', 'admin', 'medical_integration', 'samples', 'tests', 'orders', 'ocs' , 'lis_cdss']
+            return app_label in ['auth', 'contenttypes', 'sessions', 'admin', 'medical_integration', 'samples', 'tests', 'orders', 'ocs' , 'lis_cdss','worklist']
         return False
