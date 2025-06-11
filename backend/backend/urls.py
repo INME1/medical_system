@@ -27,7 +27,7 @@ urlpatterns = [
     
     # 각 앱별 prefix로 충돌 방지
     path('api/integration/', include('medical_integration.urls')),
-    path('api/orders/', include('orders.urls')),
+    path('api/orders/',      include('orders_emr.urls')),
     path('api/worklist/', include('worklist.urls')),
     path('api/samples/', include('samples.urls')),
     path('api/tests/', include('tests.urls')),

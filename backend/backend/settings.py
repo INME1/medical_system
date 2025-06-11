@@ -41,6 +41,7 @@ LOCAL_APPS = [
     'worklist',
     'accounts',
     'orders',
+    'orders_emr',
     'samples',
     'tests',
     'ocs.apps.OcsConfig',

@@ -1145,7 +1145,8 @@ def get_all_patients_simple(request):
         openmrs_username = openmrs_config['username']
         openmrs_password = openmrs_config['password']
 
-        api_url = f"http://{openmrs_host}:{openmrs_port}/openmrs/ws/rest/v1/custompatient"
+        #api_url = f"http://{openmrs_host}:{openmrs_port}/openmrs/ws/rest/v1/custompatient"
+        api_url = f"http://{openmrs_host}:{openmrs_port}/openmrs/ws/rest/v1/patient"
         params = {
             'limit': limit,
             'startIndex': start_index
@@ -1287,7 +1288,9 @@ def create_test_mapping(request):
 # 예를 들어, openmrs_models 앱이 backend 디렉토리 바로 아래에 있다면:
 # from backend.openmrs_models.models import Patient, Person, PersonName, PatientIdentifier
 # 또는 settings.py에 openmrs_models가 INSTALLED_APPS에 등록되어 있다면:
-from openmrs_models.models import Patient, Person # PersonName, PatientIdentifier 등 필요에 따라 추가
+# from openmrs_models.models import Patient, Person # PatientIdentifier, PersonName, 등 필요에 따라 추가
+from openmrs_models.models import Patient, Person, PatientIdentifier # 변경: PatientIdentifier 임포트 추가 
+
 
 
 @api_view(['GET'])
@@ -1297,29 +1300,29 @@ def get_all_openmrs_patients(request):
         all_patient_entries = Patient.objects.select_related('patient_id').filter(voided=False)
 
         for patient_entry in all_patient_entries:
-            person = patient_entry.patient_id
-            active_name_obj = patient_entry.get_active_name()
-            full_name = active_name_obj.get_full_name() if active_name_obj else "N/A"
+            person = patient_entry.patient_id 
+            active_name_obj = patient_entry.get_active_name() 
+            full_name = active_name_obj.get_full_name() if active_name_obj else "N/A" 
 
-            identifier = person.uuid  # 실제 식별자로 교체할 수도 있음
-
+            identifier = person.uuid  
+            
             # ✅ 매핑 정보 가져오기
             mapping = PatientMapping.objects.filter(openmrs_patient_uuid=person.uuid, is_active=True).first()
             orthanc_id = mapping.orthanc_patient_id if mapping else None
 
             patients_data.append({
-                "uuid": person.uuid,
-                "identifier": identifier,
+                "uuid": person.uuid, 
+                "identifier": identifier, 
                 "display": full_name,
                 "person": {
-                    "display": full_name,
+                    "display": full_name, 
                     "gender": person.gender,
-                    "birthdate": person.birthdate,
+                    "birthdate": person.birthdate, 
                 },
                 "identifiers": [
-                    {"identifier": identifier}
+                    {"identifier": identifier} 
                 ],
-                "orthanc_patient_id": orthanc_id  # ✅ 프론트에 전달
+                "orthanc_patient_id": orthanc_id
             })
 
         return Response(patients_data, status=status.HTTP_200_OK)
@@ -1327,6 +1330,28 @@ def get_all_openmrs_patients(request):
     except Exception as e:
         return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+# OCS [20250611]
+@api_view(['GET'])
+def list_openmrs_patients_map(request):
+    """
+    GET /api/integration/openmrs/patients/map/
+    → { results: [{ uuid, id, name }, …] }
+    오류나 매핑 없으면 빈 results:[] 로 200 OK
+    """
+    api_url = settings.OPENMRS_URL.rstrip('/') + '/patient'
+    try:
+        r = requests.get(api_url, auth=(settings.OPENMRS_USER, settings.OPENMRS_PASS), timeout=10)
+        r.raise_for_status()
+        pts = r.json().get('results', [])
+        out = []
+        for p in pts:
+            name = p.get('person',{}).get('display') or p.get('display','')
+            ids  = p.get('identifiers',[])
+            num  = ids[0]['identifier'] if ids else None
+            out.append({'uuid':p['uuid'], 'id':num, 'name':name})
+        return Response({'results': out}, status=status.HTTP_200_OK)
+    except Exception:
+        return Response({'results': []}, status=status.HTTP_200_OK)
     
     
 
@@ -1335,7 +1360,7 @@ def get_all_openmrs_patients(request):
 def proxy_openmrs_providers(request):
     """OpenMRS의 /ws/rest/v1/provider 데이터 프록시"""
     try:
-        OPENMRS_HOST = 'http://35.225.63.41:8082/openmrs'  # 또는 localhost:8082/openmrs
+        OPENMRS_HOST = 'http://localhost:8082/openmrs'  # 또는 35.225.63.41:8082/openmrs
         username = 'admin'
         password = 'Admin123'
 
@@ -1395,6 +1420,30 @@ def create_identifier_based_mapping(request):
     except Exception as e:
         logger.error(f"[IDENTIFIER_BASED] 매핑 생성 중 예외: {e}")
         return Response({'error': str(e)}, status=500)
+    
+
+# OCS [20250611]
+@api_view(['GET'])
+def list_openmrs_providers_map(request):
+    """
+    GET /api/integration/openmrs/providers/map/
+    → { results: [{ uuid, name }, …] }
+    오류나 매핑 없으면 빈 results:[] 로 200 OK
+    """
+    api_url = settings.OPENMRS_URL.rstrip('/') + '/provider'
+    try:
+        r = requests.get(api_url, auth=(settings.OPENMRS_USER, settings.OPENMRS_PASS), timeout=10)
+        r.raise_for_status()
+        provs = r.json().get('results', [])
+        out = [{'uuid':u['uuid'], 'name':u.get('display','')} for u in provs]
+        return Response({'results': out}, status=status.HTTP_200_OK)
+    except Exception:
+        return Response({'results': []}, status=status.HTTP_200_OK)
+
+
+
+
+
 
 
 @api_view(['GET'])
@@ -1415,30 +1464,42 @@ def openmrs_patients_with_mapping(request):
 
 
 
+# backend/medical_integration/views.py - assign_room 함수 수정
+
 @api_view(['POST'])
 def assign_room(request):
     """
-    진료실 배정 API: 선택된 환자를 특정 진료실에 배정
+    진료실 배정 API: mapping_id 또는 patient_identifier로 환자 찾기
     """
-    mapping_id = request.data.get("patientId")  # 실제로는 매핑 ID
+    mapping_id = request.data.get("patientId")  # mapping_id (숫자)
+    patient_identifier = request.data.get("patientIdentifier")  # patient_identifier (문자열)
     room = request.data.get("room")
 
-    if not mapping_id or not room:
-        return Response({"error": "필드 누락"}, status=400)
+    if (not mapping_id and not patient_identifier) or not room:
+        return Response({"error": "mapping_id 또는 patient_identifier와 room이 필요합니다"}, status=400)
 
     try:
-        mapping = PatientMapping.objects.get(mapping_id=mapping_id, is_active=True)
+        # mapping_id로 찾기 (기존 방식)
+        if mapping_id:
+            mapping = PatientMapping.objects.get(mapping_id=mapping_id, is_active=True)
+        # patient_identifier로 찾기 (새로운 방식)
+        else:
+            mapping = PatientMapping.objects.get(
+                patient_identifier=patient_identifier, 
+                is_active=True,
+                mapping_type='IDENTIFIER_BASED'
+            )
 
         mapping.assigned_room = room
         mapping.save(update_fields=["assigned_room"])
 
-        # 호출 메시지 알림용 로그 또는 후속 처리
         logger.info(f"✅ 환자 {mapping.display or mapping.patient_identifier} → 진료실 {room} 배정 완료")
 
         return Response({
             "success": True,
             "message": f"환자가 진료실 {room}에 배정되었습니다.",
-            "assigned_room": mapping.assigned_room
+            "assigned_room": mapping.assigned_room,
+            "mapping_id": mapping.mapping_id
         })
 
     except PatientMapping.DoesNotExist:
@@ -1557,3 +1618,4 @@ def waiting_board_view(request):
         "waiting": waiting,
         "assigned_recent": assigned_recent
     })
+    

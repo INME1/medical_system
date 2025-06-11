@@ -10,8 +10,8 @@ from .views import (
     UrgentAlertList,
     UrgentAlertCount,
     AlertMarkRead,
-    unassign_room, get_patient_mapping  ,assign_room,
-    # get_all_openmrs_patients
+    unassign_room, get_patient_mapping, assign_room,
+    
 )
 
 
@@ -21,6 +21,10 @@ urlpatterns = [
     # 시스템 상태
     path('health/', views.health_check, name='health_check'),
     path('test-connections/', views.test_all_connections, name='test_connections'),
+    
+    # OCS 매핑관련
+    path('openmrs/patients/map/',   views.list_openmrs_patients_map,    name='list_openmrs_patients_map'),
+    path('openmrs/providers/map/',  views.list_openmrs_providers_map,   name='list_openmrs_providers_map'),
     
     # OpenMRS 환자 관리
     path('openmrs/patients/create/', views.create_patient, name='create_openmrs_patient'),
@@ -73,5 +77,7 @@ urlpatterns = [
     path('unassign-room/', unassign_room, name='unassign-room'),  # 🔥 추가
     path('delete-mapping/<str:mapping_id>/', views.delete_patient_mapping, name='delete_patient_mapping'),
     path('waiting-board/', views.waiting_board_view, name='waiting_board'),
+    
+    
 
 ]

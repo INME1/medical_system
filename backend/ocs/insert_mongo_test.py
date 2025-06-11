@@ -27,7 +27,7 @@ from pymongo import MongoClient
 from datetime import datetime, timezone
 
 # MongoDB 연결 설정
-mongo_host = "localhost"
+mongo_host = "35.255.63.41"
 mongo_port = 27017
 mongo_user = "ocs_user"
 mongo_pass = "ocs_pass"
