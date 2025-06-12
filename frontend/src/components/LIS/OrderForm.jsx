@@ -75,6 +75,10 @@ const OrderForm = () => {
     } catch (err) {
       alert('❌ 주문 생성 실패');
       console.error(err);
+      if (err.response?.data) {
+         console.log("💡 백엔드 오류 응답 내용:", err.response.data);
+        }
+      
     }
   };
 

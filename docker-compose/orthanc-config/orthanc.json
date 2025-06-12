@@ -26,7 +26,7 @@
     "EnableWadoRs": true,
     "QidoSupportsIncludeField": true
   },
-
+  "PythonScript": "/scripts/entry.py",
   "Plugins": ["/usr/local/share/orthanc/plugins"],
   "LoadPrivatePlugins": true,
 

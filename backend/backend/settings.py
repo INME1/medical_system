@@ -57,6 +57,7 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
+    # 'ocs.middleware.APILoggingMiddleware', ###
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -225,6 +226,12 @@ EXTERNAL_SERVICES = {
         'password': 'orthanc',
     },
 }
+# ─── MongoDB 로깅용 설정 ==저에오 OCS───
+MONGO_URI = os.getenv(
+    'MONGO_URI',
+    'mongodb://ocs_user:ocs_pass@127.0.0.1:27017/?authSource=ocslog')
+DB_NAME          = os.getenv('DB_NAME',         'ocslog')
+COLLECTION_NAME  = os.getenv('COLLECTION_NAME', 'logs')
 
 ########################################
 # 로깅 설정

@@ -1,43 +1,51 @@
 # ocs/middleware.py
 
+# backend/ocs/middleware.py
+
 import json
-from .models import OCSLog
+import re
+from datetime import datetime
+from pymongo import MongoClient
+from django.conf import settings
+
+UUID_FIELD_PATTERN = re.compile(r'.*_uuid$')  # patient_uuid, doctor_uuid, 등
 
 class APILoggingMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
+        # MongoDB 연결 정보
+        self.mongo_uri = settings.MONGO_URI
+        self.db_name = settings.DB_NAME
+        self.coll_name = settings.COLLECTION_NAME
 
     def __call__(self, request):
-        if request.method == 'POST' and (
-            request.path.startswith('/api/orders') or
-            request.path.startswith('/api/samples') or
-            request.path.startswith('/api/results')
-        ): 
-            request._body_copy = request.body
-
-        response = self.get_response(request)
-
-        if request.method == 'POST' and hasattr(request, '_body_copy'):
+        # JSON POST 요청만 가로채기
+        if request.method == 'POST' and request.content_type == 'application/json':
             try:
-                parsed_body = json.loads(request._body_copy.decode('utf-8'))
+                body = request.body.decode('utf-8')
+                data = json.loads(body) if body else {}
             except Exception:
-                parsed_body = {}
+                data = {}
+            # 바디에 uuid 필드가 하나라도 있으면 로그 저장
+            if any(UUID_FIELD_PATTERN.match(k) for k in data.keys()):
+                self._save_to_mongo(request.path, data)
 
-            OCSLog.objects.create(
-                # 이 미들웨어는 오더 생성 로그이므로 category는 'LIS'로 설정
-                category     = 'LIS',
-                # 기존 step 필드를 request_type 또는 직접 받은 step값으로 저장
-                step         = parsed_body.get('step', parsed_body.get('request_type', 'order')),
-                
-                # OpenMRS UUID 필드
-                patient_uuid = parsed_body.get('patient_uuid'),
-                # Numeric ID(legacy) 필드
-                patient_id   = parsed_body.get('patient_id', 'UNKNOWN'),
-                doctor_uuid  = parsed_body.get('doctor_uuid'),
-                doctor_id    = parsed_body.get('doctor_id'),
-                
-                # 상세 정보는 JSON 필드에 통째로 저장
-                detail       = parsed_body
-            )
+        return self.get_response(request)
 
-        return response
+    def _save_to_mongo(self, path, data):
+        client = MongoClient(self.mongo_uri)
+        db = client[self.db_name]
+        coll = db[self.coll_name]
+
+        # Mongo 문서 형식
+        log_doc = {
+            'path': path,                   # 호출 경로
+            'payload': data,                # 원본 바디
+            'timestamp': datetime.utcnow()  # 시간
+        }
+        try:
+            coll.insert_one(log_doc)
+        except Exception as e:
+            print(f"[API LOGGING ERROR] {e}")
+        finally:
+            client.close()

@@ -1,5 +1,5 @@
 // src/components/EMR/ImagingRequestPanel.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const ImagingRequestPanel = ({ selectedPatient, onRequestSuccess }) => {
   const [formData, setFormData] = useState({
@@ -7,25 +7,154 @@ const ImagingRequestPanel = ({ selectedPatient, onRequestSuccess }) => {
     body_part: '',
     study_description: '',
     clinical_info: '',
-    priority: 'routine'
+    priority: 'routine',
+    requesting_physician: '' // 🔥 의사 정보 자동 채우기
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [autoFilledData, setAutoFilledData] = useState(null); // 🔥 자동 채워진 환자 정보
 
   const modalityOptions = [
-    { value: 'CR', label: 'Chest X-ray' },
-    { value: 'CT', label: 'CT Scan' },
-    { value: 'MR', label: 'MRI' },
-    { value: 'US', label: 'Ultrasound' },
-    { value: 'NM', label: 'Nuclear Medicine' },
-    { value: 'PT', label: 'PET Scan' },
-    { value: 'MG', label: 'Mammography' }
+    { value: 'CR', label: 'Chest X-ray (흉부 X선)' },
+    { value: 'CT', label: 'CT Scan (컴퓨터 단층촬영)' },
+    { value: 'MR', label: 'MRI (자기공명영상)' },
+    { value: 'US', label: 'Ultrasound (초음파)' },
+    { value: 'NM', label: 'Nuclear Medicine (핵의학)' },
+    { value: 'PT', label: 'PET Scan (양전자방출단층촬영)' },
+    { value: 'MG', label: 'Mammography (유방촬영술)' },
+    { value: 'DX', label: 'Digital Radiography (디지털 X선)' },
+    { value: 'RF', label: 'Radiofluoroscopy (투시촬영)' }
   ];
 
   const bodyPartOptions = [
     'CHEST', 'ABDOMEN', 'PELVIS', 'HEAD', 'NECK', 'SPINE', 
-    'EXTREMITY', 'HEART', 'BRAIN', 'LIVER', 'KIDNEY'
+    'EXTREMITY', 'HEART', 'BRAIN', 'LIVER', 'KIDNEY', 'LUNG',
+    'BONE', 'JOINT', 'MUSCLE', 'VESSEL'
   ];
+
+  // 🔥 환자 선택 시 자동으로 정보 구성
+  useEffect(() => {
+    if (selectedPatient) {
+      const autoData = extractPatientInfo(selectedPatient);
+      setAutoFilledData(autoData);
+      
+      // 의사 정보 자동 설정
+      const doctorName = localStorage.getItem('doctor_name') || 
+                       localStorage.getItem('username') || 
+                       'Dr. Current User';
+      setFormData(prev => ({
+        ...prev,
+        requesting_physician: doctorName
+      }));
+      
+      console.log('🔥 자동 채워진 환자 정보:', autoData);
+    } else {
+      setAutoFilledData(null);
+    }
+  }, [selectedPatient]);
+
+  // 🔥 환자 정보 추출 및 표준화 함수
+  const extractPatientInfo = (patient) => {
+    console.log('🔍 환자 원본 데이터:', patient);
+
+    // 다양한 형태의 환자 데이터 구조에 대응
+    const patientId = patient.uuid || 
+                     patient.openmrs_patient_uuid || 
+                     patient.patient_identifier || 
+                     patient.mapping_id || 
+                     'UNKNOWN_ID';
+
+    const patientName = patient.display || 
+                       patient.name || 
+                       patient.patient_name || 
+                       '이름 없음';
+
+    // 생년월일 처리 - 다양한 형식 지원
+    let birthDate = '';
+    if (patient.person?.birthdate) {
+      birthDate = formatBirthDate(patient.person.birthdate);
+    } else if (patient.birthdate) {
+      birthDate = formatBirthDate(patient.birthdate);
+    } else if (patient.birth_date) {
+      birthDate = formatBirthDate(patient.birth_date);
+    }
+
+    // 성별 처리
+    const gender = patient.person?.gender || 
+                  patient.gender || 
+                  patient.sex || 
+                  'U';
+
+    // 나이 계산
+    let age = patient.person?.age || patient.age;
+    if (!age && birthDate) {
+      age = calculateAge(birthDate);
+    }
+
+    return {
+      patient_id: patientId,
+      patient_name: patientName,
+      birth_date: birthDate,
+      sex: gender,
+      age: age,
+      // 추가 정보
+      patient_identifier: patient.patient_identifier,
+      assigned_room: patient.assigned_room
+    };
+  };
+
+  // 🔥 날짜 형식 변환 함수 개선
+  const formatBirthDate = (dateString) => {
+    if (!dateString) return '';
+    
+    try {
+      let date;
+      
+      // 이미 YYYY-MM-DD 형식인지 확인
+      if (/^\d{4}-\d{2}-\d{2}$/.test(dateString)) {
+        return dateString;
+      }
+      
+      // ISO 형식 (YYYY-MM-DDTHH:mm:ss.sssZ) 처리
+      if (dateString.includes('T')) {
+        date = new Date(dateString);
+      } else {
+        // 다른 형식들 시도
+        date = new Date(dateString);
+      }
+      
+      if (isNaN(date.getTime())) {
+        console.warn('날짜 변환 실패:', dateString);
+        return '';
+      }
+      
+      // YYYY-MM-DD 형식으로 변환
+      return date.toISOString().split('T')[0];
+      
+    } catch (error) {
+      console.warn('날짜 변환 오류:', dateString, error);
+      return '';
+    }
+  };
+
+  // 🔥 나이 계산 함수
+  const calculateAge = (birthDate) => {
+    try {
+      const birth = new Date(birthDate);
+      const today = new Date();
+      let age = today.getFullYear() - birth.getFullYear();
+      const monthDiff = today.getMonth() - birth.getMonth();
+      
+      if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+        age--;
+      }
+      
+      return age;
+    } catch (error) {
+      console.warn('나이 계산 오류:', error);
+      return null;
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -44,8 +173,18 @@ const ImagingRequestPanel = ({ selectedPatient, onRequestSuccess }) => {
       return;
     }
 
+    if (!autoFilledData) {
+      setError('환자 정보를 불러올 수 없습니다.');
+      return;
+    }
+
     if (!formData.modality || !formData.body_part) {
       setError('검사 종류와 검사 부위를 선택해주세요.');
+      return;
+    }
+
+    if (!formData.requesting_physician) {
+      setError('의사 정보를 입력해주세요.');
       return;
     }
 
@@ -53,41 +192,39 @@ const ImagingRequestPanel = ({ selectedPatient, onRequestSuccess }) => {
     setError('');
 
     console.log('🚀 영상검사 요청 시작:', {
-      patient: selectedPatient,
-      formData: formData
+      autoFilledData,
+      formData,
+      selectedPatient
     });
 
     try {
-      // 날짜 형식 변환 함수
-      const formatBirthDate = (dateString) => {
-        if (!dateString) return '';
-        try {
-          // 'YYYY-MM-DDTHH:mm:ss.sssZ' 또는 'YYYY-MM-DD' 형식을 'YYYY-MM-DD'로 변환
-          const date = new Date(dateString);
-          return date.toISOString().split('T')[0]; // YYYY-MM-DD 형식으로 변환
-        } catch (error) {
-          console.warn('날짜 변환 실패:', dateString, error);
-          return '';
-        }
-      };
-
+      // 🔥 완전히 자동화된 요청 데이터 구성
       const requestData = {
-        patient_id: selectedPatient.uuid,
-        patient_name: selectedPatient.display,
-        birth_date: formatBirthDate(selectedPatient.person.birthdate), // 🔥 날짜 형식 변환
-        sex: selectedPatient.person.gender,
+        // 🔥 자동으로 채워지는 필드들
+        patient_id: autoFilledData.patient_id,
+        patient_name: autoFilledData.patient_name,
+        birth_date: autoFilledData.birth_date,
+        sex: autoFilledData.sex,
+        
+        // 🔥 사용자가 입력하는 필드들
         modality: formData.modality,
         body_part: formData.body_part,
-        study_description: formData.study_description,
-        clinical_info: formData.clinical_info,
+        requesting_physician: formData.requesting_physician,
+        
+        // 선택적 필드들
+        study_description: formData.study_description || `${formData.modality} - ${formData.body_part}`,
+        clinical_info: formData.clinical_info || '진료 의뢰',
         priority: formData.priority,
-        requesting_physician: 'Dr. Current User', // 실제로는 로그인된 의사
-        created_by: 'emr_user'
+        
+        // 메타데이터
+        created_by: 'emr_user',
+        request_source: 'EMR_SYSTEM',
+        patient_room: autoFilledData.assigned_room || null
       };
 
-      console.log('📤 전송할 데이터:', requestData);
+      console.log('📤 최종 전송 데이터:', requestData);
 
-      // 🔥 백엔드 API 호출
+      // 백엔드 API 호출
       const response = await fetch('http://35.225.63.41:8000/api/worklist/create-from-emr/', {
         method: 'POST',
         headers: {
@@ -109,14 +246,18 @@ const ImagingRequestPanel = ({ selectedPatient, onRequestSuccess }) => {
 
       // 성공 처리
       if (result.success) {
-        // 폼 초기화
-        setFormData({
+        // 🔥 폼 초기화 (환자 정보는 유지)
+        setFormData(prev => ({
           modality: '',
           body_part: '',
           study_description: '',
           clinical_info: '',
-          priority: 'routine'
-        });
+          priority: 'routine',
+          requesting_physician: prev.requesting_physician // 의사명은 유지
+        }));
+
+        // 성공 알림
+        alert(`✅ 영상검사 요청이 성공적으로 등록되었습니다!\n\n환자: ${autoFilledData.patient_name}\n검사: ${formData.modality} - ${formData.body_part}`);
 
         if (onRequestSuccess) {
           onRequestSuccess(result);
@@ -143,21 +284,40 @@ const ImagingRequestPanel = ({ selectedPatient, onRequestSuccess }) => {
     );
   }
 
+  // 자동 채워진 데이터가 없는 경우
+  if (!autoFilledData) {
+    return (
+      <div style={styles.noPatientContainer}>
+        <div style={styles.noPatientIcon}>⚠️</div>
+        <p style={styles.noPatientText}>환자 정보를 불러오는 중입니다...</p>
+      </div>
+    );
+  }
+
   return (
     <div style={styles.container}>
-      {/* 선택된 환자 정보 */}
+      {/* 🔥 자동 채워진 환자 정보 표시 */}
       <div style={styles.patientInfo}>
         <div style={styles.patientCard}>
-          <strong>👤 {selectedPatient.display}</strong>
-          <span style={styles.patientDetails}>
-            {selectedPatient.person.gender === 'M' ? '남성' : '여성'} | 
-            {selectedPatient.person.age}세 | 
-            {selectedPatient.person.birthdate}
-          </span>
+          <div style={styles.patientHeader}>
+            <strong>👤 {autoFilledData.patient_name}</strong>
+            <span style={styles.autoFillBadge}>자동 입력됨</span>
+          </div>
+          <div style={styles.patientDetails}>
+            <div>🆔 {autoFilledData.patient_id}</div>
+            <div>
+              👥 {autoFilledData.sex === 'M' ? '남성' : autoFilledData.sex === 'F' ? '여성' : '미상'} | 
+              🎂 {autoFilledData.age ? `${autoFilledData.age}세` : '나이 미상'}
+            </div>
+            <div>📅 {autoFilledData.birth_date || '생년월일 미상'}</div>
+            {autoFilledData.assigned_room && (
+              <div>🏥 진료실 {autoFilledData.assigned_room}번</div>
+            )}
+          </div>
         </div>
       </div>
 
-      {/* 영상검사 요청 폼 */}
+      {/* 🔥 영상검사 요청 폼 */}
       <form onSubmit={handleSubmit} style={styles.form}>
         <div style={styles.formRow}>
           <div style={styles.formGroup}>
@@ -211,6 +371,19 @@ const ImagingRequestPanel = ({ selectedPatient, onRequestSuccess }) => {
               <option value="stat">응급</option>
             </select>
           </div>
+
+          <div style={styles.formGroup}>
+            <label style={styles.label}>의뢰 의사 *</label>
+            <input
+              type="text"
+              name="requesting_physician"
+              value={formData.requesting_physician}
+              onChange={handleChange}
+              required
+              style={styles.input}
+              placeholder="의사명을 입력하세요"
+            />
+          </div>
         </div>
 
         <div style={styles.formGroup}>
@@ -232,7 +405,7 @@ const ImagingRequestPanel = ({ selectedPatient, onRequestSuccess }) => {
             value={formData.clinical_info}
             onChange={handleChange}
             placeholder="환자의 증상, 의심 질환, 검사 사유 등"
-            rows={2}
+            rows={3}
             style={styles.textarea}
           />
         </div>
@@ -254,7 +427,7 @@ const ImagingRequestPanel = ({ selectedPatient, onRequestSuccess }) => {
             cursor: loading ? 'not-allowed' : 'pointer'
           }}
         >
-          {loading ? '요청 중...' : '🏥 영상검사 요청'}
+          {loading ? '⏳ 요청 중...' : '🏥 영상검사 요청'}
         </button>
       </form>
     </div>
@@ -280,19 +453,35 @@ const styles = {
   },
   patientInfo: {
     marginBottom: '15px',
-    padding: '10px',
-    backgroundColor: '#f8f9fa',
-    borderRadius: '4px',
-    border: '1px solid #e9ecef'
+    padding: '12px',
+    backgroundColor: '#e8f5e8',
+    borderRadius: '8px',
+    border: '2px solid #4caf50'
   },
   patientCard: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '4px'
+    gap: '6px'
+  },
+  patientHeader: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  autoFillBadge: {
+    fontSize: '10px',
+    padding: '2px 6px',
+    backgroundColor: '#4caf50',
+    color: 'white',
+    borderRadius: '4px',
+    fontWeight: 'bold'
   },
   patientDetails: {
-    fontSize: '12px',
-    color: '#6c757d'
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '2px',
+    fontSize: '11px',
+    color: '#2e7d32'
   },
   form: {
     display: 'flex',
@@ -343,13 +532,14 @@ const styles = {
     fontSize: '12px'
   },
   submitButton: {
-    padding: '8px 12px',
+    padding: '10px 16px',
     fontSize: '14px',
     fontWeight: 'bold',
     color: '#fff',
     border: 'none',
-    borderRadius: '4px',
-    marginTop: '8px'
+    borderRadius: '6px',
+    marginTop: '8px',
+    transition: 'all 0.2s ease'
   }
 };
 

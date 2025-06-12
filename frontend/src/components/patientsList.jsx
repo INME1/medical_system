@@ -11,7 +11,7 @@ const PatientList = () => {
   const [waitingRegistered, setWaitingRegistered] = useState({});
 
   const BASE_API_URL =
-    process.env.REACT_APP_INTEGRATION_API || 'http://localhost:8000/api/integration';
+    process.env.REACT_APP_INTEGRATION_API || 'http://35.255.36.41:8000/api/integration'; //localhost
   const GET_URL = `${BASE_API_URL.replace(/\/+$/, '')}/openmrs-patients/`;
   const POST_URL = `${BASE_API_URL.replace(/\/+$/, '')}/identifier-based/`;
 

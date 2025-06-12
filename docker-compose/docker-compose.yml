@@ -80,8 +80,9 @@ services:
     restart: unless-stopped
 
   # Orthanc + PostgreSQL + DICOMWeb
+  # jodogne/orthanc-prugin:1.12.6
   orthanc:
-    image: jodogne/orthanc-plugins:1.12.6
+    image: jodogne/orthanc-python:1.12.6
     container_name: orthanc
     hostname: orthanc-server
     depends_on:
@@ -92,6 +93,9 @@ services:
     volumes:
       - orthanc_data:/var/lib/orthanc/db
       - ./orthanc-config/orthanc.json:/etc/orthanc/orthanc.json
+      - ./scripts:/scripts
+    environment:
+      ORTHANC__PYTHON_SCRIPT: /scripts/entry.py  # JSON 파일로 지정해도 됨
     networks:
       - medical-network
     restart: unless-stopped

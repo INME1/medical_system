@@ -1,3 +1,6 @@
+/* src/components/EMR/EmrMainPage.css */
+
+/* 기존 스타일 유지 */
 html, body, #root, .App {
   margin: 0;
   padding: 0;
@@ -25,6 +28,17 @@ html, body, #root, .App {
   justify-content: center;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
   z-index: 20;
+}
+
+.logo {
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
 }
 
 /* ─── 콘텐츠 영역 ─── */
@@ -62,6 +76,24 @@ html, body, #root, .App {
   overflow: hidden;
 }
 
+.page-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  color: #333;
+  padding: 16px;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  height: calc(100% - 32px);
+  overflow-y: auto;
+  margin: 16px;
+}
+
 /* ─── 홈 화면: 2열 Flex ─── */
 .home-container {
   display: flex;
@@ -70,6 +102,7 @@ html, body, #root, .App {
   padding: 1rem;
   box-sizing: border-box;
 }
+
 .left-column {
   flex: 2;
   display: flex;
@@ -77,6 +110,7 @@ html, body, #root, .App {
   gap: 1rem;
   height: 100%;
 }
+
 .right-column {
   flex: 1;
   display: flex;
@@ -84,12 +118,12 @@ html, body, #root, .App {
   height: 100%;
 }
 
-/* ─── 진료 탭: 4컬럼 레이아웃 ─── */
-.clinical-container {
+/* ─── 🔥 새로운 진료 탭: 4컬럼 레이아웃 (크기 조정) ─── */
+.clinical-container-new {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 2fr; /* 기존 5열에서 다시 4열로 */
-  gap: 1rem;
-  padding: 1rem;
+  grid-template-columns: 320px 300px 250px 2fr; /* 첫 번째 탭 크기 축소: 400px → 320px */
+  gap: 16px;
+  padding: 16px;
   box-sizing: border-box;
   height: 100%;
   background-color: #f6f8fa;
@@ -98,33 +132,86 @@ html, body, #root, .App {
 /* 각 탭 기본 스타일 */
 .tab-col {
   background-color: #fff;
-  border-radius: 8px;
+  border-radius: 12px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  padding: 1rem;
+  padding: 16px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 
-/* 마지막 “영상검사 요청 + AI판독” 패널만 2fr 폭 전체를 차지 */
-.tab-col.tab4-5 {
-  grid-column: 4 / span 1; /* 4번째 열(2fr 폭)을 통째로 사용 */
+/* 🔥 첫 번째 탭: 배정된 환자 목록 전체 */
+.tab1-new {
+  grid-column: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.assigned-patient-section-full {
+  flex: 1;
+  overflow-y: auto;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  background-color: #fafbfc;
+}
+
+/* 기존 탭들 */
+.tab2 {
+  grid-column: 2;
+}
+
+.tab3 {
+  grid-column: 3;
+}
+
+.tab4-5 {
+  grid-column: 4;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 16px;
+  padding: 0;
+}
+
+.imaging-section,
+.ai-section {
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  overflow-y: auto;
 }
 
 /* 섹션 제목 */
-.tab-col .section-title {
-  font-size: 1.125rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
+.section-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 12px;
   color: #333;
+  border-bottom: 2px solid #e9ecef;
+  padding-bottom: 8px;
 }
 
 /* 빈값 안내 */
 .empty-text {
   font-style: italic;
-  color: #888;
-  font-size: 0.875rem;
-  margin-top: 1rem;
+  color: #6c757d;
+  font-size: 14px;
+  text-align: center;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  margin: 8px 0;
+}
+
+/* ─── 기존 진료 탭 레이아웃 (사용되지 않지만 보존) ─── */
+.clinical-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 2fr;
+  gap: 1rem;
+  padding: 1rem;
+  box-sizing: border-box;
+  height: 100%;
+  background-color: #f6f8fa;
 }
 
 /* ─── 모달 오버레이 & 콘텐츠 ─── */
@@ -138,6 +225,7 @@ html, body, #root, .App {
   justify-content: center;
   z-index: 100;
 }
+
 .modal {
   background: #fff;
   border-radius: 8px;
@@ -148,10 +236,63 @@ html, body, #root, .App {
   overflow-y: auto;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
+
 .modal::-webkit-scrollbar {
   width: 8px;
 }
+
 .modal::-webkit-scrollbar-thumb {
   background-color: rgba(0,0,0,0.2);
   border-radius: 4px;
+}
+
+/* ─── 반응형 디자인 ─── */
+@media (max-width: 1400px) {
+  .clinical-container-new {
+    grid-template-columns: 350px 280px 220px 2fr;
+  }
+}
+
+@media (max-width: 1200px) {
+  .clinical-container-new {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
+    gap: 12px;
+  }
+  
+  .tab-col {
+    grid-column: 1;
+  }
+  
+  .tab4-5 {
+    grid-template-rows: auto auto;
+  }
+  
+  .assigned-patient-section {
+    max-height: 300px;
+  }
+  
+  .room-assignment-mini {
+    max-height: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .emr-content {
+    flex-direction: column;
+  }
+  
+  .sidebar-col {
+    width: 100%;
+    height: auto;
+  }
+  
+  .clinical-container-new {
+    padding: 8px;
+    gap: 8px;
+  }
+  
+  .tab-col {
+    padding: 12px;
+  }
 }
