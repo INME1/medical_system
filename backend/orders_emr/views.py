@@ -12,6 +12,8 @@ from rest_framework import status
 from datetime import datetime, timedelta
 import json
 import logging
+from orders.models import TestOrder
+from orders.serializers import TestOrderSerializer
 
 # 로깅 설정
 logger = logging.getLogger(__name__)
@@ -37,41 +39,32 @@ def order_list_create(request):
     """
     if request.method == 'GET':
         try:
+            # 🔥 실제 DB에서 주문 목록 조회
+            orders = TestOrder.objects.all().order_by('-id')
+            
             # 쿼리 파라미터 처리
             page = int(request.GET.get('page', 1))
             page_size = int(request.GET.get('page_size', 20))
             status_filter = request.GET.get('status', None)
             patient_id = request.GET.get('patient_id', None)
             
-            # 더미 데이터 (실제로는 DB에서 조회)
-            orders = []
-            for i in range(1, 21):
-                orders.append({
-                    'id': i,
-                    'patient_id': f'patient_{i}',
-                    'patient_name': f'Patient {i}',
-                    'test_type': 'CBC' if i % 2 == 0 else 'LFT',
-                    'test_list': 'WBC, RBC, Hemoglobin' if i % 2 == 0 else 'ALT, AST, ALP',
-                    'doctor_id': 'DR001',
-                    'doctor_name': 'System User',
-                    'order_date': '2025-06-12',
-                    'order_time': f'0{9+i%12}:30:00',
-                    'status': 'pending' if i % 3 == 0 else 'completed',
-                    'notes': f'검사 요청 #{i}',
-                    'created_at': '2025-06-12T09:30:00Z',
-                    'updated_at': '2025-06-12T09:30:00Z'
-                })
-            
             # 필터링
-            if status_filter:
-                orders = [o for o in orders if o['status'] == status_filter]
             if patient_id:
-                orders = [o for o in orders if o['patient_id'] == patient_id]
+                orders = orders.filter(patient_id__icontains=patient_id)
+            
+            # 시리얼라이저로 데이터 변환
+            serializer = TestOrderSerializer(orders, many=True)
+            orders_data = serializer.data
+            
+            # 날짜 필드 추가 (호환성을 위해)
+            for order in orders_data:
+                if 'order_date' not in order and 'order_date' in order:
+                    order['order_date'] = order['order_date']
             
             return Response({
                 'status': 'success',
-                'data': orders,
-                'total': len(orders),
+                'data': orders_data,
+                'total': len(orders_data),
                 'page': page,
                 'page_size': page_size
             }, status=status.HTTP_200_OK)
@@ -106,31 +99,51 @@ def order_list_create(request):
                     'message': f'지원되지 않는 검사 타입입니다: {test_type}'
                 }, status=status.HTTP_400_BAD_REQUEST)
             
-            # 새 주문 생성 (더미 응답 - 실제로는 DB에 저장)
-            new_order = {
-                'id': 999,  # 실제로는 DB에서 자동 생성
+            # 🔥 실제 DB에 저장할 데이터 준비
+            order_data = {
+                'order_id': f"EMR_{datetime.now().strftime('%Y%m%d%H%M%S')}",
                 'patient_id': data.get('patient_id'),
-                'patient_name': data.get('patient_name'),
-                'test_type': data.get('test_type'),
-                'test_list': data.get('test_list', ', '.join(PANEL_COMPONENTS[test_type])),
                 'doctor_id': data.get('doctor_id', 'system_user'),
-                'doctor_name': data.get('doctor_name', 'System User'),
-                'order_date': data.get('order_date', datetime.now().strftime('%Y-%m-%d')),
-                'order_time': data.get('order_time', datetime.now().strftime('%H:%M:%S')),
-                'status': 'pending',
-                'notes': data.get('notes', ''),
-                'requesting_system': data.get('requesting_system', 'CDSS-EMR'),
-                'created_at': datetime.now().isoformat(),
-                'updated_at': datetime.now().isoformat()
+                'test_type': data.get('test_type'),
+                'order_date': datetime.now()
             }
             
-            logger.info(f"LIS 주문 생성 성공: Order ID {new_order['id']}")
-            
-            return Response({
-                'status': 'success',
-                'message': 'LIS 검사 주문이 성공적으로 생성되었습니다.',
-                'data': new_order
-            }, status=status.HTTP_201_CREATED)
+            # 🔥 실제 DB에 저장
+            serializer = TestOrderSerializer(data=order_data)
+            if serializer.is_valid():
+                saved_order = serializer.save()
+                
+                # 응답 데이터 구성 (기존 형식 유지)
+                response_data = {
+                    'id': saved_order.id,
+                    'patient_id': saved_order.patient_id,
+                    'patient_name': data.get('patient_name'),  # TestOrder 모델에 없는 필드
+                    'test_type': saved_order.test_type,
+                    'test_list': data.get('test_list', ', '.join(PANEL_COMPONENTS[test_type])),
+                    'doctor_id': saved_order.doctor_id,
+                    'doctor_name': data.get('doctor_name', 'System User'),
+                    'order_date': saved_order.order_date.strftime('%Y-%m-%d'),
+                    'order_time': saved_order.order_date.strftime('%H:%M:%S'),
+                    'status': 'pending',
+                    'notes': data.get('notes', ''),
+                    'requesting_system': data.get('requesting_system', 'CDSS-EMR'),
+                    'created_at': saved_order.order_date.isoformat(),
+                    'updated_at': saved_order.order_date.isoformat()
+                }
+                
+                logger.info(f"✅ LIS 주문 DB 저장 성공: Order ID {saved_order.id}")
+                
+                return Response({
+                    'status': 'success',
+                    'message': 'LIS 검사 주문이 성공적으로 생성되었습니다.',
+                    'data': response_data
+                }, status=status.HTTP_201_CREATED)
+            else:
+                logger.error(f"❌ DB 저장 실패: {serializer.errors}")
+                return Response({
+                    'status': 'error',
+                    'message': f'데이터 검증 실패: {serializer.errors}'
+                }, status=status.HTTP_400_BAD_REQUEST)
             
         except json.JSONDecodeError:
             return Response({

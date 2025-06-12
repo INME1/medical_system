@@ -2,12 +2,11 @@
 
 # backend/ocs/views.py
 # backend/ocs/views.py
-# backend/ocs/views.py
 
 import json
 import logging
 import requests
-from datetime import datetime
+from datetime import datetime, timedelta
 from pymongo import MongoClient
 from django.conf import settings
 from rest_framework.decorators import api_view
@@ -17,109 +16,218 @@ from openmrs_models.models import Patient, PatientIdentifier
 
 logger = logging.getLogger(__name__)
 
-# EXTERNAL_SERVICES에서 OpenMRS 설정을 읽어 옵니다
+# OpenMRS 설정 가져오기 (settings.EXTERNAL_SERVICES['openmrs'] 형태)
 omrs = settings.EXTERNAL_SERVICES.get('openmrs', {})
-OPENMRS_API_BASE = f"http://{omrs['host']}:{omrs['port']}/openmrs/ws/rest/v1"
-OPENMRS_AUTH     = (omrs['username'], omrs['password'])
+OPENMRS_BASE = f"http://{omrs['host']}:{omrs['port']}/openmrs/ws/rest/v1"
+OPENMRS_AUTH = (omrs['username'], omrs['password'])
+PROVIDER_TIMEOUT = 5  # seconds
 
 def _fetch_provider_map():
-    """ OpenMRS /provider 호출하여 uuid → display 맵 생성 """
-    url = f"{OPENMRS_API_BASE}/provider"
-    resp = requests.get(url, auth=OPENMRS_AUTH, timeout=10)
-    resp.raise_for_status()
-    data = resp.json().get('results', resp.json())
-    return { e['uuid']: e.get('display') for e in data if e.get('uuid') }
+    """OpenMRS로부터 {uuid: display} 맵을 가져옵니다."""
+    try:
+        resp = requests.get(
+            f"{OPENMRS_BASE}/provider",
+            auth=OPENMRS_AUTH,
+            timeout=PROVIDER_TIMEOUT
+        )
+        resp.raise_for_status()
+        data = resp.json().get('results', resp.json())
+        return {e['uuid']: e.get('display','') for e in data if e.get('uuid')}
+    except Exception as e:
+        logger.warning("의사 매핑 실패: %s", e)
+        return {}
 
 @api_view(['GET'])
 def combined_log_view(request):
-    """
-    GET /api/logs/combined/
-    MariaDB OCSLog + MongoDB logs 컬렉션을 합쳐
-    NO, 환자, 의사, 요청 종류, 요청/결과, 진단 상세, 요청/결과 시간 컬럼을 반환.
-    필터: patient_id, doctor_id, start_date, end_date (ISO date)
-    """
-
-    # STEP 0: 뷰 진입 확인
-    logger.debug("▶ combined_log_view 진입 확인! 쿼리 파라미터: %s", request.GET.dict())
-
-    # STEP 1: 환자 매핑
-    patients = list(Patient.objects.all())
-    logger.debug("▶ STEP 1: Patient.objects.all() 개수: %d", len(patients))
+    # 1) 환자 매핑 준비
+    patients = Patient.objects.prefetch_related('patientidentifier_set').all()
     patient_map = {}
     for p in patients:
-        name = p.get_active_name().get_full_name() if hasattr(p, 'get_active_name') else ''
-        ident = PatientIdentifier.objects.filter(patient=p, voided=False).first()
+        # preferred=True 우선, 없으면 첫 식별자
+        ident = (
+            p.patientidentifier_set.filter(voided=False, preferred=True).first()
+            or p.patientidentifier_set.filter(voided=False).first()
+        )
         pid = ident.identifier if ident else ''
-        patient_map[pid] = {'name': name, 'id': pid}
+        # 이름 가져오기
+        name = getattr(p, 'get_active_name', lambda: None)()
+        full_name = name.get_full_name() if name else ''
+        patient_map[pid] = f"{full_name} ({pid})"
 
-    # STEP 2: 의사 매핑
-    try:
-        provider_map = _fetch_provider_map()
-        logger.debug("▶ STEP 2: provider_map 크기: %d", len(provider_map))
-    except Exception as e:
-        logger.error("❌ STEP 2 실패 (의사 매핑): %s", e)
-        provider_map = {}
+    # 2) 의사 매핑
+    provider_map = _fetch_provider_map()
 
-    # STEP 3: OCSLog 조회 + 필터링
+    # 3) MariaDB 로그 쿼리
     qs = OCSLog.objects.all().order_by('-created_at')
-    logger.debug("▶ STEP 3: OCSLog.objects.count(): %d", qs.count())
     if pid := request.GET.get('patient_id'):
         qs = qs.filter(patient_id=pid)
-        logger.debug("   → patient_id 필터 적용 후 개수: %d", qs.count())
     if did := request.GET.get('doctor_id'):
         qs = qs.filter(doctor_id=did)
-        logger.debug("   → doctor_id 필터 적용 후 개수: %d", qs.count())
     if sd := request.GET.get('start_date'):
         qs = qs.filter(created_at__gte=datetime.fromisoformat(sd))
-        logger.debug("   → start_date 필터 적용 후 개수: %d", qs.count())
     if ed := request.GET.get('end_date'):
-        qs = qs.filter(created_at__lte=datetime.fromisoformat(ed))
-        logger.debug("   → end_date 필터 적용 후 개수: %d", qs.count())
+        # end_date inclusive
+        end_dt = datetime.fromisoformat(ed) + timedelta(days=1)
+        qs = qs.filter(created_at__lt=end_dt)
 
-    # STEP 4: MariaDB 로그로 combined 리스트 생성
     combined = []
+    # 4) MariaDB 로그 가공
     for idx, log in enumerate(qs, start=1):
         combined.append({
             'no': idx,
-            'patient': f"{patient_map.get(log.patient_id,{}).get('name','')} ({log.patient_id})",
+            'patient': patient_map.get(log.patient_id, log.patient_id),
             'doctor': provider_map.get(log.doctor_uuid, log.doctor_id or ''),
             'order_type': log.category,
-            'order_and_result': json.dumps(log.detail or {}, ensure_ascii=False),
-            'diagnosis_detail': "-",  # 필요 시 detail에서 꺼낼 수 있음
+            'order_and_result': log.detail or '',
+            'diagnosis_detail': "-", 
             'time': log.created_at.strftime("%Y.%m.%d %H:%M:%S")
         })
-    logger.debug("▶ STEP 4: MariaDB 기반 combined 개수: %d", len(combined))
 
-    # STEP 5: MongoDB 로그 추가 (선택사항)
+    # 5) MongoDB 로그 추가
     try:
         client = MongoClient(settings.MONGO_URI)
-        coll = client[settings.DB_NAME][settings.COLLECTION_NAME]
-        mongo_count = coll.count_documents({})
-        logger.debug("▶ STEP 5: MongoDB logs 개수: %d", mongo_count)
+        coll = client[settings.MONGO_DB][settings.MONGO_COLL]
         for m in coll.find().sort("timestamp", -1):
             combined.append({
-                'no': None,
-                'patient': patient_map.get(m.get('patient_id'),{}).get('name',''),
-                'doctor': provider_map.get(m.get('doctor_uuid',''), ''),
+                'no': None,  # 후에 재번호 부여
+                'patient': patient_map.get(m.get('patient_id',''), m.get('patient_id','')),
+                'doctor': provider_map.get(m.get('doctor_uuid',''), m.get('doctor_id','')),
                 'order_type': m.get('step',''),
                 'order_and_result': json.dumps(m.get('detail', {}), ensure_ascii=False),
                 'diagnosis_detail': "-",
                 'time': m.get('timestamp').strftime("%Y.%m.%d %H:%M:%S") if m.get('timestamp') else ''
             })
     except Exception as e:
-        logger.error("❌ STEP 5 실패 (MongoDB 추가): %s", e)
+        logger.warning("MongoDB 로그 추가 실패: %s", e)
     finally:
         client.close()
 
-    # STEP 6: NO 재순번 및 정렬
-    seq = 0
-    for item in combined:
-        seq += 1
-        item['no'] = seq
+    # 6) 최종 정렬 & 번호 재부여
     combined.sort(key=lambda x: x['time'], reverse=True)
-    logger.debug("▶ STEP FINAL: 최종 combined 개수: %d", len(combined))
+    for i, item in enumerate(combined, start=1):
+        item['no'] = i
 
     return Response(combined)
+
+
+
+#----------0612-오전-----------
+# import json
+# import logging
+# import requests
+# from datetime import datetime
+# from pymongo import MongoClient
+# from django.conf import settings
+# from rest_framework.decorators import api_view
+# from rest_framework.response import Response
+# from .models import OCSLog
+# from openmrs_models.models import Patient, PatientIdentifier
+
+# logger = logging.getLogger(__name__)
+
+# # EXTERNAL_SERVICES에서 OpenMRS 설정을 읽어 옵니다
+# omrs = settings.EXTERNAL_SERVICES.get('openmrs', {})
+# OPENMRS_API_BASE = f"http://{omrs['host']}:{omrs['port']}/openmrs/ws/rest/v1"
+# OPENMRS_AUTH     = (omrs['username'], omrs['password'])
+
+# def _fetch_provider_map():
+#     """ OpenMRS /provider 호출하여 uuid → display 맵 생성 """
+#     url = f"{OPENMRS_API_BASE}/provider"
+#     resp = requests.get(url, auth=OPENMRS_AUTH, timeout=10)
+#     resp.raise_for_status()
+#     data = resp.json().get('results', resp.json())
+#     return { e['uuid']: e.get('display') for e in data if e.get('uuid') }
+
+# @api_view(['GET'])
+# def combined_log_view(request):
+#     """
+#     GET /api/logs/combined/
+#     MariaDB OCSLog + MongoDB logs 컬렉션을 합쳐
+#     NO, 환자, 의사, 요청 종류, 요청/결과, 진단 상세, 요청/결과 시간 컬럼을 반환.
+#     필터: patient_id, doctor_id, start_date, end_date (ISO date)
+#     """
+
+#     # STEP 0: 뷰 진입 확인
+#     logger.debug("▶ combined_log_view 진입 확인! 쿼리 파라미터: %s", request.GET.dict())
+
+#     # STEP 1: 환자 매핑
+#     patients = list(Patient.objects.all())
+#     logger.debug("▶ STEP 1: Patient.objects.all() 개수: %d", len(patients))
+#     patient_map = {}
+#     for p in patients:
+#         name = p.get_active_name().get_full_name() if hasattr(p, 'get_active_name') else ''
+#         ident = PatientIdentifier.objects.filter(patient=p, voided=False).first()
+#         pid = ident.identifier if ident else ''
+#         patient_map[pid] = {'name': name, 'id': pid}
+
+#     # STEP 2: 의사 매핑
+#     try:
+#         provider_map = _fetch_provider_map()
+#         logger.debug("▶ STEP 2: provider_map 크기: %d", len(provider_map))
+#     except Exception as e:
+#         logger.error("❌ STEP 2 실패 (의사 매핑): %s", e)
+#         provider_map = {}
+
+#     # STEP 3: OCSLog 조회 + 필터링
+#     qs = OCSLog.objects.all().order_by('-created_at')
+#     logger.debug("▶ STEP 3: OCSLog.objects.count(): %d", qs.count())
+#     if pid := request.GET.get('patient_id'):
+#         qs = qs.filter(patient_id=pid)
+#         logger.debug("   → patient_id 필터 적용 후 개수: %d", qs.count())
+#     if did := request.GET.get('doctor_id'):
+#         qs = qs.filter(doctor_id=did)
+#         logger.debug("   → doctor_id 필터 적용 후 개수: %d", qs.count())
+#     if sd := request.GET.get('start_date'):
+#         qs = qs.filter(created_at__gte=datetime.fromisoformat(sd))
+#         logger.debug("   → start_date 필터 적용 후 개수: %d", qs.count())
+#     if ed := request.GET.get('end_date'):
+#         qs = qs.filter(created_at__lte=datetime.fromisoformat(ed))
+#         logger.debug("   → end_date 필터 적용 후 개수: %d", qs.count())
+
+#     # STEP 4: MariaDB 로그로 combined 리스트 생성
+#     combined = []
+#     for idx, log in enumerate(qs, start=1):
+#         combined.append({
+#             'no': idx,
+#             'patient': f"{patient_map.get(log.patient_id,{}).get('name','')} ({log.patient_id})",
+#             'doctor': provider_map.get(log.doctor_uuid, log.doctor_id or ''),
+#             'order_type': log.category,
+#             'order_and_result': json.dumps(log.detail or {}, ensure_ascii=False),
+#             'diagnosis_detail': "-",  # 필요 시 detail에서 꺼낼 수 있음
+#             'time': log.created_at.strftime("%Y.%m.%d %H:%M:%S")
+#         })
+#     logger.debug("▶ STEP 4: MariaDB 기반 combined 개수: %d", len(combined))
+
+#     # STEP 5: MongoDB 로그 추가 (선택사항)
+#     try:
+#         client = MongoClient(settings.MONGO_URI)
+#         coll = client[settings.DB_NAME][settings.COLLECTION_NAME]
+#         mongo_count = coll.count_documents({})
+#         logger.debug("▶ STEP 5: MongoDB logs 개수: %d", mongo_count)
+#         for m in coll.find().sort("timestamp", -1):
+#             combined.append({
+#                 'no': None,
+#                 'patient': patient_map.get(m.get('patient_id'),{}).get('name',''),
+#                 'doctor': provider_map.get(m.get('doctor_uuid',''), ''),
+#                 'order_type': m.get('step',''),
+#                 'order_and_result': json.dumps(m.get('detail', {}), ensure_ascii=False),
+#                 'diagnosis_detail': "-",
+#                 'time': m.get('timestamp').strftime("%Y.%m.%d %H:%M:%S") if m.get('timestamp') else ''
+#             })
+#     except Exception as e:
+#         logger.error("❌ STEP 5 실패 (MongoDB 추가): %s", e)
+#     finally:
+#         client.close()
+
+#     # STEP 6: NO 재순번 및 정렬
+#     seq = 0
+#     for item in combined:
+#         seq += 1
+#         item['no'] = seq
+#     combined.sort(key=lambda x: x['time'], reverse=True)
+#     logger.debug("▶ STEP FINAL: 최종 combined 개수: %d", len(combined))
+
+#     return Response(combined)
 
 #----------0611 오후 코드----
 # import json

@@ -1,8 +1,8 @@
 from django.db import models
-from orders.models import TestOrder
+from orders_emr.models import Order
 
 class Sample(models.Model):
-    order = models.ForeignKey(TestOrder, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
     sample_type = models.CharField(max_length=50)
     loinc_code = models.CharField(max_length=50)
     collection_date = models.DateTimeField()

@@ -38,7 +38,7 @@ def test_database_connections(request):
                         'engine': 'MySQL',
                         'users_count': user_count
                     }
-                elif db_name == 'orthanc':  # PostgreSQL
+                elif db_name == 'orthanc_p':  # PostgreSQL
                     cursor.execute("SELECT version()")
                     version = cursor.fetchone()[0]
                     results[db_name] = {
