@@ -34560,3 +34560,129 @@ INFO 2025-06-12 11:44:17,376 basehttp 1376729 138499095946944 "GET /api/integrat
 INFO 2025-06-12 11:44:17,961 basehttp 1376729 138499095946944 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
 INFO 2025-06-12 11:44:27,378 basehttp 1376729 138499095946944 "GET /api/integration/identifier-waiting/ HTTP/1.1" 200 192
 INFO 2025-06-12 11:44:27,962 basehttp 1376729 138499095946944 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-12 11:44:37,623 basehttp 1376729 138499095946944 "GET /api/integration/identifier-waiting/ HTTP/1.1" 200 192
+INFO 2025-06-12 11:44:38,632 basehttp 1376729 138499095946944 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+ERROR 2025-06-12 11:44:46,376 log 1376729 138499095946944 Internal Server Error: /api/orders/
+Traceback (most recent call last):
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 511, in dispatch
+    self.response = self.finalize_response(request, response, *args, **kwargs)
+                    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 423, in finalize_response
+    assert isinstance(response, HttpResponseBase), (
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Expected a `Response`, `HttpResponse` or `HttpStreamingResponse` to be returned from the view, but received a `<class 'NoneType'>`
+ERROR 2025-06-12 11:44:46,378 basehttp 1376729 138499095946944 "POST /api/orders/ HTTP/1.1" 500 93951
+INFO 2025-06-12 11:44:47,372 basehttp 1376729 138499095946944 "GET /api/integration/identifier-waiting/ HTTP/1.1" 200 192
+INFO 2025-06-12 11:44:47,965 basehttp 1376729 138499095946944 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-12 11:44:57,637 basehttp 1376729 138499095946944 "GET /api/integration/identifier-waiting/ HTTP/1.1" 200 192
+INFO 2025-06-12 11:44:58,628 basehttp 1376729 138499095946944 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-12 11:45:07,640 basehttp 1376729 138499095946944 "GET /api/integration/identifier-waiting/ HTTP/1.1" 200 192
+INFO 2025-06-12 11:45:08,638 basehttp 1376729 138499095946944 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-12 11:45:10,311 basehttp 1376729 138499112732352 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-12 11:45:10,312 basehttp 1376729 138499104339648 "GET /api/integration/identifier-waiting/ HTTP/1.1" 200 192
+INFO 2025-06-12 11:45:17,385 basehttp 1376729 138499095946944 "GET /api/integration/identifier-waiting/ HTTP/1.1" 200 192
+INFO 2025-06-12 11:45:17,960 basehttp 1376729 138499095946944 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-12 11:45:27,382 basehttp 1376729 138499095946944 "GET /api/integration/identifier-waiting/ HTTP/1.1" 200 192
+INFO 2025-06-12 11:45:27,967 basehttp 1376729 138499095946944 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-12 11:45:37,378 basehttp 1376729 138499095946944 "GET /api/integration/identifier-waiting/ HTTP/1.1" 200 192
+INFO 2025-06-12 11:45:37,962 basehttp 1376729 138499095946944 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-12 11:45:47,380 basehttp 1376729 138499095946944 "GET /api/integration/identifier-waiting/ HTTP/1.1" 200 192
+INFO 2025-06-12 11:45:47,967 basehttp 1376729 138499095946944 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-12 11:45:55,293 basehttp 1376729 138499104339648 "GET /api/samples/ HTTP/1.1" 200 2
+INFO 2025-06-12 11:45:55,296 basehttp 1376729 138499112732352 "GET /api/orders/ HTTP/1.1" 200 64
+INFO 2025-06-12 11:45:55,632 basehttp 1376729 138499123222208 "GET /api/samples/ HTTP/1.1" 200 2
+INFO 2025-06-12 11:45:55,632 basehttp 1376729 138499095946944 "GET /api/orders/ HTTP/1.1" 200 64
+INFO 2025-06-12 11:45:55,869 basehttp 1376729 138499086505664 "GET /api/orders/ HTTP/1.1" 200 64
+INFO 2025-06-12 11:45:55,872 basehttp 1376729 138498736649920 "GET /api/samples/ HTTP/1.1" 200 2
+INFO 2025-06-12 11:45:57,398 basehttp 1376729 138499095946944 "GET /api/integration/identifier-waiting/ HTTP/1.1" 200 192
+INFO 2025-06-12 11:45:57,975 basehttp 1376729 138499095946944 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-12 11:46:03,249 basehttp 1376729 138499104339648 "GET /api/samples/ HTTP/1.1" 200 2
+INFO 2025-06-12 11:46:03,251 basehttp 1376729 138499112732352 "GET /api/orders/ HTTP/1.1" 200 64
+INFO 2025-06-12 11:46:07,388 basehttp 1376729 138499095946944 "GET /api/integration/identifier-waiting/ HTTP/1.1" 200 192
+INFO 2025-06-12 11:46:07,974 basehttp 1376729 138499095946944 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-12 11:46:10,289 basehttp 1376729 138499104339648 "GET /api/integration/identifier-waiting/ HTTP/1.1" 200 192
+INFO 2025-06-12 11:46:10,290 basehttp 1376729 138499112732352 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-12 11:46:10,628 basehttp 1376729 138499123222208 "GET /api/orders/ HTTP/1.1" 200 64
+INFO 2025-06-12 11:46:10,629 basehttp 1376729 138498728257216 "GET /api/samples/ HTTP/1.1" 200 2
+INFO 2025-06-12 11:46:14,405 basehttp 1376729 138499123222208 "GET /api/samples/ HTTP/1.1" 200 2
+INFO 2025-06-12 11:46:14,408 basehttp 1376729 138498728257216 "GET /api/orders/ HTTP/1.1" 200 64
+INFO 2025-06-12 11:46:17,309 basehttp 1376729 138498728257216 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-12 11:46:17,558 basehttp 1376729 138499095946944 "GET /api/integration/identifier-waiting/ HTTP/1.1" 200 192
+INFO 2025-06-12 11:46:17,801 basehttp 1376729 138498728257216 "GET /api/integration/identifier-waiting/ HTTP/1.1" 200 192
+INFO 2025-06-12 11:46:17,971 basehttp 1376729 138499095946944 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-12 11:46:20,473 basehttp 1376729 138498728257216 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-12 11:46:20,861 basehttp 1376729 138498728257216 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-12 11:46:21,594 basehttp 1376729 138498728257216 "GET /api/integration/identifier-waiting/ HTTP/1.1" 200 192
+INFO 2025-06-12 11:46:21,990 basehttp 1376729 138498728257216 "GET /api/integration/identifier-waiting/ HTTP/1.1" 200 192
+INFO 2025-06-12 11:46:22,379 basehttp 1376729 138498728257216 "GET /api/integration/identifier-waiting/ HTTP/1.1" 200 192
+INFO 2025-06-12 11:46:22,780 basehttp 1376729 138498728257216 "GET /api/integration/identifier-waiting/ HTTP/1.1" 200 192
+INFO 2025-06-12 11:46:27,387 basehttp 1376729 138499095946944 "GET /api/integration/identifier-waiting/ HTTP/1.1" 200 192
+INFO 2025-06-12 11:46:27,973 basehttp 1376729 138499095946944 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-12 11:46:28,571 basehttp 1376729 138498728257216 "OPTIONS /api/orders/ HTTP/1.1" 200 0
+ERROR 2025-06-12 11:46:28,979 log 1376729 138498728257216 Internal Server Error: /api/orders/
+Traceback (most recent call last):
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/home/medical_system/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 511, in dispatch
+    self.response = self.finalize_response(request, response, *args, **kwargs)
+                    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/medical_system/venv/lib/python3.13/site-packages/rest_framework/views.py", line 423, in finalize_response
+    assert isinstance(response, HttpResponseBase), (
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Expected a `Response`, `HttpResponse` or `HttpStreamingResponse` to be returned from the view, but received a `<class 'NoneType'>`
+ERROR 2025-06-12 11:46:28,981 basehttp 1376729 138498728257216 "POST /api/orders/ HTTP/1.1" 500 93957
+INFO 2025-06-12 11:46:30,477 basehttp 1376729 138498728257216 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-12 11:46:32,297 basehttp 1376729 138498728257216 "GET /api/integration/identifier-waiting/ HTTP/1.1" 200 192
+INFO 2025-06-12 11:46:34,460 basehttp 1376729 138498728257216 "GET /api/orders/ HTTP/1.1" 200 64
+INFO 2025-06-12 11:46:34,460 basehttp 1376729 138499123222208 "GET /api/samples/ HTTP/1.1" 200 2
+INFO 2025-06-12 11:46:34,856 basehttp 1376729 138498728257216 "GET /api/orders/ HTTP/1.1" 200 64
+INFO 2025-06-12 11:46:34,856 basehttp 1376729 138499123222208 "GET /api/samples/ HTTP/1.1" 200 2
+INFO 2025-06-12 11:46:37,630 basehttp 1376729 138499095946944 "GET /api/integration/identifier-waiting/ HTTP/1.1" 200 192
+INFO 2025-06-12 11:46:38,622 autoreload 1376729 138503348265216 /home/medical_system/backend/orders_emr/urls.py changed, reloading.
+INFO 2025-06-12 11:46:40,089 autoreload 1379270 135792872055040 Watching for file changes with StatReloader
+INFO 2025-06-12 11:49:28,803 autoreload 1379270 135792872055040 /home/medical_system/backend/orders_emr/urls.py changed, reloading.
+INFO 2025-06-12 11:49:29,372 autoreload 1380000 127598765859072 Watching for file changes with StatReloader
+INFO 2025-06-12 11:49:37,820 basehttp 1380000 127594540996288 "GET /api/integration/identifier-waiting/ HTTP/1.1" 200 192
+INFO 2025-06-12 11:49:38,634 basehttp 1380000 127594540996288 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-12 11:49:44,116 autoreload 1380000 127598765859072 /home/medical_system/backend/orders_emr/views.py changed, reloading.
+INFO 2025-06-12 11:49:45,646 autoreload 1380092 136527479513344 Watching for file changes with StatReloader
+INFO 2025-06-12 11:49:49,856 basehttp 1380092 136523256862400 "GET /api/integration/identifier-waiting/ HTTP/1.1" 200 192
+INFO 2025-06-12 11:49:50,100 basehttp 1380092 136523248469696 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-12 11:49:52,676 basehttp 1380092 136523248469696 "POST /api/orders/ HTTP/1.1" 201 573
+INFO 2025-06-12 11:49:57,388 basehttp 1380092 136523248469696 "GET /api/integration/identifier-waiting/ HTTP/1.1" 200 192
+INFO 2025-06-12 11:49:57,977 basehttp 1380092 136523248469696 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-12 11:50:00,697 basehttp 1380092 136523220145856 "OPTIONS /api/ai/analyze/ HTTP/1.1" 200 0
+WARNING 2025-06-12 11:50:03,366 log 1380092 136522707756736 Not Found: /
+WARNING 2025-06-12 11:50:03,367 basehttp 1380092 136522707756736 "GET / HTTP/1.1" 404 4179
+WARNING 2025-06-12 11:50:04,031 log 1380092 136522699364032 Not Found: /favicon.ico
+WARNING 2025-06-12 11:50:04,032 basehttp 1380092 136522699364032 "GET /favicon.ico HTTP/1.1" 404 4235
+INFO 2025-06-12 11:50:07,392 basehttp 1380092 136523248469696 "GET /api/integration/identifier-waiting/ HTTP/1.1" 200 192
+INFO 2025-06-12 11:50:07,981 basehttp 1380092 136523248469696 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-12 11:50:10,489 basehttp 1380092 136522690971328 "GET /api/integration/identifier-waiting/ HTTP/1.1" 200 192
+INFO 2025-06-12 11:50:10,491 basehttp 1380092 136522682578624 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-12 11:50:15,160 basehttp 1380092 136523220145856 "GET /api/ai/results/1.2.826.0.1.3680043.8.1055.1.20111103112244831.40200514.30965937/ HTTP/1.1" 200 129
+INFO 2025-06-12 11:50:17,397 basehttp 1380092 136523248469696 "GET /api/integration/identifier-waiting/ HTTP/1.1" 200 192
+INFO 2025-06-12 11:50:17,977 basehttp 1380092 136523248469696 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-12 11:50:27,394 basehttp 1380092 136523248469696 "GET /api/integration/identifier-waiting/ HTTP/1.1" 200 192
+INFO 2025-06-12 11:50:28,029 basehttp 1380092 136523248469696 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-12 11:50:37,643 basehttp 1380092 136523248469696 "GET /api/integration/identifier-waiting/ HTTP/1.1" 200 192
+INFO 2025-06-12 11:50:38,631 basehttp 1380092 136523248469696 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11
+INFO 2025-06-12 11:50:39,728 basehttp 1380092 136523220145856 "GET /api/ai/results/1.2.276.0.7230010.3.1.2.8323329.26429.1517874472.155203/ HTTP/1.1" 200 120
+INFO 2025-06-12 11:50:47,651 basehttp 1380092 136523248469696 "GET /api/integration/identifier-waiting/ HTTP/1.1" 200 192
+INFO 2025-06-12 11:50:48,641 basehttp 1380092 136523248469696 "GET /api/integration/alerts/urgent/count/ HTTP/1.1" 200 11

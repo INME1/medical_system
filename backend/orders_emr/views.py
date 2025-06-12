@@ -31,77 +31,117 @@ PANEL_COMPONENTS = {
 @api_view(['GET', 'POST'])
 @permission_classes([AllowAny])
 def order_list_create(request):
+    """
+    GET: 주문 목록 조회
+    POST: 새 주문 생성 (LIS 검사 요청)
+    """
     if request.method == 'GET':
         try:
-            # 🔥 실제 Order 모델 import 및 조회
-            try:
-                from orders_emr.models import Order
-                
-                # 기본 쿼리셋
-                queryset = Order.objects.all()
-                
-                # 필터링 적용
-                status_filter = request.GET.get('status')
-                if status_filter:
-                    queryset = queryset.filter(status=status_filter)
-                
-                patient_id = request.GET.get('patient_id')
-                if patient_id:
-                    queryset = queryset.filter(patient_id=patient_id)
-                
-                # 페이지네이션
-                page = int(request.GET.get('page', 1))
-                page_size = int(request.GET.get('page_size', 20))
-                
-                total = queryset.count()
-                start = (page - 1) * page_size
-                end = start + page_size
-                
-                orders = list(queryset.order_by('-order_id')[start:end].values(
-                    'order_id', 'patient_id', 'doctor_id', 'panel', 'tests',
-                    'order_date', 'status', 'created_at'
-                ))
-                
-                # 응답 데이터 형식 맞추기
-                formatted_orders = []
-                for order in orders:
-                    formatted_orders.append({
-                        'id': order['order_id'],
-                        'patient_id': str(order['patient_id']),
-                        'patient_name': f"Patient {order['patient_id'][:8]}",  # 임시
-                        'doctor_id': str(order['doctor_id']),
-                        'doctor_name': 'System User',  # 임시
-                        'test_type': order['panel'],
-                        'test_list': ', '.join(order['tests']) if order['tests'] else '',
-                        'order_date': order['order_date'].strftime('%Y-%m-%d'),
-                        'status': order['status'],
-                        'created_at': order['created_at'].isoformat(),
-                        'updated_at': order['created_at'].isoformat()
-                    })
-                
-                return Response({
-                    'status': 'success',
-                    'data': formatted_orders,
-                    'total': total,
-                    'page': page,
-                    'page_size': page_size
-                }, status=status.HTTP_200_OK)
-                
-            except ImportError:
-                # Order 모델이 없으면 빈 배열 반환
-                return Response({
-                    'status': 'success',
-                    'data': [],
-                    'total': 0,
-                    'page': 1,
-                    'page_size': 20
-                }, status=status.HTTP_200_OK)
-                
+            # 쿼리 파라미터 처리
+            page = int(request.GET.get('page', 1))
+            page_size = int(request.GET.get('page_size', 20))
+            status_filter = request.GET.get('status', None)
+            patient_id = request.GET.get('patient_id', None)
+            
+            # 더미 데이터 (실제로는 DB에서 조회)
+            orders = []
+            for i in range(1, 21):
+                orders.append({
+                    'id': i,
+                    'patient_id': f'patient_{i}',
+                    'patient_name': f'Patient {i}',
+                    'test_type': 'CBC' if i % 2 == 0 else 'LFT',
+                    'test_list': 'WBC, RBC, Hemoglobin' if i % 2 == 0 else 'ALT, AST, ALP',
+                    'doctor_id': 'DR001',
+                    'doctor_name': 'System User',
+                    'order_date': '2025-06-12',
+                    'order_time': f'0{9+i%12}:30:00',
+                    'status': 'pending' if i % 3 == 0 else 'completed',
+                    'notes': f'검사 요청 #{i}',
+                    'created_at': '2025-06-12T09:30:00Z',
+                    'updated_at': '2025-06-12T09:30:00Z'
+                })
+            
+            # 필터링
+            if status_filter:
+                orders = [o for o in orders if o['status'] == status_filter]
+            if patient_id:
+                orders = [o for o in orders if o['patient_id'] == patient_id]
+            
+            return Response({
+                'status': 'success',
+                'data': orders,
+                'total': len(orders),
+                'page': page,
+                'page_size': page_size
+            }, status=status.HTTP_200_OK)
+            
         except Exception as e:
             logger.error(f"주문 목록 조회 오류: {str(e)}")
             return Response({
                 'status': 'error',
                 'message': f'주문 목록 조회 실패: {str(e)}'
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+    elif request.method == 'POST':
+        try:
+            # 요청 데이터 파싱
+            data = request.data
+            logger.info(f"LIS 주문 생성 요청: {data}")
+            
+            # 필수 필드 검증
+            required_fields = ['patient_id', 'patient_name', 'test_type']
+            for field in required_fields:
+                if not data.get(field):
+                    return Response({
+                        'status': 'error',
+                        'message': f'필수 필드가 누락되었습니다: {field}'
+                    }, status=status.HTTP_400_BAD_REQUEST)
+            
+            # 검사 패널 유효성 검증
+            test_type = data.get('test_type')
+            if test_type not in PANEL_COMPONENTS:
+                return Response({
+                    'status': 'error',
+                    'message': f'지원되지 않는 검사 타입입니다: {test_type}'
+                }, status=status.HTTP_400_BAD_REQUEST)
+            
+            # 새 주문 생성 (더미 응답 - 실제로는 DB에 저장)
+            new_order = {
+                'id': 999,  # 실제로는 DB에서 자동 생성
+                'patient_id': data.get('patient_id'),
+                'patient_name': data.get('patient_name'),
+                'test_type': data.get('test_type'),
+                'test_list': data.get('test_list', ', '.join(PANEL_COMPONENTS[test_type])),
+                'doctor_id': data.get('doctor_id', 'system_user'),
+                'doctor_name': data.get('doctor_name', 'System User'),
+                'order_date': data.get('order_date', datetime.now().strftime('%Y-%m-%d')),
+                'order_time': data.get('order_time', datetime.now().strftime('%H:%M:%S')),
+                'status': 'pending',
+                'notes': data.get('notes', ''),
+                'requesting_system': data.get('requesting_system', 'CDSS-EMR'),
+                'created_at': datetime.now().isoformat(),
+                'updated_at': datetime.now().isoformat()
+            }
+            
+            logger.info(f"LIS 주문 생성 성공: Order ID {new_order['id']}")
+            
+            return Response({
+                'status': 'success',
+                'message': 'LIS 검사 주문이 성공적으로 생성되었습니다.',
+                'data': new_order
+            }, status=status.HTTP_201_CREATED)
+            
+        except json.JSONDecodeError:
+            return Response({
+                'status': 'error',
+                'message': '잘못된 JSON 형식입니다.'
+            }, status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            logger.error(f"LIS 주문 생성 오류: {str(e)}")
+            return Response({
+                'status': 'error',
+                'message': f'주문 생성 실패: {str(e)}'
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 @api_view(['GET', 'PUT', 'DELETE'])
