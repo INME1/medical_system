@@ -1,128 +1,427 @@
-// src/components/OCS/OCSLogPage.jsx
-// frontend/src/components/OCSLogPage.jsx
-
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { saveLog } from '../utils/saveLog';  // utils 위치에 맞게 상대 경로 확인
 import axios from 'axios';
 import './OCSLogPage.css';
 
-// 하드코딩된 백엔드 API 기본 URL
-const API = 'http://35.225.63.41:8000/api';
-
-export default function OCSLogPage() {
+const OCSLogPage = () => {
   const [logs, setLogs] = useState([]);
-  const [patientId, setPatientId] = useState('');
-  const [doctorId,  setDoctorId]  = useState('');
-  const [startDate, setStartDate] = useState('');
-  const [endDate,   setEndDate]   = useState('');
+  const [patientFilter, setPatientFilter] = useState('');
+  const [doctorFilter, setDoctorFilter] = useState('');
+  const [page, setPage] = useState(1);
+  const [pageSize] = useState(20);
+  const [totalCount, setTotalCount] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const fetchLogs = async () => {
-    const params = {};
-    if (patientId) params.patient_id = patientId;
-    if (doctorId)  params.doctor_id  = doctorId;
-    if (startDate) params.start_date  = startDate;
-    if (endDate)   params.end_date    = endDate;
-
+  const fetchLogs = useCallback(async () => {
+    setLoading(true);
+    setError(null);
     try {
-      const res = await axios.get(`${API}/logs/combined/`, { params });
-      // 브라우저 콘솔에 디버그 로그 출력
-      console.log('▶ fetchLogs() 요청 URL:', `${API}/logs/combined/`, '파라미터:', params);
-      console.log('▶ fetchLogs() 응답 객체:', res);
-      console.log('▶ fetchLogs() 데이터 배열:', res.data);
+      const params = { page, page_size: pageSize };
+      if (patientFilter) params.patient = patientFilter;
+      if (doctorFilter) params.doctor = doctorFilter;
 
-      setLogs(res.data);
+      // proxy를 package.json 에 설정했다면 이대로 사용
+      const res = await axios.get('/api/logs/', { params });
+        // await axios.get('http://35.225.63.41:8000/api/logs/logs/', { params });
+                 
+      setLogs(res.data.data);
+      setTotalCount(res.data.total);
     } catch (err) {
-      console.error('❌ 로그 조회 실패:', err);
-      setLogs([]);
+      console.error('로그 조회 실패:', err);
+      setError('로그를 불러오는 데 실패했습니다.');
+    } finally {
+      setLoading(false);
     }
-  };
+  }, [page, pageSize, patientFilter, doctorFilter]);
 
   useEffect(() => {
     fetchLogs();
-  }, []);
+  }, [fetchLogs]);
+
+  const handleSearch = () => {
+    // 1) 로그 남기기 (POST)
+    saveLog({
+      action: '검색 클릭',
+      patient_id: null,    // UUID를 알고 있다면 이곳에 넣어 주세요
+      doctor_id:  null,
+      payload: { patientFilter, doctorFilter },
+    });
+
+    // 2) 검색 결과 조회
+    setPage(1);
+    fetchLogs();
+  };
 
   const handleReset = () => {
-    setPatientId('');
-    setDoctorId('');
-    setStartDate('');
-    setEndDate('');
+    setPatientFilter('');
+    setDoctorFilter('');
+    setPage(1);
     fetchLogs();
+  };
+
+  const handlePrev = () => {
+    if (page > 1) setPage(p => p - 1);
+  };
+  const handleNext = () => {
+    const maxPage = Math.ceil(totalCount / pageSize);
+    if (page < maxPage) setPage(p => p + 1);
   };
 
   return (
     <div className="ocs-body">
-      <h1 className="ocs-title">로그 조회</h1>
+      <h2 className="ocs-title">OCS 로그 조회</h2>
 
       <div className="ocs-controls">
+        <label className="ocs-controls-label">환자:</label>
         <input
+          type="text"
           className="ocs-controls-input"
-          placeholder="환자 ID"
-          value={patientId}
-          onChange={e => setPatientId(e.target.value)}
+          placeholder="환자 이름 검색"
+          value={patientFilter}
+          onChange={e => setPatientFilter(e.target.value)}
         />
+        <label className="ocs-controls-label">의사:</label>
         <input
+          type="text"
           className="ocs-controls-input"
-          placeholder="의사 ID"
-          value={doctorId}
-          onChange={e => setDoctorId(e.target.value)}
+          placeholder="의사 이름 검색"
+          value={doctorFilter}
+          onChange={e => setDoctorFilter(e.target.value)}
         />
-        <input
-          type="date"
-          className="ocs-controls-input"
-          value={startDate}
-          onChange={e => setStartDate(e.target.value)}
-        />
-        <input
-          type="date"
-          className="ocs-controls-input"
-          value={endDate}
-          onChange={e => setEndDate(e.target.value)}
-        />
-
-        <button className="ocs-controls-button" onClick={fetchLogs}>
-          검색
-        </button>
-        <button className="ocs-controls-button reset" onClick={handleReset}>
-          초기화
-        </button>
+        <button className="ocs-controls-button" onClick={handleSearch}>검색</button>
+        <button className="ocs-controls-button reset" onClick={handleReset}>초기화</button>
       </div>
 
-      <table className="ocs-table">
-        <thead>
-          <tr>
-            <th>NO</th>
-            <th>환자</th>
-            <th>의사</th>
-            <th>요청 종류</th>
-            <th>요청/결과</th>
-            <th>진단 상세</th>
-            <th>요청/결과 시간</th>
-          </tr>
-        </thead>
-        <tbody>
-          {logs.length > 0 ? (
-            logs.map(log => (
-              <tr key={log.no}>
-                <td>{log.no}</td>
-                <td>{log.patient}</td>
-                <td>{log.doctor}</td>
-                <td>{log.order_type}</td>
-                <td style={{ whiteSpace: 'pre-wrap' }}>{log.order_and_result}</td>
-                <td style={{ whiteSpace: 'pre-wrap' }}>{log.diagnosis_detail}</td>
-                <td>{log.time}</td>
+      {loading && <p className="ocs-loading-message">로딩 중...</p>}
+      {error   && <p className="ocs-error-message">{error}</p>}
+      {!loading && !error && logs.length === 0 && (
+        <p className="ocs-no-logs">저장된 로그가 없습니다.</p>
+      )}
+
+      {!loading && !error && logs.length > 0 && (
+        <div className="ocs-table-container">
+          <table className="ocs-table">
+            <thead>
+              <tr>
+                <th>시간</th>
+                <th>환자</th>
+                <th>의사</th>
+                <th>시스템</th>
+                <th>Raw Data</th>
               </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan="7" style={{ textAlign: 'center', padding: '20px' }}>
-                저장된 로그가 없습니다.
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+            </thead>
+            <tbody>
+              {logs.map((log, idx) => (
+                <tr key={log.id} className={idx % 2 === 0 ? 'ocs-table-even-row' : ''}>
+                  <td>{new Date(log.timestamp).toLocaleString()}</td>
+                  <td>{log.raw_data.patient_name || log.patient_id}</td>
+                  <td>{log.raw_data.doctor_name  || log.doctor_id}</td>
+                  <td>{log.system}</td>
+                  <td><pre>{JSON.stringify(log.raw_data, null, 2)}</pre></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {!loading && !error && logs.length > 0 && (
+        <div className="ocs-controls" style={{ justifyContent: 'space-between' }}>
+          <button className="ocs-controls-button" onClick={handlePrev} disabled={page === 1}>이전</button>
+          <span>Page {page} / {Math.ceil(totalCount / pageSize)}</span>
+          <button className="ocs-controls-button" onClick={handleNext} disabled={page >= Math.ceil(totalCount / pageSize)}>다음</button>
+        </div>
+      )}
     </div>
   );
-}
+};
+
+export default OCSLogPage;
+
+
+
+// import React, { useEffect, useState } from 'react';
+// import axios from 'axios';
+// import './OCSLogPage.css';
+
+// const API_BASE = process.env.REACT_APP_API_BASE_URL?.replace(/\/$/, '');
+
+
+// export default function OCSLogPage() {
+//   const [logs, setLogs]           = useState([]);
+//   const [patientId, setPatientId] = useState('');
+//   const [doctorId, setDoctorId]   = useState('');
+//   const [startDate, setStartDate] = useState(() => {
+//     const d = new Date();
+//     d.setDate(d.getDate() - 7);           // 기본 7일 전
+//     return d.toISOString().slice(0, 10);
+//   });
+//   const [endDate, setEndDate]     = useState(() =>
+//     new Date().toISOString().slice(0, 10)
+//   );
+//   const [loading, setLoading]     = useState(false);
+//   const [error, setError]         = useState('');
+
+//   const fetchLogs = async () => {
+//   setLoading(true);
+//   setError('');
+
+//   const params = {};
+//     if (patientId) params.patient_id = patientId;
+//     if (doctorId)  params.doctor_id  = doctorId;
+//     if (startDate) params.start_date = startDate;
+//     if (endDate)   params.end_date   = endDate;
+
+//     try {
+//       const url = `${API_BASE}/logs/combined/`;
+//       console.log('▶ fetchLogs() 요청 URL:', url, '파라미터:', params);
+
+//       const res = await axios.get(url, { params });
+//       console.log('▶ fetchLogs() 응답 객체:', res);
+//       console.log('▶ fetchLogs() res.data:', res.data);
+//       console.log('▶ fetchLogs() res.data.data:', res.data.data);
+
+//       setLogs(res.data.data ?? res.data);
+//     } catch (err) {
+//       console.error('❌ 로그 조회 실패:', err);
+//       setError('로그를 불러오는 데 실패했습니다.');
+//       setLogs([]);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   useEffect(() => {
+//     fetchLogs();
+//   }, [patientId, doctorId, startDate, endDate]);
+
+//   const handleReset = () => {
+//     setPatientId('');
+//     setDoctorId('');
+//     const today = new Date().toISOString().slice(0, 10);
+//     setEndDate(today);
+//     const weekAgo = new Date();
+//     weekAgo.setDate(weekAgo.getDate() - 7);
+//     setStartDate(weekAgo.toISOString().slice(0, 10));
+//   };
+
+//   return (
+//     <div className="ocs-body">
+//       <h1 className="ocs-title">로그 조회</h1>
+
+//       <div className="ocs-controls">
+//         <input
+//           className="ocs-controls-input"
+//           placeholder="환자 ID"
+//           value={patientId}
+//           onChange={e => setPatientId(e.target.value)}
+//         />
+//         <input
+//           className="ocs-controls-input"
+//           placeholder="의사 ID"
+//           value={doctorId}
+//           onChange={e => setDoctorId(e.target.value)}
+//         />
+
+//         <input
+//           type="date"
+//           className="ocs-controls-input"
+//           value={startDate}
+//           onChange={e => setStartDate(e.target.value)}
+//         />
+//         <input
+//           type="date"
+//           className="ocs-controls-input"
+//           value={endDate}
+//           onChange={e => setEndDate(e.target.value)}
+//         />
+
+//         <button
+//           className="ocs-controls-button"
+//           onClick={fetchLogs}
+//           disabled={loading}
+//         >
+//           {loading ? '로딩 중…' : '검색'}
+//         </button>
+//         <button
+//           className="ocs-controls-button reset"
+//           onClick={handleReset}
+//           disabled={loading}
+//         >
+//           초기화
+//         </button>
+//       </div>
+
+//       {error && <div className="ocs-error">⚠️ {error}</div>}
+
+//       <table className="ocs-table">
+//         <thead>
+//           <tr>
+//             <th>NO</th>
+//             <th>환자</th>
+//             <th>의사</th>
+//             <th>요청 종류</th>
+//             <th>요청/결과</th>
+//             <th>진단 상세</th>
+//             <th>요청/결과 시간</th>
+//           </tr>
+//         </thead>
+//         <tbody>
+//           {logs.length > 0 ? (
+//             logs.map(log => (
+//               <tr key={log.no}>
+//                 <td>{log.no}</td>
+//                 <td>{log.patient}</td>
+//                 <td>{log.doctor}</td>
+//                 <td>{log.order_type}</td>
+//                 <td style={{ whiteSpace: 'pre-wrap' }}>
+//                   {log.order_and_result}
+//                 </td>
+//                 <td style={{ whiteSpace: 'pre-wrap' }}>
+//                   {log.diagnosis_detail}
+//                 </td>
+//                 <td>{log.time}</td>
+//               </tr>
+//             ))
+//           ) : (
+//             <tr>
+//               <td colSpan="7" className="ocs-no-data">
+//                 저장된 로그가 없습니다.
+//               </td>
+//             </tr>
+//           )}
+//         </tbody>
+//       </table>
+//     </div>
+//   );
+// }
+
+
+
+// -------------------오전(20250612)---------------------
+// import React, { useEffect, useState } from 'react';
+// import axios from 'axios';
+// import './OCSLogPage.css';
+
+// // 하드코딩된 백엔드 API 기본 URL
+// const API = 'http://35.225.63.41:8000/api';
+
+// export default function OCSLogPage() {
+//   const [logs, setLogs] = useState([]);
+//   const [patientId, setPatientId] = useState('');
+//   const [doctorId,  setDoctorId]  = useState('');
+//   const [startDate, setStartDate] = useState('');
+//   const [endDate,   setEndDate]   = useState('');
+
+//   const fetchLogs = async () => {
+//     const params = {};
+//     if (patientId) params.patient_id = patientId;
+//     if (doctorId)  params.doctor_id  = doctorId;
+//     if (startDate) params.start_date  = startDate;
+//     if (endDate)   params.end_date    = endDate;
+
+//     try {
+//       const res = await axios.get(`${API}/logs/combined/`, { params });
+//       // 브라우저 콘솔에 디버그 로그 출력
+//       console.log('▶ fetchLogs() 요청 URL:', `${API}/logs/combined/`, '파라미터:', params);
+//       console.log('▶ fetchLogs() 응답 객체:', res);
+//       console.log('▶ fetchLogs() 데이터 배열:', res.data);
+
+//       setLogs(res.data);
+//     } catch (err) {
+//       console.error('❌ 로그 조회 실패:', err);
+//       setLogs([]);
+//     }
+//   };
+
+//   useEffect(() => {
+//     fetchLogs();
+//   }, []);
+
+//   const handleReset = () => {
+//     setPatientId('');
+//     setDoctorId('');
+//     setStartDate('');
+//     setEndDate('');
+//     fetchLogs();
+//   };
+
+//   return (
+//     <div className="ocs-body">
+//       <h1 className="ocs-title">로그 조회</h1>
+
+//       <div className="ocs-controls">
+//         <input
+//           className="ocs-controls-input"
+//           placeholder="환자 ID"
+//           value={patientId}
+//           onChange={e => setPatientId(e.target.value)}
+//         />
+//         <input
+//           className="ocs-controls-input"
+//           placeholder="의사 ID"
+//           value={doctorId}
+//           onChange={e => setDoctorId(e.target.value)}
+//         />
+//         <input
+//           type="date"
+//           className="ocs-controls-input"
+//           value={startDate}
+//           onChange={e => setStartDate(e.target.value)}
+//         />
+//         <input
+//           type="date"
+//           className="ocs-controls-input"
+//           value={endDate}
+//           onChange={e => setEndDate(e.target.value)}
+//         />
+
+//         <button className="ocs-controls-button" onClick={fetchLogs}>
+//           검색
+//         </button>
+//         <button className="ocs-controls-button reset" onClick={handleReset}>
+//           초기화
+//         </button>
+//       </div>
+
+//       <table className="ocs-table">
+//         <thead>
+//           <tr>
+//             <th>NO</th>
+//             <th>환자</th>
+//             <th>의사</th>
+//             <th>요청 종류</th>
+//             <th>요청/결과</th>
+//             <th>진단 상세</th>
+//             <th>요청/결과 시간</th>
+//           </tr>
+//         </thead>
+//         <tbody>
+//           {logs.length > 0 ? (
+//             logs.map(log => (
+//               <tr key={log.no}>
+//                 <td>{log.no}</td>
+//                 <td>{log.patient}</td>
+//                 <td>{log.doctor}</td>
+//                 <td>{log.order_type}</td>
+//                 <td style={{ whiteSpace: 'pre-wrap' }}>{log.order_and_result}</td>
+//                 <td style={{ whiteSpace: 'pre-wrap' }}>{log.diagnosis_detail}</td>
+//                 <td>{log.time}</td>
+//               </tr>
+//             ))
+//           ) : (
+//             <tr>
+//               <td colSpan="7" style={{ textAlign: 'center', padding: '20px' }}>
+//                 저장된 로그가 없습니다.
+//               </td>
+//             </tr>
+//           )}
+//         </tbody>
+//       </table>
+//     </div>
+//   );
+// }
 
 
 

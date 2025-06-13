@@ -1,7 +1,7 @@
 // src/components/EMR/HomePage.jsx
 import React from 'react';
 import { DashboardCards, ScheduleCalendar, UrgentWidget, QuickActions } from './home';
-import NotificationBell from './NotificationBell'; // 헤더 알림 벨, 나중에 구현
+import NotificationBell from './NotificationBell';
 
 import './HomePage.css';
 

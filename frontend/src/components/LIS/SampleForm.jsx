@@ -120,6 +120,10 @@ const SampleForm = () => {
     } catch (error) {
       console.error('❌ 샘플 등록 실패:', error);
       alert('샘플 등록 중 오류가 발생했습니다.');
+
+      if (error.response?.data) {
+         console.log("💡 백엔드 오류 응답 내용:", error.response.data);
+        }
     }
   };
 

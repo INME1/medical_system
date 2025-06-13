@@ -90,6 +90,7 @@ const LisRequestPanel = ({ patient }) => {
     };
   };
 
+  // 🔥 FIX: handleAPIError 함수를 handleSubmit 위에 정의
   const handleAPIError = (error, context = '') => {
     console.error(`${context} API 에러:`, error);
     
@@ -189,8 +190,8 @@ const LisRequestPanel = ({ patient }) => {
         panel: selectedPanel 
       });
       
-      // 🔥 실제 백엔드 API 엔드포인트 사용
-      const apiUrl = getFullApiUrl(LIS_API.CREATE_ORDER);
+      // 🔥 FIX: API URL 통일 - 환경변수 사용하고 슬래시 추가
+      const apiUrl = `${process.env.REACT_APP_API_BASE_URL}orders/`;
       console.log('📡 최종 API URL:', apiUrl);
       
       const response = await axios.post(apiUrl, orderData, {
@@ -198,13 +199,13 @@ const LisRequestPanel = ({ patient }) => {
           'Content-Type': 'application/json'
         }
       });
-      
+
       console.log('✅ LIS 검사 주문 성공:', response.data);
       
       // 성공 로그 저장
       await saveIntegrationLog('LIS_ORDER_SUCCESS', orderData, response.data);
       
-      alert(`검사 주문이 성공적으로 등록되었습니다.\n주문 ID: ${response.data.id || 'N/A'}`);
+      alert(`검사 주문이 성공적으로 등록되었습니다.\n주문 ID: ${response.data.id || response.data.data?.id || 'N/A'}`);
       
       // 요청 성공 후 폼 초기화
       setSelectedPanel('');
@@ -217,7 +218,7 @@ const LisRequestPanel = ({ patient }) => {
         await saveIntegrationLog('LIS_ORDER_ERROR', orderData, null, err);
       }
       
-      // 🔥 개선된 에러 처리
+      // 🔥 이제 handleAPIError가 정의되어 있으므로 호출 가능
       const errorMessage = handleAPIError(err, 'LIS 검사 주문');
       setError(errorMessage);
       
@@ -235,45 +236,45 @@ const LisRequestPanel = ({ patient }) => {
   return (
     <div className="lis-request-panel" style={{ padding: '16px', backgroundColor: '#f8f9fa', borderRadius: '8px' }}>
       {!patient ? (
-        <div style={{ textAlign: 'center', padding: '20px' }}>
-          <p style={{ color: '#6c757d', fontSize: '16px' }}>환자를 선택해주세요.</p>
+        <div style={{ 
+          padding: '24px', 
+          textAlign: 'center', 
+          color: '#6c757d',
+          fontSize: '14px'
+        }}>
+          환자를 선택하면 LIS 검사를 요청할 수 있습니다.
         </div>
       ) : (
         <>
           {/* 환자 정보 표시 */}
           <div style={{ 
-            marginBottom: '20px', 
+            marginBottom: '16px', 
             padding: '12px', 
-            backgroundColor: '#ffffff', 
+            backgroundColor: '#e9ecef', 
             borderRadius: '6px',
-            border: '1px solid #dee2e6'
+            fontSize: '14px'
           }}>
-            <h4 style={{ margin: '0 0 8px 0', color: '#495057' }}>선택된 환자</h4>
-            <p style={{ margin: '4px 0', fontSize: '16px' }}>
-              <strong>{getPatientDisplayInfo().name}</strong>
-              {getPatientDisplayInfo().age && ` (${getPatientDisplayInfo().age}세)`}
-            </p>
-            {getPatientDisplayInfo().gender && (
-              <p style={{ margin: '4px 0', fontSize: '14px', color: '#6c757d' }}>
-                성별: {getGenderDisplay(getPatientDisplayInfo().gender)}
-              </p>
-            )}
-            {getPatientDisplayInfo().identifier && (
-              <p style={{ margin: '4px 0', fontSize: '14px', color: '#6c757d' }}>
-                환자번호: {getPatientDisplayInfo().identifier}
-              </p>
-            )}
+            <div><strong>환자:</strong> {getPatientDisplayInfo()?.name || 'Unknown'}</div>
+            <div><strong>ID:</strong> {getPatientDisplayInfo()?.identifier || 'N/A'}</div>
+            <div><strong>성별:</strong> {getGenderDisplay(getPatientDisplayInfo()?.gender)}</div>
+            <div><strong>나이:</strong> {getPatientDisplayInfo()?.age ? `${getPatientDisplayInfo().age}세` : '미상'}</div>
           </div>
 
-          {/* 패널 선택 드롭다운 */}
-          <div style={{ marginBottom: '20px' }}>
-            <label style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold', color: '#495057' }}>
-              검사 패널 선택:
+          {/* 검사 패널 선택 */}
+          <div style={{ marginBottom: '16px' }}>
+            <label style={{ 
+              display: 'block', 
+              marginBottom: '8px', 
+              fontWeight: 'bold',
+              fontSize: '14px',
+              color: '#495057'
+            }}>
+              🔬 검사 패널 선택
             </label>
             <select
               value={selectedPanel}
-              onChange={e => setSelectedPanel(e.target.value)}
-              style={{ 
+              onChange={(e) => setSelectedPanel(e.target.value)}
+              style={{
                 width: '100%',
                 padding: '8px 12px',
                 border: '1px solid #ced4da',
@@ -282,7 +283,7 @@ const LisRequestPanel = ({ patient }) => {
                 backgroundColor: '#ffffff'
               }}
             >
-              <option value="">-- 검사 패널을 선택하세요 --</option>
+              <option value="">검사 패널을 선택하세요</option>
               {Object.keys(panelComponents).map(panel => (
                 <option key={panel} value={panel}>
                   {panel} ({panelComponents[panel].length}개 항목)
@@ -291,18 +292,19 @@ const LisRequestPanel = ({ patient }) => {
             </select>
           </div>
 
-          {/* 선택된 패널의 검사 항목 미리보기 */}
+          {/* 선택된 패널의 검사 항목 표시 */}
           {selectedPanel && (
             <div style={{ 
-              marginBottom: '20px', 
+              marginBottom: '16px', 
               padding: '12px', 
-              backgroundColor: '#e9ecef', 
-              borderRadius: '6px' 
+              backgroundColor: '#d1ecf1', 
+              borderRadius: '6px',
+              fontSize: '13px'
             }}>
-              <h5 style={{ margin: '0 0 8px 0', color: '#495057' }}>
-                {selectedPanel} 검사 항목:
-              </h5>
-              <div style={{ fontSize: '14px', color: '#6c757d' }}>
+              <div style={{ fontWeight: 'bold', marginBottom: '8px' }}>
+                📋 {selectedPanel} 검사 항목:
+              </div>
+              <div style={{ color: '#0c5460' }}>
                 {panelComponents[selectedPanel].join(', ')}
               </div>
             </div>
@@ -311,11 +313,11 @@ const LisRequestPanel = ({ patient }) => {
           {/* 검사 요청 버튼 */}
           <button
             onClick={handleSubmit}
-            disabled={!selectedPanel || loading}
+            disabled={loading || !selectedPanel}
             style={{
               width: '100%',
-              padding: '12px 16px',
-              background: loading ? '#6c757d' : (!selectedPanel ? '#ced4da' : '#28a745'),
+              padding: '12px',
+              backgroundColor: loading ? '#6c757d' : (!selectedPanel ? '#ced4da' : '#28a745'),
               color: '#ffffff',
               border: 'none',
               borderRadius: '6px',

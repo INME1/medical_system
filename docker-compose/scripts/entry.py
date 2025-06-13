@@ -1,31 +1,43 @@
-#!/usr/bin/env python3
+
 """
-Orthanc Python Plugin for AI Analysis
-DICOM 이미지 저장 시 자동으로 AI 모델을 통한 분석 수행
+Flask AI Service for Orthanc
+DICOM 이미지 AI 분석을 위한 독립적인 Flask 서비스
 """
-import orthanc
+
 import json
 import sys
 import os
 import logging
 from datetime import datetime
 import importlib.util
+import requests
+from flask import Flask, request, jsonify
+import pydicom
+import io
+import base64
 
 # 로깅 설정
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('/var/log/orthanc_ai.log'),
+        logging.FileHandler('/var/log/ai_service.log'),
         logging.StreamHandler(sys.stdout)
     ]
 )
-logger = logging.getLogger('OrthancAI')
+logger = logging.getLogger('AIService')
+
+# Flask 앱 초기화
+app = Flask(__name__)
 
 # 모델 경로 설정
-MODELS_PATH = '//home/medical_system/backend/ai_models'
+MODELS_PATH = '/models'
 YOLO_MODEL_PATH = os.path.join(MODELS_PATH, 'yolov8', 'yolov8_inference.py')
 SSD_MODEL_PATH = os.path.join(MODELS_PATH, 'ssd', 'ssd_inference.py')
+
+# Orthanc 서버 설정 (네트워크에서 확인된 IP 사용)
+DJANGO_API_URL_SAVE = 'http://10.128.0.11:8000/api/ai/analysis-results/save/'
+
 
 class AIAnalyzer:
     """AI 분석을 담당하는 클래스"""
@@ -59,11 +71,11 @@ class AIAnalyzer:
         except Exception as e:
             logger.error(f"모델 로드 중 오류 발생: {str(e)}")
     
-    def analyze_dicom(self, dicom_path, modality, body_part):
+    def analyze_dicom_data(self, dicom_data, modality, body_part):
         """
-        DICOM 이미지 분석
+        DICOM 데이터 분석
         Args:
-            dicom_path: DICOM 파일 경로
+            dicom_data: DICOM 파일 데이터
             modality: 촬영 방식 (CT, MR, CR, etc.)
             body_part: 촬영 부위
         Returns:
@@ -73,17 +85,59 @@ class AIAnalyzer:
             # 모달리티와 부위에 따른 모델 선택
             model_type = self._select_model(modality, body_part)
             
-            if model_type == 'yolo' and self.yolo_module:
-                result = self.yolo_module.analyze(dicom_path)
-                logger.info(f"YOLO 분석 완료: {len(result.get('detections', []))}개 객체 검출")
+            if model_type == 'both':
+                # CR인 경우 YOLO와 SSD 둘 다 실행
+                combined_result = {
+                    'success': True,
+                    'detections': [],
+                    'yolo_results': {},
+                    'ssd_results': {},
+                    'message': 'YOLO와 SSD 모델로 분석 완료'
+                }
+                
+                # YOLO 분석
+                if self.yolo_module:
+                    try:
+                        yolo_result = self.yolo_module.analyze(dicom_data)  # analyze_data -> analyze
+                        combined_result['yolo_results'] = yolo_result
+                        combined_result['detections'].extend(yolo_result.get('detections', []))
+                        logger.info(f"YOLO 분석 완료: {len(yolo_result.get('detections', []))}개 객체 검출")
+                    except AttributeError:
+                        logger.warning("YOLO 모델에 analyze 함수가 없습니다. 모의 결과 생성")
+                        combined_result['yolo_results'] = {'success': True, 'detections': []}
+                
+                # SSD 분석
+                if self.ssd_module:
+                    try:
+                        ssd_result = self.ssd_module.analyze(dicom_data)  # analyze_data -> analyze
+                        combined_result['ssd_results'] = ssd_result
+                        combined_result['detections'].extend(ssd_result.get('detections', []))
+                        logger.info(f"SSD 분석 완료: {len(ssd_result.get('detections', []))}개 객체 검출")
+                    except AttributeError:
+                        logger.warning("SSD 모델에 analyze 함수가 없습니다. 모의 결과 생성")
+                        combined_result['ssd_results'] = {'success': True, 'detections': []}
+                
+                result = combined_result
+                
+            elif model_type == 'yolo' and self.yolo_module:
+                try:
+                    result = self.yolo_module.analyze(dicom_data)  # analyze_data -> analyze
+                    logger.info(f"YOLO 분석 완료: {len(result.get('detections', []))}개 객체 검출")
+                except AttributeError:
+                    logger.warning("YOLO 모델에 analyze 함수가 없습니다.")
+                    result = self._create_mock_result(modality, body_part)
                 
             elif model_type == 'ssd' and self.ssd_module:
-                result = self.ssd_module.analyze(dicom_path)
-                logger.info(f"SSD 분석 완료: {len(result.get('detections', []))}개 객체 검출")
+                try:
+                    result = self.ssd_module.analyze(dicom_data)  # analyze_data -> analyze
+                    logger.info(f"SSD 분석 완료: {len(result.get('detections', []))}개 객체 검출")
+                except AttributeError:
+                    logger.warning("SSD 모델에 analyze 함수가 없습니다.")
+                    result = self._create_mock_result(modality, body_part)
                 
             else:
                 logger.warning(f"사용 가능한 모델이 없습니다. 모달리티: {modality}, 부위: {body_part}")
-                return self._create_empty_result()
+                return self._create_mock_result(modality, body_part)
             
             # 결과에 메타데이터 추가
             result['metadata'] = {
@@ -100,26 +154,39 @@ class AIAnalyzer:
             return self._create_error_result(str(e))
     
     def _select_model(self, modality, body_part):
-        """모달리티와 부위에 따라 적절한 모델 선택"""
-        # 간단한 규칙 기반 모델 선택
-        # 실제 운영에서는 더 복잡한 로직 구현 가능
-        
-        if modality in ['CT', 'MR']:
-            if 'CHEST' in body_part.upper() or 'LUNG' in body_part.upper():
-                return 'yolo'  # 흉부 영상은 YOLO 사용
-            else:
-                return 'ssd'   # 기타 부위는 SSD 사용
-        elif modality in ['CR', 'DX']:
-            return 'yolo'      # X-ray는 YOLO 사용
-        else:
-            return 'ssd'       # 기본값은 SSD
+        """모든 이미지에 YOLO와 SSD 둘 다 적용"""
+        return 'both'  # 항상 둘 다 실행
     
-    def _create_empty_result(self):
-        """빈 결과 생성"""
+    def _create_mock_result(self, modality, body_part):
+        """모델이 없을 때 모의 결과 생성 (YOLO + SSD 결합)"""
         return {
             'success': True,
-            'detections': [],
-            'message': '분석할 수 있는 모델이 없습니다.'
+            'detections': [
+                {
+                    'class_name': 'mock_yolo_detection',
+                    'confidence': 0.85,
+                    'bbox': {'x': 100, 'y': 100, 'width': 200, 'height': 150},
+                    'description': 'YOLO 모의 분석 결과'
+                },
+                {
+                    'class_name': 'mock_ssd_detection', 
+                    'confidence': 0.78,
+                    'bbox': {'x': 150, 'y': 200, 'width': 180, 'height': 120},
+                    'description': 'SSD 모의 분석 결과'
+                }
+            ],
+            'yolo_results': {
+                'success': True,
+                'detections': [{'class_name': 'mock_yolo_detection', 'confidence': 0.85}],
+                'message': 'YOLO 모의 분석 완료'
+            },
+            'ssd_results': {
+                'success': True, 
+                'detections': [{'class_name': 'mock_ssd_detection', 'confidence': 0.78}],
+                'message': 'SSD 모의 분석 완료'
+            },
+            'message': f'{modality} 영상에 YOLO + SSD 분석 완료 (모의 결과)',
+            'model_available': False
         }
     
     def _create_error_result(self, error_msg):
@@ -133,103 +200,179 @@ class AIAnalyzer:
 # 전역 AI 분석기 인스턴스
 ai_analyzer = AIAnalyzer()
 
-def OnStoredInstance(receivedDicom, tags, metadata, origin):
-    """
-    DICOM 인스턴스가 저장될 때 호출되는 콜백 함수
-    """
+@app.route('/health', methods=['GET'])
+def health_check():
+    """서비스 상태 확인"""
+    return jsonify({
+        'status': 'healthy',
+        'service': 'AI Analysis Service',
+        'timestamp': datetime.now().isoformat()
+    })
+
+@app.route('/analyze/<instance_id>', methods=['POST'])
+def analyze_instance(instance_id):
+    """특정 인스턴스 AI 분석"""
     try:
-        instance_id = receivedDicom['ID']
-        logger.info(f"새로운 DICOM 인스턴스 저장됨: {instance_id}")
+        logger.info(f"인스턴스 분석 요청: {instance_id}")
         
-        # DICOM 태그에서 정보 추출
-        modality = tags.get('Modality', 'UNKNOWN')
-        body_part = tags.get('BodyPartExamined', 'UNKNOWN')
-        patient_id = tags.get('PatientID', 'UNKNOWN')
-        study_date = tags.get('StudyDate', 'UNKNOWN')
+        # Orthanc에서 인스턴스 정보 가져오기
+        instance_info = get_instance_info(instance_id)
+        if not instance_info:
+            return jsonify({'error': 'Instance not found'}), 404
         
-        logger.info(f"분석 시작 - Patient: {patient_id}, Modality: {modality}, Body Part: {body_part}")
+        # DICOM 파일 다운로드
+        dicom_data = get_dicom_file(instance_id)
+        if not dicom_data:
+            return jsonify({'error': 'Failed to download DICOM file'}), 500
         
-        # DICOM 파일 경로 구성 (Orthanc 내부 경로)
-        dicom_path = f"/var/lib/orthanc/db/{instance_id}"
+        # DICOM 메타데이터 추출
+        main_tags = instance_info.get('MainDicomTags', {})
+        modality = main_tags.get('Modality', 'UNKNOWN')
+        body_part = main_tags.get('BodyPartExamined', 'UNKNOWN')
+        
+        logger.info(f"DICOM 메타데이터 - Modality: {modality}, Body Part: {body_part}")
+        logger.info(f"전체 인스턴스 정보: {instance_info}")
         
         # AI 분석 수행
-        analysis_result = ai_analyzer.analyze_dicom(dicom_path, modality, body_part)
+        analysis_result = ai_analyzer.analyze_dicom_data(dicom_data, modality, body_part)
         
-        # 분석 결과를 인스턴스 메타데이터에 저장
-        if analysis_result['success']:
-            # 결과를 JSON 문자열로 변환하여 저장
-            result_json = json.dumps(analysis_result)
-            
-            # Orthanc API를 통해 메타데이터 저장
-            orthanc.RestApiPut(f'/instances/{instance_id}/metadata/1024', result_json)
-            orthanc.RestApiPut(f'/instances/{instance_id}/metadata/1025', analysis_result['metadata']['model_used'])
-            orthanc.RestApiPut(f'/instances/{instance_id}/metadata/1026', analysis_result['metadata']['analysis_timestamp'])
-            orthanc.RestApiPut(f'/instances/{instance_id}/metadata/1027', str(len(analysis_result.get('detections', []))))
-            
-            logger.info(f"AI 분석 완료 및 저장됨: {instance_id}")
-        else:
-            logger.error(f"AI 분석 실패: {instance_id}, 오류: {analysis_result.get('error', 'Unknown error')}")
-            
+        # 결과를 Orthanc 메타데이터에 저장
+        save_analysis_result(instance_id, analysis_result)
+        
+        logger.info(f"인스턴스 {instance_id} 분석 완료")
+        return jsonify(analysis_result)
+        
     except Exception as e:
-        logger.error(f"OnStoredInstance 콜백 처리 중 오류 발생: {str(e)}")
+        logger.error(f"인스턴스 분석 중 오류: {str(e)}")
+        return jsonify({'error': str(e)}), 500
 
-def OnChange(changeType, level, resource):
-    """
-    Orthanc 리소스 변경 시 호출되는 콜백 함수
-    """
-    if changeType == orthanc.ChangeType.STABLE_STUDY:
-        logger.info(f"Study가 안정화됨: {resource}")
-    elif changeType == orthanc.ChangeType.NEW_INSTANCE:
-        logger.info(f"새로운 인스턴스 생성: {resource}")
-
-def GetAnalysisResult(output, uri, **request):
-    """
-    분석 결과를 조회하는 REST API 엔드포인트
-    URL: /ai-analysis/{instance-id}
-    """
+@app.route('/analyze/batch', methods=['POST'])
+def analyze_batch():
+    """여러 인스턴스 일괄 분석"""
     try:
-        # URI에서 인스턴스 ID 추출
-        parts = uri.split('/')
-        if len(parts) < 3:
-            output.AnswerBuffer("Invalid URI", "text/plain", 400)
-            return
+        data = request.get_json()
+        instance_ids = data.get('instance_ids', [])
         
-        instance_id = parts[2]
+        results = []
+        for instance_id in instance_ids:
+            try:
+                # 각 인스턴스 분석
+                result = analyze_single_instance(instance_id)
+                results.append({
+                    'instance_id': instance_id,
+                    'result': result
+                })
+            except Exception as e:
+                results.append({
+                    'instance_id': instance_id,
+                    'error': str(e)
+                })
         
-        # 메타데이터에서 분석 결과 조회
-        try:
-            result_json = orthanc.RestApiGet(f'/instances/{instance_id}/metadata/1024')
-            model_used = orthanc.RestApiGet(f'/instances/{instance_id}/metadata/1025')
-            timestamp = orthanc.RestApiGet(f'/instances/{instance_id}/metadata/1026')
-            detection_count = orthanc.RestApiGet(f'/instances/{instance_id}/metadata/1027')
-            
-            # 응답 데이터 구성
-            response = {
-                'instance_id': instance_id,
-                'analysis_result': json.loads(result_json),
-                'model_used': model_used,
-                'analysis_timestamp': timestamp,
-                'detection_count': int(detection_count)
-            }
-            
-            output.AnswerBuffer(json.dumps(response, indent=2), "application/json")
-            
-        except Exception as e:
-            if "404" in str(e):
-                output.AnswerBuffer(json.dumps({
-                    'error': 'Analysis result not found for this instance',
-                    'instance_id': instance_id
-                }), "application/json", 404)
-            else:
-                raise e
-                
+        return jsonify({
+            'batch_results': results,
+            'total_processed': len(results)
+        })
+        
     except Exception as e:
-        logger.error(f"GetAnalysisResult API 오류: {str(e)}")
-        output.AnswerBuffer(json.dumps({
-            'error': str(e)
-        }), "application/json", 500)
+        logger.error(f"일괄 분석 중 오류: {str(e)}")
+        return jsonify({'error': str(e)}), 500
 
-# Orthanc 플러그인 초기화 시 REST API 등록
-orthanc.RegisterRestCallback('/ai-analysis/(.*)', GetAnalysisResult)
+@app.route('/results/<instance_id>', methods=['GET'])
+def get_analysis_result(instance_id):
+    """분석 결과 조회"""
+    try:
+        # Orthanc 메타데이터에서 분석 결과 조회
+        try:
+            response = requests.get(f'{DJANGO_API_URL_SAVE}/instances/{instance_id}/metadata/1024')
+            if response.status_code == 200:
+                result = json.loads(response.text)
+                return jsonify(result)
+            else:
+                return jsonify({
+                    'error': 'Analysis result not found',
+                    'instance_id': instance_id
+                }), 404
+        except Exception as e:
+            return jsonify({'error': str(e)}), 500
+            
+    except Exception as e:
+        logger.error(f"결과 조회 중 오류: {str(e)}")
+        return jsonify({'error': str(e)}), 500
 
-logger.info("Orthanc AI Plugin 초기화 완료")
+def get_instance_info(instance_id):
+    """Orthanc에서 인스턴스 정보 가져오기"""
+    try:
+        response = requests.get(f'{DJANGO_API_URL_SAVE}/instances/{instance_id}', 
+                              auth=('orthanc', 'orthanc'))
+        if response.status_code == 200:
+            return response.json()
+        return None
+    except Exception as e:
+        logger.error(f"인스턴스 정보 조회 실패: {str(e)}")
+        return None
+
+def get_dicom_file(instance_id):
+    """Orthanc에서 DICOM 파일 다운로드"""
+    try:
+        response = requests.get(f'{DJANGO_API_URL_SAVE}/instances/{instance_id}/file',
+                              auth=('orthanc', 'orthanc'))
+        if response.status_code == 200:
+            return response.content
+        return None
+    except Exception as e:
+        logger.error(f"DICOM 파일 다운로드 실패: {str(e)}")
+        return None
+
+def save_analysis_result(instance_id, result):
+    """분석 결과를 Orthanc 메타데이터에 저장"""
+    try:
+        # 메타데이터 저장
+        result_json = json.dumps(result)
+        
+        # 분석 결과 저장 (메타데이터 1024)
+        requests.put(
+            f'{DJANGO_API_URL_SAVE}/instances/{instance_id}/metadata/1024',
+            data=result_json,
+            headers={'Content-Type': 'application/json'},
+            auth=('orthanc', 'orthanc')
+        )
+        
+        # 추가 메타데이터 저장
+        if 'metadata' in result:
+            metadata = result['metadata']
+            requests.put(f'{DJANGO_API_URL_SAVE}/instances/{instance_id}/metadata/1025', 
+                        data=metadata.get('model_used', ''),
+                        auth=('orthanc', 'orthanc'))
+            requests.put(f'{DJANGO_API_URL_SAVE}/instances/{instance_id}/metadata/1026', 
+                        data=metadata.get('analysis_timestamp', ''),
+                        auth=('orthanc', 'orthanc'))
+            requests.put(f'{DJANGO_API_URL_SAVE}/instances/{instance_id}/metadata/1027', 
+                        data=str(len(result.get('detections', []))),
+                        auth=('orthanc', 'orthanc'))
+        
+        logger.info(f"분석 결과 저장 완료: {instance_id}")
+        
+    except Exception as e:
+        logger.error(f"분석 결과 저장 실패: {str(e)}")
+
+def analyze_single_instance(instance_id):
+    """단일 인스턴스 분석 (내부 함수)"""
+    instance_info = get_instance_info(instance_id)
+    if not instance_info:
+        raise Exception('Instance not found')
+    
+    dicom_data = get_dicom_file(instance_id)
+    if not dicom_data:
+        raise Exception('Failed to download DICOM file')
+    
+    modality = instance_info.get('MainDicomTags', {}).get('Modality', 'UNKNOWN')
+    body_part = instance_info.get('MainDicomTags', {}).get('BodyPartExamined', 'UNKNOWN')
+    
+    analysis_result = ai_analyzer.analyze_dicom_data(dicom_data, modality, body_part)
+    save_analysis_result(instance_id, analysis_result)
+    
+    return analysis_result
+
+if __name__ == '__main__':
+    logger.info("AI Service 시작")
+    app.run(host='0.0.0.0', port=5000, debug=True)

@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # OpenMRS MySQL
   openmrs-mysql:
@@ -82,7 +80,10 @@ services:
   # Orthanc + PostgreSQL + DICOMWeb
   # jodogne/orthanc-prugin:1.12.6
   orthanc:
-    image: jodogne/orthanc-python:1.12.6
+    build:
+      context: .  # 현재 폴더 기준 (필요시 경로 조정)
+      dockerfile: Dockerfile  # 실제 파일 이름
+    image: orthanc-custom:latest
     container_name: orthanc
     hostname: orthanc-server
     depends_on:
@@ -91,11 +92,9 @@ services:
       - "8042:8042"
       - "4242:4242"
     volumes:
-      - orthanc_data:/var/lib/orthanc/db
-      - ./orthanc-config/orthanc.json:/etc/orthanc/orthanc.json
+      - ../backend/db:/home/medical_system/backend/db
       - ./scripts:/scripts
-    environment:
-      ORTHANC__PYTHON_SCRIPT: /scripts/entry.py  # JSON 파일로 지정해도 됨
+      - ./ai_models:/models
     networks:
       - medical-network
     restart: unless-stopped

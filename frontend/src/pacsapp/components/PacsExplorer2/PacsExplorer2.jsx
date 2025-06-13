@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const PacsExplorer2 = () => {
-  const [pacsUrl, setPacsUrl] = useState('http://localhost:8042/ui/app/');
+  const [pacsUrl, setPacsUrl] = useState('http://35.225.63.41:8042/ui/app/');
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
 

@@ -10,7 +10,6 @@ import HelpGuide from './Settings/HelpGuide';
 import NotificationModal from './NotificationModal';
 import { saveLog } from '../utils/saveLog';
 
-// 기존 컴포넌트
 import ChartHeader from './ChartHeader';
 import WaitingRoom from './WaitingRoom';
 import PatientInfoPanel from './PatientInfoPanel';
@@ -19,11 +18,8 @@ import LisRequestPanel from './LisRequestPanel';
 import ImagingRequestPanel from './ImagingRequestPanel';
 import DiagnosisPanel from './DiagnosisPanel';
 import WaitingBoard from './WaitingBoard';
-
-// 새 컴포넌트
 import AssignedPatientList from './AssignedPatientList';
 
-// 임시 더미 의사 ID
 import { DEFAULT_DOCTOR_ID } from './lisConfig';
 
 import {
@@ -31,6 +27,8 @@ import {
   ScheduleCalendar,
   UrgentWidget,
 } from './home';
+
+import ReceptionPanel from './ReceptionPanel'; // ✅ 추가
 
 import './EmrMainPage.css';
 
@@ -96,6 +94,13 @@ const EmrMainPage = () => {
     </div>
   );
 
+  // ─── 접수 ────────────────────────────────────────
+  const renderReception = () => (
+    <div className="page-container-full">
+      <ReceptionPanel />
+    </div>
+  );
+
   // ─── 설정 ────────────────────────────────────────
   const renderSettings = () => (
     <div className="page-container-full">
@@ -127,7 +132,6 @@ const EmrMainPage = () => {
   // ─── 진료 ────────────────────────────────────────
   const renderClinical = () => (
     <div className="clinical-container-new">
-      {/* 탭1: 진료실 배정된 환자 */}
       <section className="tab-col tab1-new">
         <h3 className="section-title">🧑‍⚕️ 진료실 배정된 환자</h3>
         <AssignedPatientList
@@ -137,7 +141,6 @@ const EmrMainPage = () => {
         />
       </section>
 
-      {/* 탭2: 정보 + 내원 이력 */}
       <section className="tab-col tab2">
         <h3 className="section-title">📄 환자 정보</h3>
         {selectedPatient
@@ -152,32 +155,30 @@ const EmrMainPage = () => {
         }
       </section>
 
-      {/* 탭3: LIS 검사 요청 */}
       <section className="tab-col tab3">
         <h3 className="section-title">🔬 LIS 검사 요청</h3>
         {selectedPatient
           ? (
             <LisRequestPanel
               patient={selectedPatient}
-              doctorId={DEFAULT_DOCTOR_ID}  // 임시 더미 ID
+              doctorId={DEFAULT_DOCTOR_ID}
             />
           )
           : <p className="empty-text">배정된 환자를 선택해주세요.</p>
         }
       </section>
 
-      {/* 탭4-5: 영상검사 요청 + AI 판독 */}
       <section className="tab-col tab4-5">
         <div className="imaging-section">
           <h3 className="section-title">🏥 영상검사 요청</h3>
           {selectedPatient
-            ? <ImagingRequestPanel selectedPatient={selectedPatient}/>
+            ? <ImagingRequestPanel selectedPatient={selectedPatient} />
             : <p className="empty-text">배정된 환자를 선택해주세요.</p>}
         </div>
         <div className="ai-section">
           <h3 className="section-title">🧠 AI 판독</h3>
           {selectedPatient
-            ? <DiagnosisPanel patient={selectedPatient}/>
+            ? <DiagnosisPanel patient={selectedPatient} />
             : <p className="empty-text">배정된 환자를 선택해주세요.</p>}
         </div>
       </section>
@@ -202,6 +203,7 @@ const EmrMainPage = () => {
         </aside>
         <main className="content-col">
           {activeTab === '홈'        && renderHome()}
+          {activeTab === '접수'      && renderReception()}
           {activeTab === '설정'      && renderSettings()}
           {activeTab === '대기 목록' && renderWaitingList()}
           {activeTab === '대기 화면' && renderWaitingBoard()}

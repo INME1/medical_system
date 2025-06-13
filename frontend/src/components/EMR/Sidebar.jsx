@@ -3,7 +3,7 @@ import React from 'react';
 import NotificationBell from './NotificationBell';
 
 const Sidebar = ({ activeTab, setActiveTab, onBellClick }) => {
-  const menus = ['홈', '진료', '대기 목록','대기 화면', '설정'];
+  const menus = ['홈', '진료', '접수', '대기 목록','대기 화면', '설정'];
 
   return (
     <div

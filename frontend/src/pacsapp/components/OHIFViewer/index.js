@@ -14,7 +14,7 @@ import usePACS from '../../hooks/usePACS';
 import styles from './OHIFViewer.module.css';
 
 const OHIFViewer = ({
-  ohifBaseUrl = "http://localhost:8042/ohif/",
+  ohifBaseUrl = "http://35.225.63.41:8042/ohif/",
   showDebugInfo = false
 }) => {
   // 동적 z-index 관리

@@ -26,8 +26,12 @@
     "EnableWadoRs": true,
     "QidoSupportsIncludeField": true
   },
+
   "PythonScript": "/scripts/entry.py",
-  "Plugins": ["/usr/local/share/orthanc/plugins"],
+  "PythonPath": ["/scripts"],
+  "PythonVerbose": true,
+
+  "Plugins": ["/usr/local/share/orthanc/plugins", "/scripts"],
   "LoadPrivatePlugins": true,
 
   "PostgreSQL": {

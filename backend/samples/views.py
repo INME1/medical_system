@@ -4,7 +4,10 @@ from rest_framework import status
 from .models import Sample, LOINCCode, AliasMapping
 #from orders.models import TestOrder
 from .serializers import SampleSerializer
+from tests.serializers import TestResultSerializer
 from django.core.exceptions import ValidationError
+from django.shortcuts import get_object_or_404
+from orders_emr.models import Order
 import traceback
 
 @api_view(['GET'])
@@ -86,11 +89,11 @@ def create_sample(request): # 샘플 등록
             status=status.HTTP_400_BAD_REQUEST
         )
         
-    # if not TestOrder.objects.filter(id=order_id).exists():
-    #     return Response(
-    #         {"error": f"주문 ID '{order_id}'는 존재하지 않습니다."},
-    #         status=status.HTTP_400_BAD_REQUEST
-    #     )
+    if not Order.objects.filter(order_id=order_id).exists():
+         return Response(
+             {"error": f"주문 ID '{order_id}'는 존재하지 않습니다."},
+             status=status.HTTP_400_BAD_REQUEST
+         )
 
     serializer = SampleSerializer(data=request.data)
     if serializer.is_valid():
