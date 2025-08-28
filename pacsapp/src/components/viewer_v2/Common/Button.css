@@ -1,0 +1,100 @@
+/* Base button styles */
+.mv-btn {
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-weight: 500;
+  border-radius: 4px;
+}
+
+.mv-btn:focus {
+  outline: 2px solid #60a5fa;
+  outline-offset: 2px;
+}
+
+.mv-btn-icon {
+  flex-shrink: 0;
+}
+
+/* Button variants */
+.mv-btn-default {
+  background-color: #374151;
+  color: white;
+}
+
+.mv-btn-default:hover:not(.mv-btn-disabled) {
+  background-color: #4b5563;
+}
+
+.mv-btn-primary {
+  background-color: #2563eb;
+  color: white;
+}
+
+.mv-btn-primary:hover:not(.mv-btn-disabled) {
+  background-color: #1d4ed8;
+}
+
+.mv-btn-success {
+  background-color: #16a34a;
+  color: white;
+}
+
+.mv-btn-success:hover:not(.mv-btn-disabled) {
+  background-color: #15803d;
+}
+
+.mv-btn-danger {
+  background-color: #dc2626;
+  color: white;
+}
+
+.mv-btn-danger:hover:not(.mv-btn-disabled) {
+  background-color: #b91c1c;
+}
+
+.mv-btn-warning {
+  background-color: #d97706;
+  color: white;
+}
+
+.mv-btn-warning:hover:not(.mv-btn-disabled) {
+  background-color: #b45309;
+}
+
+.mv-btn-ghost {
+  background-color: transparent;
+  color: #94a3b8;
+  border: 1px solid #4b5563;
+}
+
+.mv-btn-ghost:hover:not(.mv-btn-disabled) {
+  background-color: #374151;
+  color: white;
+}
+
+/* Button sizes */
+.mv-btn-small {
+  padding: 6px 12px;
+  font-size: 12px;
+}
+
+.mv-btn-medium {
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
+.mv-btn-large {
+  padding: 12px 24px;
+  font-size: 16px;
+}
+
+/* Disabled state */
+.mv-btn-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

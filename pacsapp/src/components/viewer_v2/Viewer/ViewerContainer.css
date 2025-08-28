@@ -1,0 +1,279 @@
+/* /home/medical_system/pacsapp/src/components/viewer_v2/Viewer/ViewerContainer.css */
+
+/* 메인 컨테이너 */
+.mv-viewer-container {
+  flex: 1;
+  background-color: black;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* 뷰어 메인 영역 */
+.mv-viewer-main {
+  flex: 1;
+  position: relative;
+  background: linear-gradient(135deg, #0f172a 0%, #000000 100%);
+  display: flex;
+  min-height: 0; /* Flexbox 오버플로우 방지 */
+}
+
+/* 뷰어 콘텐츠 영역 */
+.mv-viewer-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* AI 컨트롤 영역 */
+.mv-viewer-ai-controls {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+/* AI 로딩 오버레이 */
+.mv-ai-loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.mv-ai-loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 24px;
+  background: rgba(30, 41, 59, 0.9);
+  border-radius: 8px;
+  border: 1px solid #475569;
+  animation: fadeInScale 0.3s ease-out;
+}
+
+.mv-loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #444;
+  border-top: 4px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* 일반 로딩 오버레이 */
+.mv-loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  z-index: 500;
+}
+
+.mv-loading-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* 애니메이션 */
+@keyframes spin {
+  0% { 
+    transform: rotate(0deg); 
+  }
+  100% { 
+    transform: rotate(360deg); 
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .mv-viewer-ai-controls {
+    position: static;
+    transform: none;
+    margin: 8px;
+    align-self: center;
+  }
+  
+  .mv-ai-loading-content {
+    margin: 16px;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mv-viewer-main {
+    background: #000000; /* 그라데이션 제거 - 성능 */
+  }
+  
+  .mv-ai-loading-content {
+    margin: 12px;
+    padding: 16px;
+    gap: 12px;
+  }
+}
+
+/* 기존 ViewerContainer.css 파일에 추가할 스타일들 */
+
+/* 편집 모드 오버레이 */
+.mv-edit-mode-overlay {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  pointer-events: none;
+}
+
+/* 편집 모드 컨트롤 */
+.mv-edit-mode-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(59, 130, 246, 0.9);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(4px);
+  animation: slideInDown 0.3s ease-out;
+  pointer-events: auto;
+}
+
+/* 편집 모드 텍스트 */
+.mv-edit-mode-text {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* 편집 종료 버튼 */
+.mv-edit-mode-exit {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mv-edit-mode-exit:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: scale(1.05);
+}
+
+.mv-edit-mode-exit:active {
+  transform: scale(0.95);
+}
+
+/* 편집 모드일 때 뷰어 경계 표시 */
+.mv-viewer-container:has(.mv-edit-mode-overlay) .mv-viewer-content {
+  border: 2px solid rgba(59, 130, 246, 0.3);
+  border-radius: 4px;
+}
+
+/* 편집 모드 애니메이션 */
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* 편집 모드 펄스 효과 (선택사항) */
+.mv-edit-mode-controls {
+  animation: slideInDown 0.3s ease-out, editModePulse 2s ease-in-out infinite 1s;
+}
+
+@keyframes editModePulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(59, 130, 246, 0);
+  }
+}
+
+/* 반응형 - 편집 모드 */
+@media (max-width: 768px) {
+  .mv-edit-mode-controls {
+    padding: 6px 12px;
+    gap: 8px;
+  }
+  
+  .mv-edit-mode-text {
+    font-size: 12px;
+  }
+  
+  .mv-edit-mode-exit {
+    padding: 3px 8px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mv-edit-mode-overlay {
+    left: 8px;
+    right: 8px;
+    transform: none;
+  }
+  
+  .mv-edit-mode-controls {
+    width: 100%;
+    justify-content: space-between;
+    border-radius: 8px;
+  }
+}

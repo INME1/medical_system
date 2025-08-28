@@ -1,0 +1,651 @@
+/* pacsapp/src/components/pacsdocs/DocumentRequestList.css */
+
+.document-request-list {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  font-family: 'Malgun Gothic', -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow: hidden;
+}
+
+/* 섹션 헤더 */
+.section-header {
+  padding: 16px 20px;
+  background: #f8f9fa;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 18px;
+  font-weight: 700;
+  color: #111827;
+  flex-shrink: 0;
+}
+
+/* 필터 섹션 */
+.filter-section {
+  padding: 20px;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  flex-shrink: 0;
+}
+
+.filter-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.filter-row:last-child {
+  margin-bottom: 0;
+}
+
+.filter-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.filter-item span {
+  font-size: 16px;
+  width: 20px;
+  text-align: center;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.filter-input {
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: 'Malgun Gothic', sans-serif;
+  background: white;
+  min-width: 120px;
+  transition: border-color 0.2s ease;
+}
+
+.filter-input:focus {
+  outline: none;
+  border-color: #374151;
+  box-shadow: 0 0 0 1px #374151;
+}
+
+.filter-input::placeholder {
+  color: #9ca3af;
+}
+
+.patient-filter {
+  min-width: 140px;
+}
+
+.btn {
+  padding: 8px 16px;
+  border: 1px solid;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Malgun Gothic', sans-serif;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: #dc2626;
+  color: white;
+  border-color: #dc2626;
+}
+
+.btn-primary:hover {
+  background: #b91c1c;
+  border-color: #b91c1c;
+}
+
+.btn-secondary {
+  background: #6b7280;
+  color: white;
+  border-color: #6b7280;
+}
+
+.btn-secondary:hover {
+  background: #4b5563;
+  border-color: #4b5563;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: #f3f4f6 !important;
+  border-color: #d1d5db !important;
+  color: #9ca3af !important;
+}
+
+/* 🔥 디바운싱 상태 표시 */
+.filter-loading {
+  padding: 8px 16px;
+  background: #f0f9ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #1e40af;
+  text-align: center;
+  margin-top: 8px;
+}
+
+/* 메시지들 */
+.loading-message, .error-message, .empty-message {
+  text-align: center;
+  padding: 40px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.error-message {
+  color: #dc2626;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 4px;
+  margin: 20px;
+}
+
+.empty-message {
+  border: 1px dashed #d1d5db;
+  border-radius: 4px;
+  margin: 20px;
+  background: #f9fafb;
+}
+
+/* 테이블 컨테이너 */
+.table-container {
+  flex: 1;
+  overflow: auto;
+  background: white;
+}
+
+/* 🔥 PACSDOCS 전용 테이블 - 클래스명 분리 */
+.pacsdocs-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  font-family: 'Malgun Gothic', sans-serif;
+  background: white;
+}
+
+.pacsdocs-table th {
+  background: #f8f9fa;
+  font-weight: 600;
+  font-size: 13px;
+  color: #374151;
+  text-align: left;
+  padding: 12px 8px;
+  border-bottom: 1px solid #e5e7eb;
+  border-right: 1px solid #e5e7eb;
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.pacsdocs-table th:last-child {
+  border-right: none;
+}
+
+.pacsdocs-table td {
+  padding: 10px 8px;
+  border-bottom: 1px solid #e5e7eb;
+  border-right: 1px solid #e5e7eb;
+  font-size: 13px;
+  color: #374151;
+  vertical-align: top;
+}
+
+.pacsdocs-table td:last-child {
+  border-right: none;
+}
+
+.pacsdocs-table tbody tr:hover {
+  background: #f8f9fa;
+}
+
+/* 번호 열 */
+.number-cell {
+  text-align: center;
+  width: 60px;
+  font-weight: 500;
+}
+
+/* 환자 정보 */
+.patient-cell {
+  font-weight: 600;
+  color: #111827;
+  min-width: 120px;
+}
+
+.patient-id {
+  color: #6b7280;
+  font-weight: normal;
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+/* 모달리티 */
+.modality-cell {
+  text-align: center;
+  font-weight: 600;
+  width: 80px;
+}
+
+.modality-ct { color: #dc2626; }
+.modality-mr { color: #7c3aed; }
+.modality-cr { color: #059669; }
+.modality-us { color: #0891b2; }
+.modality-xa { color: #ea580c; }
+.modality-dx { color: #059669; }
+.modality-mg { color: #c2410c; }
+.modality-nm { color: #7c3aed; }
+.modality-pt { color: #dc2626; }
+
+/* 🔥 통합된 문서 리스트 스타일 */
+.all-documents {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 160px; /* 🔥 240px → 160px로 축소 */
+}
+
+.unified-document {
+  padding: 6px 8px;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.unified-document:hover {
+  background: #f8f9fa;
+}
+
+/* 동의서 스타일 (주황색 계열) */
+.unified-document.consent-doc {
+  background: #fef7ed;
+  border-color: #fed7aa;
+}
+
+.unified-document.consent-doc:hover {
+  background: #fef3e2;
+}
+
+/* 일반 서류 스타일 (파란색 계열) */
+.unified-document.regular-doc {
+  background: #f0f9ff;
+  border-color: #bfdbfe;
+}
+
+.unified-document.regular-doc:hover {
+  background: #e0f2fe;
+}
+
+/* 체크박스 색상 구분 */
+.consent-checkbox {
+  accent-color: #f59e0b;
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  vertical-align: top;
+  margin-top: 2px;
+}
+
+.regular-checkbox {
+  accent-color: #3b82f6;
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  vertical-align: top;
+  margin-top: 2px;
+}
+
+/* 문서 내용 레이아웃 */
+.doc-content {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 8px;
+}
+
+/* 문서명 스타일 */
+.doc-name {
+  font-size: 12px;
+  font-weight: 500;
+  flex: 1;
+  white-space: nowrap; /* 🔥 추가: 텍스트 줄바꿈 방지 */
+  overflow: hidden;     /* 🔥 추가: 넘치는 텍스트 숨김 */
+  text-overflow: ellipsis; /* 🔥 추가: ... 표시 */
+}
+
+.consent-name {
+  color: #c2410c;
+}
+
+.regular-name {
+  color: #1e40af;
+}
+
+/* 간단한 액션 버튼들 */
+.doc-actions-simple {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0; /* 🔥 추가: 버튼 크기 고정 */
+}
+
+.simple-btn {
+  background: none;
+  border: 1px solid #d1d5db;
+  border-radius: 3px;
+  padding: 2px 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  min-width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.simple-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.view-btn {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+}
+
+.view-btn:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+.upload-btn {
+  background: #fefce8;
+  border-color: #fde047;
+}
+
+.upload-btn:hover {
+  background: #fef9c3;
+  border-color: #facc15;
+}
+
+/* CD 안내 문구 (별도 줄) */
+.imaging-info-line {
+  font-size: 10px;
+  color: #6b7280;
+  font-style: italic;
+  margin-top: 4px;
+  display: block;
+}
+
+/* 발급 섹션 */
+.issue-section {
+  text-align: center;
+  width: 100px;
+}
+
+.issue-btn {
+  padding: 6px 12px;
+  background: #10b981;
+  color: white;
+  border: 1px solid #10b981;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  display: inline-block;
+  min-width: 70px;
+}
+
+.issue-btn:hover:not(:disabled) {
+  background: #059669;
+  border-color: #059669;
+  transform: translateY(-1px);
+}
+
+.issue-btn:disabled {
+  background: #f3f4f6;
+  border-color: #d1d5db;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.issue-count {
+  font-size: 10px;
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+/* 🔥 비고 박스 스타일 */
+.status-boxes {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: stretch;
+}
+
+.status-box {
+  padding: 6px 12px;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid;
+  min-height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.status-pending {
+  background-color: #fff3cd;
+  border-color: #ffeaa7;
+  color: #856404;
+}
+
+.status-completed {
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+  color: #155724;
+}
+
+.status-processing {
+  background-color: #d1ecf1;
+  border-color: #bee5eb;
+  color: #0c5460;
+}
+
+.status-ready {
+  background-color: #e2e3f3;
+  border-color: #d1d4f1;
+  color: #383d76;
+}
+
+.status-failed {
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  color: #721c24;
+}
+
+.remarks-section {
+  width: 100px; /* 🔥 120px → 100px로 축소 */
+  vertical-align: top;
+  padding: 8px;
+}
+
+/* 긴급 표시 */
+.urgent-row {
+  background: #fef2f2 !important;
+}
+
+.urgent-row:hover {
+  background: #fecaca !important;
+}
+
+/* 🔥 PACSDOCS 테이블 열 너비 조정 - 독립적 설정 */
+.pacsdocs-table th:nth-child(8), /* 서류 컬럼 */
+.pacsdocs-table td:nth-child(8) {
+  min-width: 180px;  /* 🔥 PACSDOCS 전용 너비 */
+  width: 180px;
+}
+
+.pacsdocs-table th:nth-child(9), /* 비고 컬럼 */
+.pacsdocs-table td:nth-child(9) {
+  min-width: 100px;  /* 🔥 PACSDOCS 전용 너비 */
+  width: 100px;
+}
+
+/* 반응형 */
+@media (max-width: 1200px) {
+  .filter-row {
+    gap: 12px;
+  }
+  
+  .filter-input {
+    min-width: 100px;
+  }
+  
+  .patient-filter {
+    min-width: 120px;
+  }
+  
+  .simple-btn {
+    font-size: 12px;
+    min-width: 20px;
+    height: 20px;
+  }
+  
+  /* 🔥 중간 화면에서 더 축소 */
+  .all-documents {
+    min-width: 140px;
+  }
+  
+  .pacsdocs-table th:nth-child(8),
+  .pacsdocs-table td:nth-child(8) {
+    min-width: 150px;
+    width: 150px;
+  }
+}
+
+@media (max-width: 768px) {
+  .filter-section {
+    padding: 16px;
+  }
+  
+  .filter-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  
+  .filter-item {
+    justify-content: flex-start;
+  }
+  
+  .filter-input {
+    min-width: auto;
+    flex: 1;
+  }
+  
+  .filter-buttons {
+    margin-left: 0;
+    justify-content: center;
+  }
+  
+  .pacsdocs-table {
+    font-size: 12px;
+  }
+  
+  .pacsdocs-table th,
+  .pacsdocs-table td {
+    padding: 8px 4px;
+  }
+  
+  .all-documents {
+    min-width: 120px; /* 🔥 모바일에서 더 축소 */
+  }
+  
+  .patient-cell {
+    min-width: 100px;
+  }
+  
+  .simple-btn {
+    font-size: 10px;
+    min-width: 18px;
+    height: 18px;
+  }
+  
+  .doc-name {
+    font-size: 11px;
+  }
+  
+  .imaging-info-line {
+    font-size: 9px;
+  }
+  
+  /* 🔥 모바일에서 컬럼 더 축소 */
+  .pacsdocs-table th:nth-child(8),
+  .pacsdocs-table td:nth-child(8) {
+    min-width: 120px;
+    width: 120px;
+  }
+  
+  .pacsdocs-table th:nth-child(9),
+  .pacsdocs-table td:nth-child(9) {
+    min-width: 80px;
+    width: 80px;
+  }
+}
+
+/* 스크롤바 */
+.table-container::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.table-container::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* 로딩 애니메이션 */
+.loading-message::after {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #f3f4f6;
+  border-top: 2px solid #374151;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-left: 8px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

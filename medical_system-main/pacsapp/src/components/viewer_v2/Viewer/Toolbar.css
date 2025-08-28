@@ -1,0 +1,309 @@
+/* /home/medical_system/pacsapp/src/components/viewer_v2/Viewer/Toolbar.css */
+
+/* 툴바 메인 */
+.mv-toolbar {
+  background-color: #1e293b;
+  border-bottom: 1px solid #475569;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 56px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 툴바 도구 그룹 */
+.mv-toolbar-tools {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+/* 도구 그룹 구분자 */
+.mv-toolbar-separator {
+  width: 1px;
+  height: 32px;
+  background-color: #475569;
+  margin: 0 8px;
+}
+
+/* 도구 버튼 */
+.mv-tool-btn {
+  padding: 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background-color: #374151;
+  color: #d1d5db;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  position: relative;
+  overflow: hidden;
+}
+
+.mv-tool-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.mv-tool-btn:hover::before {
+  left: 100%;
+}
+
+.mv-tool-btn:hover {
+  background-color: #4b5563;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.mv-tool-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.mv-tool-btn.mv-active {
+  background-color: #3b82f6;
+  color: white;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  transform: translateY(-1px);
+}
+
+.mv-tool-btn.mv-active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 3px;
+  background-color: #60a5fa;
+  border-radius: 2px;
+}
+
+/* 특별한 도구 버튼 스타일 */
+.mv-tool-btn.mv-reset {
+  background-color: #dc2626;
+}
+
+.mv-tool-btn.mv-reset:hover {
+  background-color: #ef4444;
+}
+
+.mv-tool-btn.mv-load-results {
+  background-color: #059669;
+}
+
+.mv-tool-btn.mv-load-results:hover {
+  background-color: #10b981;
+}
+
+/* 패널 토글 버튼 */
+.mv-panel-toggle {
+  padding: 10px 12px;
+  background-color: #374151;
+  border: 1px solid #4b5563;
+  border-radius: 6px;
+  color: #d1d5db;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.mv-panel-toggle:hover {
+  background-color: #4b5563;
+  border-color: #6b7280;
+  transform: translateX(-2px);
+}
+
+.mv-panel-toggle:active {
+  transform: translateX(0);
+}
+
+/* 네비게이션 컨트롤 */
+.mv-toolbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 16px;
+}
+
+.mv-nav-btn {
+  padding: 8px;
+  background-color: #374151;
+  border: 1px solid #4b5563;
+  border-radius: 4px;
+  color: #d1d5db;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mv-nav-btn:hover {
+  background-color: #4b5563;
+  border-color: #6b7280;
+}
+
+.mv-nav-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background-color: #2d3748;
+}
+
+.mv-nav-btn:disabled:hover {
+  background-color: #2d3748;
+  border-color: #4b5563;
+}
+
+/* 이미지 정보 표시 */
+.mv-image-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  font-size: 12px;
+  color: #d1d5db;
+  min-width: 80px;
+  justify-content: center;
+}
+
+/* 뷰포트 설정 컨트롤 */
+.mv-viewport-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: 16px;
+  padding-left: 16px;
+  border-left: 1px solid #475569;
+}
+
+.mv-viewport-control {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.mv-viewport-value {
+  color: #d1d5db;
+  font-weight: 500;
+  min-width: 40px;
+  text-align: right;
+}
+
+/* 툴팁 */
+.mv-tool-btn[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  white-space: nowrap;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+/* 키보드 단축키 표시 */
+.mv-tool-shortcut {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  font-size: 8px;
+  color: #6b7280;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 1px 3px;
+  border-radius: 2px;
+  line-height: 1;
+}
+
+/* 로딩 상태 */
+.mv-toolbar.mv-loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.mv-toolbar.mv-loading .mv-tool-btn {
+  opacity: 0.5;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .mv-toolbar {
+    padding: 6px 12px;
+    min-height: 48px;
+  }
+  
+  .mv-toolbar-tools {
+    gap: 2px;
+  }
+  
+  .mv-tool-btn {
+    padding: 8px;
+    min-width: 36px;
+    min-height: 36px;
+  }
+  
+  .mv-toolbar-nav {
+    margin-left: 8px;
+  }
+  
+  .mv-viewport-controls {
+    display: none; /* 모바일에서 숨김 */
+  }
+  
+  .mv-panel-toggle {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mv-toolbar {
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 4px 8px;
+  }
+  
+  .mv-toolbar-tools {
+    flex: 1;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .mv-toolbar-tools::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .mv-tool-btn {
+    flex-shrink: 0;
+  }
+  
+  .mv-toolbar-separator {
+    height: 24px;
+    margin: 0 4px;
+  }
+}

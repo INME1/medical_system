@@ -1,0 +1,142 @@
+/* src/components/OHIFViewer/AnnotationTools/LabelModal.module.css */
+
+
+/* src/components/OHIFViewer/AnnotationTools/LabelModal.module.css */
+@import '../../../styles/variables.css';
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-overlay);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2147483646 !important; /* AI보다 1 낮게 하지만 실제로는 모달이 위에 */
+  backdrop-filter: blur(4px);
+}
+
+.modalContent {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: var(--spacing-xxl);
+  min-width: 320px;
+  max-width: 400px;
+  color: var(--text-primary);
+  z-index: 2147483646 !important; /* 같은 레벨 */
+}
+
+.modalHeader {
+  margin: 0 0 var(--spacing-xl) 0;
+  color: var(--text-primary);
+  font-size: var(--font-lg);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.labelInput {
+  width: 100%;
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius);
+  font-size: var(--font-md);
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  transition: border-color var(--transition-normal);
+}
+
+.labelInput:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.labelInput::placeholder {
+  color: var(--text-muted);
+}
+
+.buttonContainer {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.button {
+  flex: 1;
+  border: 1px solid;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: var(--font-md);
+  font-weight: 500;
+  transition: all var(--transition-normal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+}
+
+.saveButton {
+  background: var(--color-success);
+  color: var(--text-primary);
+  border-color: var(--color-success);
+}
+
+.saveButton:hover:not(:disabled) {
+  background: var(--color-medical-green);
+  border-color: var(--color-medical-green);
+}
+
+.saveButton:disabled {
+  background: var(--color-secondary);
+  border-color: var(--color-secondary);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.cancelButton {
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  border-color: var(--border-primary);
+}
+
+.cancelButton:hover {
+  background: var(--bg-quaternary);
+  border-color: var(--border-secondary);
+  color: var(--text-primary);
+}
+
+/* 애니메이션 */
+.modalOverlay {
+  animation: fadeIn var(--transition-normal);
+}
+
+.modalContent {
+  animation: slideUp var(--transition-normal);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

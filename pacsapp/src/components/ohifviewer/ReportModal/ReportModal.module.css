@@ -1,0 +1,632 @@
+/* src/components/OHIFViewer/ReportModal/ReportModal.module.css */
+@import '../../../styles/variables.css';
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-overlay-dark);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2147483646 !important; /* AI 바운딩 박스보다 높게 */
+  backdrop-filter: blur(6px);
+  animation: fadeIn var(--transition-normal);
+}
+
+.modalContent {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--shadow-lg);
+  padding: var(--spacing-xxxl);
+  width: 90%;
+  max-width: 900px;
+  max-height: 90vh;
+  overflow: auto;
+  color: var(--text-primary);
+  animation: slideUp var(--transition-normal);
+  z-index: 2147483646 !important; /* AI 바운딩 박스보다 높게 */
+}
+
+.modalHeader {
+  margin: 0 0 var(--spacing-xl) 0;
+  color: var(--text-primary);
+  font-size: var(--font-xxl);
+  font-weight: 600;
+  border-bottom: 2px solid var(--color-primary);
+  padding-bottom: var(--spacing-md);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+/* 환자 정보 섹션 */
+.patientInfo {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+}
+
+.patientInfoHeader {
+  margin: 0 0 var(--spacing-md) 0;
+  color: var(--text-primary);
+  font-size: var(--font-lg);
+  font-weight: 600;
+}
+
+.patientGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
+  font-size: var(--font-md);
+}
+
+.patientGridItem {
+  color: var(--text-secondary);
+}
+
+.patientGridItem strong {
+  color: var(--text-primary);
+}
+
+/* AI 분석 결과 섹션 */
+.aiResults {
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+}
+
+.aiResultsHeader {
+  margin: 0 0 var(--spacing-xl) 0;
+  color: var(--color-primary);
+  font-size: var(--font-lg);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.aiResultsSummary {
+  font-size: var(--font-md);
+  margin-bottom: var(--spacing-md);
+  color: var(--text-secondary);
+}
+
+.aiResultsSummary strong {
+  color: var(--text-primary);
+}
+
+.detectionItem {
+  background: var(--bg-secondary);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.detectionItemHigh {
+  border: 2px solid var(--color-danger);
+}
+
+.detectionItemLow {
+  border: 2px solid var(--color-warning);
+}
+
+.detectionLabel {
+  font-weight: 600;
+  font-size: var(--font-md);
+}
+
+.detectionLabelHigh {
+  color: var(--color-danger);
+}
+
+.detectionLabelLow {
+  color: var(--color-warning);
+}
+
+.confidenceBadge {
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: var(--font-sm);
+  font-weight: bold;
+  color: var(--text-primary);
+}
+
+.confidenceBadgeHigh {
+  background: var(--color-danger);
+}
+
+.confidenceBadgeLow {
+  background: var(--color-warning);
+}
+
+.detectionLocation {
+  font-size: var(--font-sm);
+  color: var(--text-muted);
+  margin-top: var(--spacing-xs);
+}
+
+/* 수동 어노테이션 섹션 */
+.annotations {
+  background: rgba(251, 191, 36, 0.1);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+}
+
+.annotationsHeader {
+  margin: 0 0 var(--spacing-xl) 0;
+  color: var(--color-warning);
+  font-size: var(--font-lg);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.annotationItem {
+  background: var(--bg-secondary);
+  border: 2px solid var(--color-annotation);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.annotationLabel {
+  color: var(--color-annotation);
+  font-weight: 600;
+  font-size: var(--font-md);
+}
+
+.annotationBadge {
+  background: var(--color-annotation);
+  color: var(--text-primary);
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: var(--font-sm);
+}
+
+.annotationLocation {
+  font-size: var(--font-sm);
+  color: var(--text-muted);
+  margin-top: var(--spacing-xs);
+}
+
+.annotationDoctor {
+  font-size: var(--font-sm);
+  color: var(--color-annotation);
+  margin-top: var(--spacing-xs);
+  font-weight: 500;
+}
+
+/* ⭐ STT 섹션 스타일 추가 */
+.sttSection {
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+}
+
+.sttHeader {
+  margin: 0 0 var(--spacing-xl) 0;
+  color: var(--color-success);
+  font-size: var(--font-lg);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.sttControls {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xl);
+  margin-bottom: var(--spacing-lg);
+  flex-wrap: wrap;
+}
+
+.startRecordButton {
+  background: var(--color-success) !important;
+  border-color: var(--color-success) !important;
+}
+
+.startRecordButton:hover {
+  background: #16a34a !important;
+  border-color: #16a34a !important;
+}
+
+.recordingButton {
+  background: var(--color-danger) !important;
+  border-color: var(--color-danger) !important;
+  animation: pulse 2s infinite;
+}
+
+.recordingButton:hover {
+  background: #dc2626 !important;
+  border-color: #dc2626 !important;
+}
+
+.recordingTime {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background: var(--color-danger);
+  color: var(--text-primary);
+  border-radius: var(--border-radius);
+  font-weight: bold;
+  font-family: monospace;
+  font-size: var(--font-md);
+}
+
+.recordingIndicator {
+  width: 8px;
+  height: 8px;
+  background: var(--text-primary);
+  border-radius: 50%;
+  animation: blink 1.5s infinite;
+}
+
+.sttProcessButton {
+  background: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.sttProcessButton:hover {
+  background: #1d4ed8 !important;
+  border-color: #1d4ed8 !important;
+}
+
+.sttProcessButton:disabled {
+  background: var(--bg-quaternary) !important;
+  border-color: var(--border-secondary) !important;
+  color: var(--text-muted) !important;
+  cursor: not-allowed;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.audioPlayback {
+  padding: var(--spacing-lg);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius);
+  margin-bottom: var(--spacing-lg);
+}
+
+.audioControls {
+  width: 100%;
+  height: 30px;
+  margin-bottom: var(--spacing-sm);
+}
+
+.audioHint {
+  margin: 0;
+  font-size: var(--font-sm);
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.permissionWarning {
+  padding: var(--spacing-lg);
+  background: rgba(251, 191, 36, 0.1);
+  border: 1px solid var(--color-warning);
+  border-radius: var(--border-radius);
+  color: var(--text-primary);
+}
+
+.permissionWarning strong {
+  color: var(--color-warning);
+}
+
+.permissionWarning p {
+  margin: var(--spacing-sm) 0;
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+}
+
+.permissionButton {
+  background: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+  font-size: var(--font-sm) !important;
+  padding: var(--spacing-sm) var(--spacing-lg) !important;
+  margin-top: var(--spacing-sm);
+}
+
+.permissionButton:hover {
+  background: #1d4ed8 !important;
+  border-color: #1d4ed8 !important;
+}
+
+/* 종합 소견 섹션 */
+.reportSection {
+  margin-bottom: var(--spacing-xl);
+}
+
+.reportSectionHeader {
+  margin: 0 0 var(--spacing-md) 0;
+  color: var(--text-primary);
+  font-size: var(--font-lg);
+  font-weight: 600;
+}
+
+.reportTextarea {
+  width: 100%;
+  height: 150px; /* ⭐ 높이 증가 */
+  padding: var(--spacing-lg);
+  border: 2px solid var(--border-primary);
+  border-radius: var(--border-radius-lg);
+  font-size: var(--font-md);
+  font-family: inherit;
+  resize: vertical;
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  transition: border-color var(--transition-normal);
+  box-sizing: border-box;
+  line-height: 1.6;
+}
+
+.reportTextarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.reportTextarea::placeholder {
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ⭐ 텍스트 영역 하단 정보 */
+.textareaFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--spacing-sm);
+  font-size: var(--font-sm);
+  color: var(--text-muted);
+}
+
+.textareaFooter span:first-child {
+  color: var(--text-secondary);
+}
+
+.textareaFooter span:last-child {
+  color: var(--color-success);
+  font-weight: 500;
+}
+
+/* 버튼 섹션 */
+.buttonContainer {
+  display: flex;
+  gap: var(--spacing-xl);
+  justify-content: flex-end;
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--border-primary);
+}
+
+.button {
+  border: 1px solid;
+  padding: var(--spacing-lg) var(--spacing-xl);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: var(--font-md);
+  font-weight: 600;
+  transition: all var(--transition-normal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  min-width: 120px;
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.cancelButton {
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  border-color: var(--border-primary);
+}
+
+.cancelButton:hover:not(:disabled) {
+  background: var(--bg-quaternary);
+  border-color: var(--border-secondary);
+  color: var(--text-primary);
+}
+
+.printButton {
+  background: var(--color-info);
+  color: var(--text-primary);
+  border-color: var(--color-info);
+}
+
+.printButton:hover:not(:disabled) {
+  background: #0891b2;
+  border-color: #0891b2;
+}
+
+.saveButton {
+  background: var(--color-success);
+  color: var(--text-primary);
+  border-color: var(--color-success);
+}
+
+.saveButton:hover:not(:disabled) {
+  background: var(--color-medical-green);
+  border-color: var(--color-medical-green);
+}
+
+/* ⭐ 애니메이션 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ⭐ 오디오 컨트롤 스타일링 */
+.audioControls::-webkit-media-controls {
+  background-color: var(--bg-secondary);
+}
+
+.audioControls::-webkit-media-controls-panel {
+  background-color: var(--bg-secondary);
+}
+
+.audioControls::-webkit-media-controls-play-button,
+.audioControls::-webkit-media-controls-pause-button {
+  background-color: var(--color-primary);
+  border-radius: 50%;
+}
+
+.audioControls::-webkit-media-controls-timeline {
+  background-color: var(--bg-quaternary);
+  border-radius: 25px;
+}
+
+.audioControls::-webkit-media-controls-current-time-display,
+.audioControls::-webkit-media-controls-time-remaining-display {
+  color: var(--text-primary);
+  font-size: var(--font-sm);
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .modalContent {
+    width: 95%;
+    padding: var(--spacing-xl);
+  }
+  
+  .patientGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .buttonContainer {
+    flex-direction: column;
+  }
+  
+  .button {
+    width: 100%;
+  }
+  
+  /* ⭐ STT 컨트롤 모바일 대응 */
+  .sttControls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-lg);
+  }
+  
+  .sttControls .button {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .recordingTime {
+    justify-content: center;
+  }
+  
+  .textareaFooter {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-xs);
+  }
+}
+
+@media (max-width: 480px) {
+  .modalContent {
+    width: 100%;
+    height: 100%;
+    max-height: 100vh;
+    border-radius: 0;
+    padding: var(--spacing-lg);
+  }
+  
+  .modalOverlay {
+    padding: 0;
+  }
+  
+  .reportTextarea {
+    height: 120px;
+  }
+  
+  .sttSection,
+  .aiResults,
+  .annotations,
+  .patientInfo {
+    padding: var(--spacing-lg);
+  }
+}

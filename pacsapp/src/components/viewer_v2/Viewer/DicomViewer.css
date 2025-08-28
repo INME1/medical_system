@@ -1,0 +1,296 @@
+/* /home/medical_system/pacsapp/src/components/viewer_v2/Viewer/DicomViewer.css */
+/* ========================================
+   DICOM Viewer CSS - Complete with Highlight Animations
+   ======================================== */
+
+.mv-dicom-viewer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #0f172a;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* 의료 이미지 컨테이너 */
+.mv-medical-image {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: #000000;
+}
+
+.mv-image-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* DICOM 이미지 */
+.mv-dicom-image {
+  max-width: 100%;
+  max-height: 100%;
+  user-select: none;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* Empty State */
+.mv-empty-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  font-size: 16px;
+  gap: 8px;
+}
+
+.mv-empty-image-icon {
+  font-size: 64px;
+  margin-bottom: 16px;
+}
+
+.mv-empty-image-text {
+  font-size: 14px;
+  color: #94a3b8;
+}
+
+/* AI 오버레이 */
+.mv-ai-overlay {
+  position: absolute;
+  pointer-events: none;
+}
+
+.mv-ai-bbox {
+  position: absolute;
+  border: 2px solid;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.mv-ai-label {
+  position: absolute;
+  top: -24px;
+  left: 0;
+  padding: 2px 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: white;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+
+/* 뷰포트 정보 오버레이 */
+.mv-viewport-info {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 8px 12px;
+  font-size: 12px;
+  color: white;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  backdrop-filter: blur(4px);
+  z-index: 20;
+}
+
+.mv-info-left {
+  top: 16px;
+  left: 16px;
+}
+
+.mv-info-right {
+  top: 16px;
+  right: 16px;
+  text-align: right;
+}
+
+.mv-info-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.mv-viewport-info div {
+  margin-bottom: 4px;
+}
+
+.mv-viewport-info div:last-child {
+  margin-bottom: 0;
+}
+
+.mv-edit-mode-indicator {
+  color: #3b82f6 !important;
+  font-weight: 600;
+}
+
+/* 🔥 하이라이트 상태 표시 */
+.mv-highlight-indicator {
+  color: #f59e0b !important;
+  font-weight: bold;
+}
+
+/* 🔥 라벨 통계 표시 */
+.mv-label-stats {
+  color: #22c55e !important;
+  font-size: 11px;
+}
+
+/* 도구 도움말 */
+.mv-tool-help {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  color: #e2e8f0;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.mv-edit-help {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(59, 130, 246, 0.9);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  color: white;
+  font-weight: 600;
+  pointer-events: none;
+  z-index: 20;
+}
+
+/* 🔥 하이라이트 도움말 */
+.mv-highlight-help {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(245, 158, 11, 0.9);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  color: white;
+  font-weight: 600;
+  pointer-events: none;
+  z-index: 20;
+}
+
+/* 🔥 하이라이트 애니메이션 - 깜빡이 효과 */
+@keyframes blinkHighlight {
+  0%, 50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 8px currentColor);
+  }
+  25%, 75% {
+    opacity: 0.3;
+    filter: drop-shadow(0 0 4px currentColor);
+  }
+}
+
+.mv-measurement-highlight {
+  animation: blinkHighlight 1s ease-in-out 3;
+  filter: drop-shadow(0 0 6px #f59e0b);
+}
+
+.mv-label-highlight {
+  animation: blinkHighlight 1s ease-in-out 3;
+  filter: drop-shadow(0 0 6px #22c55e);
+}
+
+/* 컨텍스트 메뉴 */
+.mv-context-menu {
+  background-color: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  padding: 4px 0;
+  min-width: 140px;
+  z-index: 1000;
+}
+
+.mv-context-menu-item {
+  padding: 8px 12px;
+  font-size: 13px;
+  color: #e2e8f0;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mv-context-menu-item:hover {
+  background-color: #334155;
+}
+
+.mv-context-menu-item:active {
+  background-color: #475569;
+}
+
+/* 로딩 오버레이 */
+.mv-loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.mv-loading-message {
+  text-align: center;
+  color: white;
+  font-size: 16px;
+}
+
+.mv-loading-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #334155;
+  border-top: 3px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 16px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .mv-viewport-info {
+    font-size: 11px;
+    padding: 6px 8px;
+  }
+  
+  .mv-tool-help,
+  .mv-edit-help,
+  .mv-highlight-help {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+  
+  .mv-context-menu-item {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+}

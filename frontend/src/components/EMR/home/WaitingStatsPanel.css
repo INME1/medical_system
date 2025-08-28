@@ -1,0 +1,52 @@
+/* src/components/home/WaitingStatsPanel.css */
+
+.waiting-stats-panel {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.panel-title {
+  margin: 1rem 0 1rem;    /* 위쪽 1rem, 아래쪽 1rem */
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.panel-body {
+  display: flex;
+  gap: 2rem;           /* 좌우 컬럼 간격 */
+  padding: 0 1.5rem;   /* 좌우 동일 패딩 */
+}
+
+.panel-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label-waiting,
+.label-completed {
+  font-weight: 600;
+  margin-left: 1rem;   /* 탭 한 칸 만큼 들여쓰기 */
+}
+
+.label-waiting {
+  color: #d9822b;      /* 진한 노란 계열 */
+}
+
+.label-completed {
+  color: #3e8e41;      /* 진한 초록 계열 */
+}
+
+.list-item {
+  font-size: 0.95rem;
+  color: #333;
+  padding-left: 1.5rem;  /* 라벨 이후 자연스러운 정렬 */
+}

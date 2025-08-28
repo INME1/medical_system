@@ -1,0 +1,490 @@
+/* ========================================
+   Right Panel CSS - Medical Viewer
+   ======================================== */
+
+/* 우측 패널 버튼들 컨테이너 */
+.mv-right-panel-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #1e293b;
+  border-left: 1px solid #475569;
+  padding: 8px;
+  gap: 8px;
+}
+
+/* 패널 버튼 스타일 */
+.mv-panel-btn {
+  padding: 12px;
+  border-radius: 4px;
+  border: none;
+  background-color: #374151;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mv-panel-btn:hover {
+  background-color: #4b5563;
+}
+
+.mv-panel-btn.mv-active {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+/* 우측 패널 메인 컨테이너 */
+.mv-right-panel {
+  width: 400px; /* 320px → 380px로 증가 */
+  background-color: #1e293b;
+  border-left: 1px solid #475569;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* 패널 헤더 */
+.mv-panel-header {
+  padding: 20px 24px 16px; /* 16px → 20px */
+  border-bottom: 1px solid #475569;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1e293b;
+}
+
+.mv-panel-title {
+  font-size: 20px; /* 18px → 20px */
+  font-weight: 600;
+  color: white;
+  margin: 0;
+}
+
+.mv-panel-close {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: color 0.2s;
+}
+
+.mv-panel-close:hover {
+  color: white;
+}
+
+/* 패널 콘텐츠 영역 */
+.mv-panel-content {
+  flex: 1;
+  padding: 20px; /* 16px → 20px */
+  overflow-y: auto;
+  background-color: #1e293b;
+}
+
+/* 스크롤바 스타일 */
+.mv-panel-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.mv-panel-content::-webkit-scrollbar-track {
+  background: #334155;
+}
+
+.mv-panel-content::-webkit-scrollbar-thumb {
+  background: #64748b;
+  border-radius: 3px;
+}
+
+.mv-panel-content::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* ========================================
+   AI Annotations Panel
+   ======================================== */
+
+/* 모델 섹션 */
+.mv-model-section {
+  margin-bottom: 24px;
+}
+
+.mv-model-title {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  letter-spacing: 0.5px;
+}
+
+/* 주석 아이템 */
+.mv-annotation-item {
+  background-color: #374151;
+  border-radius: 4px;
+  padding: 12px;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  transition: background-color 0.2s;
+}
+
+.mv-annotation-item:hover {
+  background-color: #4b5563;
+}
+
+.mv-annotation-info {
+  flex: 1;
+  margin-right: 12px;
+}
+
+.mv-annotation-label {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.mv-annotation-label.mv-manual {
+  color: #22c55e;
+}
+
+.mv-annotation-confidence {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.mv-annotation-slice {
+  font-size: 12px;
+  color: #94a3b8;
+  margin-bottom: 2px;
+}
+
+.mv-annotation-coords {
+  font-size: 10px;
+  color: #64748b;
+  font-family: 'Courier New', monospace;
+}
+
+/* 주석 컨트롤 버튼들 */
+.mv-annotation-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.mv-visibility-btn {
+  padding: 6px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mv-visibility-btn.mv-visible {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+.mv-visibility-btn.mv-hidden {
+  background-color: #4b5563;
+  color: white;
+}
+
+.mv-visibility-btn:hover.mv-visible {
+  background-color: #1d4ed8;
+}
+
+.mv-visibility-btn:hover.mv-hidden {
+  background-color: #6b7280;
+}
+
+.mv-delete-btn {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mv-delete-btn:hover {
+  color: #ef4444;
+}
+
+/* ========================================
+   Measurements Panel
+   ======================================== */
+
+.mv-measurement-item {
+  background-color: #374151;
+  border-radius: 4px;
+  padding: 12px;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.2s;
+}
+
+.mv-measurement-item:hover {
+  background-color: #4b5563;
+}
+
+.mv-measurement-info {
+  flex: 1;
+}
+
+.mv-measurement-type {
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
+  margin-bottom: 4px;
+}
+
+.mv-measurement-value {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+/* ========================================
+   Reports Panel
+   ======================================== */
+
+.mv-report-item {
+  background-color: #374151;
+  border-radius: 4px;
+  padding: 12px;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
+
+.mv-report-item:hover {
+  background-color: #4b5563;
+}
+
+.mv-report-info {
+  flex: 1;
+  margin-right: 12px;
+}
+
+.mv-report-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
+  margin-bottom: 4px;
+}
+
+.mv-report-date {
+  font-size: 12px;
+  color: #94a3b8;
+  margin-bottom: 6px;
+}
+
+.mv-report-status {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.mv-report-status.mv-completed {
+  background-color: #16a34a;
+  color: white;
+}
+
+.mv-report-status.mv-draft {
+  background-color: #d97706;
+  color: white;
+}
+
+.mv-report-controls {
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+}
+
+.mv-action-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mv-action-btn.mv-edit {
+  color: #94a3b8;
+}
+
+.mv-action-btn.mv-edit:hover {
+  color: #3b82f6;
+  background-color: rgba(59, 130, 246, 0.1);
+}
+
+.mv-action-btn.mv-save {
+  color: #94a3b8;
+}
+
+.mv-action-btn.mv-save:hover {
+  color: #16a34a;
+  background-color: rgba(22, 163, 74, 0.1);
+}
+
+.mv-new-report-btn {
+  width: 100%;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 8px;
+}
+
+.mv-new-report-btn:hover {
+  background-color: #1d4ed8;
+}
+
+/* ========================================
+   Empty States
+   ======================================== */
+
+.mv-empty-state {
+  text-align: center;
+  padding: 32px 16px;
+  color: #94a3b8;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.mv-empty-icon {
+  color: #4b5563;
+  margin-bottom: 16px;
+}
+
+.mv-empty-state p {
+  margin: 8px 0;
+  color: white;
+  font-weight: 500;
+}
+
+.mv-empty-subtitle {
+  color: #94a3b8 !important;
+  font-weight: 400 !important;
+  font-size: 13px !important;
+}
+
+/* ========================================
+   Responsive Design
+   ======================================== */
+
+@media (max-width: 1200px) {
+  .mv-right-panel {
+    width: 280px;
+  }
+  
+  .mv-panel-content {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .mv-right-panel {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: -4px 0 12px rgba(0, 0, 0, 0.3);
+  }
+  
+  .mv-right-panel-buttons {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 999;
+  }
+}
+
+/* ========================================
+   Animations
+   ======================================== */
+
+.mv-right-panel {
+  animation: slideInRight 0.3s ease-out;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.mv-annotation-item,
+.mv-measurement-item,
+.mv-report-item {
+  animation: fadeInUp 0.2s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================
+   Focus States for Accessibility
+   ======================================== */
+
+.mv-panel-btn:focus,
+.mv-visibility-btn:focus,
+.mv-delete-btn:focus,
+.mv-action-btn:focus,
+.mv-new-report-btn:focus,
+.mv-panel-close:focus {
+  outline: 2px solid #60a5fa;
+  outline-offset: 2px;
+}
+
+/* ========================================
+   Print Styles
+   ======================================== */
+
+@media print {
+  .mv-right-panel-buttons,
+  .mv-right-panel {
+    display: none;
+  }
+}

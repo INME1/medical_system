@@ -1,0 +1,37 @@
+/* LeftPanel.css - 로고 및 기본 레이아웃만 */
+
+.mv-left-panel {
+  width: 400px; 
+  background-color: #1e293b;
+  border-right: 1px solid #475569;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  max-height: 100vh;
+
+}
+
+/* 로고 헤더 영역 */
+.mv-logo-header {
+  height: 150px;
+  border-bottom: 1px solid #475569;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1e293b;
+}
+
+.mv-logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mv-logo-text {
+  font-size: 24px;
+  font-weight: bold;
+  color: #60a5fa;
+  margin: 0;
+  letter-spacing: 1px;
+  text-shadow: 0 0 10px rgba(96, 165, 250, 0.3);
+}

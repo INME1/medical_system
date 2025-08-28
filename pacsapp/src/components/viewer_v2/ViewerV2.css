@@ -1,0 +1,185 @@
+/* src/components/viewer_v2/ViewerV2.css */
+
+.viewer-v2-container {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: #1a1a1a;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 뷰어 헤더 */
+.viewer-header {
+  height: 60px;
+  background-color: #2d2d2d;
+  border-bottom: 1px solid #444;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  justify-content: space-between;
+}
+
+.viewer-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.patient-info {
+  display: flex;
+  gap: 20px;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+/* 메인 뷰어 영역 */
+.viewer-main {
+  flex: 1;
+  display: flex;
+  background-color: #1a1a1a;
+}
+
+/* 왼쪽 패널 */
+.viewer-left-panel {
+  width: 300px;
+  background-color: #2d2d2d;
+  border-right: 1px solid #444;
+  overflow-y: auto;
+}
+
+/* 중앙 뷰어 */
+.viewer-center {
+  flex: 1;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* 오른쪽 패널 */
+.viewer-right-panel {
+  width: 320px;
+  background-color: #2d2d2d;
+  border-left: 1px solid #444;
+  overflow-y: auto;
+}
+
+/* DICOM 이미지 */
+.dicom-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* 로딩 스피너 */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #ccc;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #444;
+  border-top: 4px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 에러 메시지 */
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #ef4444;
+  text-align: center;
+  padding: 20px;
+}
+
+/* 툴바 */
+.viewer-toolbar {
+  background-color: #2d2d2d;
+  border-bottom: 1px solid #444;
+  padding: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.toolbar-button {
+  background-color: #404040;
+  border: 1px solid #555;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+}
+
+.toolbar-button:hover {
+  background-color: #4a4a4a;
+}
+
+.toolbar-button.active {
+  background-color: #3b82f6;
+  border-color: #2563eb;
+}
+
+/* 반응형 */
+@media (max-width: 1200px) {
+  .viewer-left-panel {
+    width: 250px;
+  }
+  
+  .viewer-right-panel {
+    width: 280px;
+  }
+}
+
+@media (max-width: 768px) {
+  .viewer-left-panel,
+  .viewer-right-panel {
+    position: absolute;
+    top: 60px;
+    bottom: 0;
+    z-index: 100;
+    background-color: rgba(45, 45, 45, 0.95);
+    backdrop-filter: blur(10px);
+  }
+  
+  .viewer-left-panel {
+    left: -100%;
+    transition: left 0.3s ease;
+  }
+  
+  .viewer-left-panel.open {
+    left: 0;
+  }
+  
+  .viewer-right-panel {
+    right: -100%;
+    transition: right 0.3s ease;
+  }
+  
+  .viewer-right-panel.open {
+    right: 0;
+  }
+}

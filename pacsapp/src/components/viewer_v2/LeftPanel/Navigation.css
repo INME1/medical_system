@@ -1,0 +1,76 @@
+/* Navigation.css - 드롭다운 스타일 */
+
+.mv-navigation-container {
+  padding: 20px;
+  border-bottom: 1px solid #475569;
+}
+
+.mv-navigation-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.mv-navigation-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #a855f7;
+  margin: 0;
+}
+
+.mv-navigation-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 15px;
+}
+
+.mv-nav-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mv-nav-label {
+  color: #94a3b8;
+  font-weight: 500;
+  min-width: 60px;
+  font-size: 14px;
+}
+
+.mv-nav-select {
+  flex: 1;
+  background-color: #374151;
+  border: 1px solid #4b5563;
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 13px;
+  color: white;
+  cursor: pointer;
+}
+
+.mv-nav-select:hover {
+  background-color: #4b5563;
+}
+
+.mv-nav-select:focus {
+  outline: 2px solid #a855f7;
+  outline-offset: 2px;
+}
+
+.mv-slice-info {
+  color: #a855f7;
+  font-weight: 600;
+  font-family: monospace;
+  font-size: 14px;
+  flex: 1;
+  text-align: right;
+}
+
+.mv-navigation-slider {
+  width: 100%;
+  accent-color: #a855f7;
+  height: 6px;
+  margin-top: 4px;
+}

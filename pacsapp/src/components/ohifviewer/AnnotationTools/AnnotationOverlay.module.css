@@ -1,0 +1,116 @@
+/* src/components/OHIFViewer/AnnotationTools/AnnotationOverlay.module.css */
+
+/* src/components/OHIFViewer/AnnotationTools/AnnotationOverlay.module.css */
+@import '../../../styles/variables.css';
+
+.overlayContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 999998; /* AI보다 1 낮게 */
+}
+
+.overlayContainer.drawingMode {
+  pointer-events: auto;
+  cursor: crosshair;
+  z-index: 999999; /* AI와 같은 레벨 */
+}
+
+.overlayContainer.normalMode {
+  pointer-events: none; /* 일반 모드에서는 클릭 통과 */
+  cursor: default;
+}
+
+/* 현재 그리고 있는 박스 */
+.currentBox {
+  position: absolute;
+  border: 2px dashed var(--color-drawing);
+  background: rgba(16, 185, 129, 0.1);
+  pointer-events: none;
+  z-index: 1000000; /* 그리기 중일 때만 높게 */
+}
+
+/* 저장된 어노테이션 박스들 */
+.annotationBox {
+  position: absolute;
+  border: 3px solid var(--color-annotation);
+  background: rgba(251, 191, 36, 0.15);
+  z-index: 1000000; /* 어노테이션도 적당히 높게 */
+}
+
+.annotationBox.drawingMode {
+  pointer-events: none;
+}
+
+.annotationBox.normalMode {
+  pointer-events: auto;
+}
+
+/* 어노테이션 라벨 */
+.annotationLabel {
+  background: rgba(251, 191, 36, 0.9);
+  color: var(--text-primary);
+  padding: 2px 6px;
+  font-size: var(--font-xs);
+  font-weight: bold;
+  border-radius: var(--border-radius-sm);
+  margin: 2px;
+  display: inline-block;
+  max-width: calc(100% - 4px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  pointer-events: auto; /* 라벨은 클릭 가능 */
+}
+
+/* 삭제 버튼 */
+.deleteButton {
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  margin-left: var(--spacing-sm);
+  cursor: pointer;
+  font-size: var(--font-xs);
+  padding: 0;
+  line-height: 1;
+  transition: color var(--transition-fast);
+  pointer-events: auto; /* 삭제 버튼은 클릭 가능 */
+}
+
+.deleteButton:hover {
+  color: var(--color-danger);
+  transform: scale(1.2);
+}
+
+/* 호버 효과 */
+.annotationBox:hover {
+  border-color: var(--color-warning);
+  background: rgba(251, 191, 36, 0.25);
+}
+
+.annotationBox:hover .annotationLabel {
+  background: rgba(251, 191, 36, 1);
+}
+
+/* 애니메이션 효과 */
+.annotationBox {
+  transition: all var(--transition-fast);
+}
+
+.currentBox {
+  animation: pulse 1s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+  from {
+    border-color: var(--color-drawing);
+    background: rgba(16, 185, 129, 0.1);
+  }
+  to {
+    border-color: var(--color-medical-green);
+    background: rgba(16, 185, 129, 0.2);
+  }
+}

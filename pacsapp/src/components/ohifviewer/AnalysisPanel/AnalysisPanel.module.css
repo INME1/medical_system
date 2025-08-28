@@ -1,0 +1,735 @@
+/* src/components/OHIFViewer/AnalysisPanel/AnalysisPanel.module.css */
+@import '../../../styles/variables.css';
+
+.analysisPanel {
+  flex: 1;
+  padding: var(--spacing-xl);
+  background: var(--bg-secondary);
+  overflow-y: auto;
+  color: var(--text-primary);
+  max-height: 100vh; /* 🔥 높이 제한 추가 */
+}
+
+.panelHeader {
+  margin-bottom: var(--spacing-lg);
+  color: var(--text-primary);
+  font-size: var(--font-xl);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.statusMessage {
+  margin-bottom: var(--spacing-xl);
+  font-weight: bold;
+  font-size: var(--font-md);
+  color: var(--text-secondary);
+}
+
+/* 현재 스터디 정보 */
+.studyInfo {
+  background: var(--bg-tertiary);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  margin-bottom: var(--spacing-xl);
+  border: 1px solid var(--border-primary);
+  font-size: var(--font-base);
+}
+
+.studyInfoHeader {
+  margin-bottom: var(--spacing-sm);
+  font-weight: bold;
+  color: var(--text-primary);
+}
+
+.studyUid {
+  color: var(--color-success);
+  font-family: monospace;
+  font-size: var(--font-xs);
+  margin-bottom: var(--spacing-sm);
+}
+
+.studyUidError {
+  color: var(--color-danger);
+}
+
+.studyCount {
+  margin-top: var(--spacing-sm);
+  color: var(--text-secondary);
+}
+
+.imageResolution {
+  margin-top: var(--spacing-sm);
+  color: var(--color-primary);
+}
+
+.refreshButtons {
+  margin-top: var(--spacing-md);
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.refreshButton {
+  background: var(--color-secondary);
+  color: var(--text-primary);
+  border: none;
+  padding: 4px 8px;
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  font-size: var(--font-xs);
+  transition: all var(--transition-normal);
+}
+
+.refreshButton:hover {
+  background: var(--bg-quaternary);
+}
+
+.recalculateButton {
+  background: var(--color-warning);
+  color: var(--text-inverse);
+}
+
+.recalculateButton:hover {
+  background: var(--color-medical-yellow);
+}
+
+/* 스터디 선택 드롭다운 */
+.studySelector {
+  margin-bottom: var(--spacing-xl);
+}
+
+.studySelectorLabel {
+  display: block;
+  margin-bottom: var(--spacing-sm);
+  font-weight: bold;
+  color: var(--text-primary);
+}
+
+.studySelectorDropdown {
+  width: 100%;
+  padding: var(--spacing-sm);
+  font-size: var(--font-base);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius);
+  color: var(--text-primary);
+}
+
+/* AI 분석 섹션 */
+.aiSection {
+  margin-bottom: var(--spacing-xl);
+}
+
+.aiSectionHeader {
+  margin-bottom: var(--spacing-lg);
+  color: var(--text-primary);
+  font-size: var(--font-lg);
+  font-weight: 600;
+}
+
+.aiButtons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.aiButtonLarge {
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  border: 1px solid;
+  font-weight: 500;
+  transition: all var(--transition-normal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  font-size: var(--font-md);
+}
+
+.yoloButton {
+  background: var(--color-primary);
+  color: var(--text-primary);
+  border-color: var(--color-primary);
+}
+
+.yoloButton:hover {
+  background: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+}
+
+.ssdButton {
+  background: var(--color-success);
+  color: var(--text-primary);
+  border-color: var(--color-success);
+}
+
+.ssdButton:hover {
+  background: var(--color-medical-green);
+  border-color: var(--color-medical-green);
+}
+
+.smallButtons {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-md);
+}
+
+.smallButton {
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  border: 1px solid var(--border-primary);
+  font-size: var(--font-sm);
+  transition: all var(--transition-normal);
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.smallButton:hover {
+  background: var(--bg-quaternary);
+  border-color: var(--border-secondary);
+}
+
+.loadButton {
+  background: var(--color-info);
+  border-color: var(--color-info);
+}
+
+.loadButton:hover {
+  background: #0891b2;
+  border-color: #0891b2;
+}
+
+.clearButton {
+  background: var(--color-danger);
+  border-color: var(--color-danger);
+}
+
+.clearButton:hover {
+  background: #dc2626;
+  border-color: #dc2626;
+}
+
+.statusButton {
+  background: var(--color-secondary);
+  border-color: var(--color-secondary);
+}
+
+.statusButton:hover {
+  background: var(--bg-quaternary);
+  border-color: var(--border-secondary);
+}
+
+/* 오버레이 토글 */
+.overlayToggle {
+  width: 100%;
+  padding: var(--spacing-md) var(--spacing-xl);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  border: 1px solid;
+  margin-top: var(--spacing-md);
+  font-weight: 500;
+  transition: all var(--transition-normal);
+}
+
+.overlayToggleShow {
+  background: var(--color-danger);
+  color: var(--text-primary);
+  border-color: var(--color-danger);
+}
+
+.overlayToggleShow:hover {
+  background: #dc2626;
+  border-color: #dc2626;
+}
+
+.overlayToggleHide {
+  background: var(--color-info);
+  color: var(--text-primary);
+  border-color: var(--color-info);
+}
+
+.overlayToggleHide:hover {
+  background: #0891b2;
+  border-color: #0891b2;
+}
+
+/* 레포트 섹션 */
+.reportSection {
+  margin-bottom: var(--spacing-xl);
+}
+
+.reportButtons {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+.reportButton {
+  flex: 1;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  border: 1px solid;
+  font-size: var(--font-sm);
+  font-weight: bold;
+  transition: all var(--transition-normal);
+}
+
+.reportLoadButton {
+  background: var(--color-info);
+  color: var(--text-primary);
+  border-color: var(--color-info);
+}
+
+.reportLoadButton:hover {
+  background: #0891b2;
+  border-color: #0891b2;
+}
+
+.reportCreateButton {
+  background: var(--color-success);
+  color: var(--text-primary);
+  border-color: var(--color-success);
+}
+
+.reportCreateButton:hover {
+  background: var(--color-medical-green);
+  border-color: var(--color-medical-green);
+}
+
+.reportDropdownToggle {
+  width: 100%;
+  background: var(--color-purple);
+  border: 1px solid var(--color-purple);
+  color: var(--text-primary);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: var(--font-sm);
+  transition: all var(--transition-normal);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.reportDropdownToggle:hover {
+  background: #7c3aed;
+  border-color: #7c3aed;
+}
+
+.reportDropdownContent {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+  max-height: 150px;
+  overflow-y: auto;
+  margin-bottom: var(--spacing-md);
+}
+
+.reportDropdownItem {
+  padding: var(--spacing-lg);
+  border-bottom: 1px solid var(--border-primary);
+  font-size: var(--font-base);
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.reportDropdownItem:hover {
+  background: var(--bg-quaternary);
+}
+
+.reportDropdownItem:last-child {
+  border-bottom: none;
+}
+
+.reportItemHeader {
+  font-weight: bold;
+  color: var(--color-success);
+  font-size: var(--font-md);
+  margin-bottom: var(--spacing-sm);
+}
+
+.reportItemDate {
+  color: var(--text-secondary);
+  font-size: var(--font-xs);
+  margin-bottom: var(--spacing-xs);
+}
+
+.reportItemDoctor {
+  color: var(--color-primary);
+  font-size: var(--font-xs);
+  margin-bottom: var(--spacing-xs);
+}
+
+.reportItemStatus {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.reportItemStatusLabel {
+  color: var(--text-muted);
+  font-size: var(--font-xs);
+}
+
+.reportItemStatusSelect {
+  font-size: var(--font-xs);
+  padding: 2px 4px;
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius-sm);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.reportDropdownEmpty {
+  padding: var(--spacing-xl);
+  color: var(--text-muted);
+  text-align: center;
+  font-size: var(--font-base);
+  font-style: italic;
+}
+
+.reportDeleteButton {
+  background: var(--color-danger);
+  color: var(--text-primary);
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: var(--font-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: var(--spacing-md);
+  transition: all var(--transition-fast);
+}
+
+.reportDeleteButton:hover {
+  background: #dc2626;
+  transform: scale(1.1);
+}
+
+/* 분석 결과 섹션 */
+.resultsSection {
+  margin-top: var(--spacing-xl);
+}
+
+.resultsSectionHeader {
+  margin-bottom: var(--spacing-lg);
+  color: var(--text-primary);
+  font-size: var(--font-lg);
+  font-weight: 600;
+}
+
+.resultsOverview {
+  background: var(--bg-tertiary);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  margin-bottom: var(--spacing-md);
+  border: 1px solid var(--border-primary);
+}
+
+.resultsOverviewItem {
+  margin-bottom: var(--spacing-sm);
+  font-size: var(--font-md);
+}
+
+.resultsOverviewItem strong {
+  color: var(--text-primary);
+}
+
+.detectionCard {
+  background: var(--bg-tertiary);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  margin-bottom: var(--spacing-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.detectionCardHigh {
+  border: 2px solid var(--color-danger);
+}
+
+.detectionCardLow {
+  border: 2px solid var(--color-warning);
+}
+
+.detectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.detectionLabelHigh {
+  color: var(--color-danger);
+  font-size: var(--font-lg);
+  font-weight: 600;
+}
+
+.detectionLabelLow {
+  color: var(--color-warning);
+  font-size: var(--font-lg);
+  font-weight: 600;
+}
+
+.confidenceBadgeHigh {
+  background: var(--color-danger);
+  color: var(--text-primary);
+  padding: 2px 6px;
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-base);
+  font-weight: bold;
+}
+
+.confidenceBadgeLow {
+  background: var(--color-warning);
+  color: var(--text-primary);
+  padding: 2px 6px;
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-base);
+  font-weight: bold;
+}
+
+.detectionLocation {
+  margin: var(--spacing-sm) 0;
+  font-size: var(--font-sm);
+  color: var(--text-muted);
+}
+
+.detectionResolution {
+  margin: var(--spacing-sm) 0 0 0;
+  font-size: var(--font-base);
+  color: var(--color-primary);
+}
+
+.detectionDescription {
+  margin: var(--spacing-sm) 0 0 0;
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* JSON 데이터 상세보기 */
+.jsonDetails {
+  margin-top: var(--spacing-xl);
+}
+
+.jsonSummary {
+  cursor: pointer;
+  font-weight: bold;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+.jsonContent {
+  background: var(--bg-tertiary);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  font-size: var(--font-xs);
+  overflow: auto;
+  max-height: 200px;
+  font-family: monospace;
+  white-space: pre-wrap;
+  color: var(--text-secondary);
+}
+
+
+
+
+/* 모델별 오버레이 토글 버튼들 */
+.overlayControls {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.overlayToggleBtn {
+  flex: 1;
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: var(--font-sm);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius);
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.overlayToggleBtn:hover {
+  background: var(--bg-quaternary);
+}
+
+.overlayToggleBtn.active {
+  background: var(--color-success);
+  color: var(--text-inverse);
+  border-color: var(--color-success);
+}
+
+/* 분석 결과 항목 스타일 */
+.resultsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.resultItem {
+  background: var(--bg-tertiary);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-primary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.resultInfo {
+  flex: 1;
+}
+
+.resultHeader {
+  font-weight: bold;
+  font-size: var(--font-md);
+  margin-bottom: var(--spacing-xs);
+  display: flex;
+  justify-content: space-between;
+}
+
+.resultLabel {
+  color: var(--color-primary);
+}
+
+.resultConfidence {
+  color: var(--color-danger);
+}
+
+.resultDetails {
+  font-size: var(--font-xs);
+  color: var(--text-muted);
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.deleteResultBtn {
+  background: transparent;
+  border: none;
+  color: var(--color-danger);
+  font-size: var(--font-lg);
+  cursor: pointer;
+  transition: transform var(--transition-fast);
+}
+
+.deleteResultBtn:hover {
+  transform: scale(1.1);
+}
+
+
+
+
+
+/* 삭제 확인 모달 */
+.deleteModalOverlay {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background: rgba(0, 0, 0, 0.7) !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  z-index: 999999 !important;
+  pointer-events: auto !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+}
+
+.deleteModalContent {
+  background: #1e293b !important; /* 다크 테마 배경 */
+  padding: 30px !important;
+  border-radius: 12px !important;
+  max-width: 400px !important;
+  width: 90% !important;
+  text-align: center !important;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8) !important;
+  z-index: 999999 !important;
+  position: relative !important;
+  animation: modalSlideIn 0.3s ease !important;
+  border: 1px solid #374151 !important;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.deleteModalContent h3 {
+  margin: 0 0 15px 0 !important;
+  color: #ef4444 !important;
+  font-size: 20px !important;
+  font-weight: 600 !important;
+}
+
+.deleteModalContent p {
+  margin: 0 0 25px 0 !important;
+  color: #f1f5f9 !important;
+  font-size: 16px !important;
+  line-height: 1.5 !important;
+}
+
+.deleteModalButtons {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 15px !important;
+  margin: 0 !important;
+}
+
+.confirmBtn,
+.cancelBtn {
+  padding: 12px 24px !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  border-radius: 8px !important;
+  cursor: pointer !important;
+  border: none !important;
+  transition: all 0.2s ease !important;
+  min-width: 80px !important;
+  font-family: inherit !important;
+}
+
+.confirmBtn {
+  background: #ef4444 !important;
+  color: white !important;
+}
+
+.confirmBtn:hover {
+  background: #dc2626 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4) !important;
+}
+
+.cancelBtn {
+  background: #6b7280 !important;
+  color: white !important;
+}
+
+.cancelBtn:hover {
+  background: #4b5563 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(107, 114, 128, 0.4) !important;
+}

@@ -1,0 +1,107 @@
+{
+  "Name": "Medical Platform Orthanc",
+  "HttpPort": 8042,
+  "DicomPort": 4242,
+  "RemoteAccessAllowed": true,
+  "AuthenticationEnabled": false,
+  "SslEnabled": false,
+
+  "HttpHeaders": {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+    "Access-Control-Allow-Headers": "Origin, Content-Type, Accept, Authorization",
+    "Access-Control-Allow-Credentials": "true"
+  },
+
+  "StorageDirectory": "/var/lib/orthanc/db",
+  "IndexDirectory": "/var/lib/orthanc/db",
+
+  "LogLevel": "INFO",
+  "Verbosity": "verbose",
+
+  "Plugins": [
+    "/usr/local/share/orthanc/plugins",
+    "/scripts"
+  ],
+  "LoadPrivatePlugins": true,
+
+  "OrthancExplorer2": {
+    "Enable": true
+  },
+
+  "LuaScripts": [
+    "/etc/orthanc/lua-scripts/auto_analyze.lua"
+  ],
+  "ExecuteLuaEnabled": true,
+  "LuaVerbose": true,
+
+  "PythonScript": "/scripts/entry.py",
+  "PythonPath": ["/scripts"],
+  "PythonVerbose": true,
+
+  "DicomWeb": {
+    "Enable": true,
+    "Root": "/dicom-web/",
+    "EnableWado": true,
+    "WadoRoot": "/wado",
+    "EnableQido": true,
+    "EnableStow": true,
+    "EnableWadoRs": true,
+    "QidoSupportsIncludeField": true
+  },
+
+  "PostgreSQL": {
+    "EnableIndex": true,
+    "EnableStorage": true,
+    "Host": "orthanc-postgres",
+    "Port": 5432,
+    "Database": "orthanc",
+    "Username": "orthanc",
+    "Password": "orthanc",
+    "IndexConnectionsCount": 5
+  },
+
+  "UserMetadata": {
+    "AI_ANALYSIS": 1024,
+    "PROCESSING_STATUS": 1025,
+    "CONFIDENCE_SCORE": 1026
+  },
+
+  "ExtraMainDicomTags": {
+    "Instance": [
+      "Rows", "Columns", "ImageType", "SOPClassUID",
+      "PhotometricInterpretation", "PixelSpacing", "SliceThickness",
+      "WindowCenter", "WindowWidth"
+    ],
+    "Series": [
+      "SeriesType", "OperatorsName", "PerformedProcedureStepDescription",
+      "BodyPartExamined", "ViewPosition", "Laterality"
+    ],
+    "Study": ["TimezoneOffsetFromUTC"],
+    "Patient": []
+  },
+
+  "DicomModalities": {
+    "sample": ["SAMPLE_AET", "127.0.0.1", 11112]
+  },
+
+  "Worklists": {
+    "Enable": true,
+    "Database": "/var/lib/orthanc/worklists"
+  },
+
+  "GDCM": true,
+  "HttpTimeout": 60,
+  "DicomAssociationTimeout": 30,
+  "DicomScuTimeout": 30,
+  "StableAge": 60,
+  "StrictAetComparison": false,
+  "StorageCompression": false,
+  "MaximumStorageSize": 0,
+  "MaximumPatientCount": 0,
+  "OverwriteInstances": false,
+
+  "RegisteredUsers": {
+    "orthanc": "orthanc"
+  }
+}

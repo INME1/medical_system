@@ -1,0 +1,55 @@
+FROM python:3.9-slim
+
+# 시스템 패키지 설치 (GUI 라이브러리 추가)
+RUN apt-get update && apt-get install -y \
+    libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
+    libgomp1 \
+    libgl1-mesa-glx \
+    libfontconfig1 \
+    libxcb1 \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+    
+# 기본 Python 패키지 설치
+RUN pip install --no-cache-dir \
+    numpy \
+    pillow \
+    pydicom \
+    opencv-python-headless \
+    flask \
+    flask_cors \
+    requests \
+    ultralytics
+
+# PyTorch 패키지 설치 (CPU 버전)
+RUN pip install --no-cache-dir \
+    torch \
+    torchvision \
+    torchaudio \
+    --index-url https://download.pytorch.org/whl/cpu
+
+
+WORKDIR /app
+
+# Python 모듈 검색 경로에 현재 작업 디렉토리(/app)와 /models 추가
+# /app이 sys.path에 자동으로 추가되므로, /app/scripts는 scripts로 인식됩니다.
+ENV PYTHONPATH=/app:/models 
+
+# 파일 복사: scripts 폴더를 /app 안으로 복사
+# 이렇게 하면 'scripts' 폴더가 '/app/scripts' 경로에 위치하게 됩니다.
+COPY scripts/ ./scripts/ 
+COPY models/ /models/
+
+# 권한 설정 (scripts/entry.py가 실행 가능하도록)
+RUN chmod +x ./scripts/*.py 
+
+# AI 서비스 시작
+EXPOSE 5000
+
+# Flask 앱을 Gunicorn을 통해 실행합니다. (Shell form으로 변경)
+# Shell form은 명령어 전체를 하나의 문자열로 작성합니다.
+CMD ["python", "scripts/entry.py"]
+

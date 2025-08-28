@@ -1,0 +1,21 @@
+.home-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+}
+.home-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 16px;
+  padding: 16px;
+  height: calc(100vh - 64px);
+  box-sizing: border-box;
+}
+@media (max-width: 768px) {
+  .home-grid {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: repeat(4, auto) !important;
+  }
+}

@@ -1,0 +1,15 @@
+
+/* VariableImportanceChart.css */
+.variable-importance-chart {
+  margin-top: 2rem;
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.echart-container {
+  width: 100%;
+  height: 400px;
+  margin-top: 1rem;
+}

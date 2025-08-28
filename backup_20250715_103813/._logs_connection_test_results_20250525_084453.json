@@ -1,0 +1,82 @@
+{
+  "timestamp": "2025-05-25T08:41:27.613199",
+  "tests": {
+    "mariadb": {
+      "success": true,
+      "data": {
+        "databases": [
+          "information_schema",
+          "medical_platform",
+          "mysql",
+          "performance_schema",
+          "sys"
+        ],
+        "version": "10.11.13-MariaDB-ubu2204"
+      }
+    },
+    "openmrs_mysql": {
+      "success": false,
+      "data": {
+        "error": "2003 (HY000): Can't connect to MySQL server on '35.225.63.41:3307' (110)"
+      }
+    },
+    "orthanc_postgres": {
+      "success": true,
+      "data": {
+        "version": "PostgreSQL 14.18 (Debian 14.18-1.pgdg120+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit",
+        "resource_count": 0,
+        "patient_count": 0,
+        "tables": [
+          "globalproperties",
+          "resources",
+          "metadata",
+          "maindicomtags",
+          "attachedfiles",
+          "dicomidentifiers",
+          "changes",
+          "exportedresources",
+          "patientrecyclingorder",
+          "deletedfiles",
+          "remainingancestor",
+          "deletedresources",
+          "globalintegers",
+          "serverproperties",
+          "labels"
+        ]
+      }
+    },
+    "mongodb": {
+      "success": false,
+      "data": {
+        "error": "No servers found yet, Timeout: 5.0s, Topology Description: <TopologyDescription id: 6832d83c0f6deb9c22b19789, topology_type: Unknown, servers: [<ServerDescription ('35.225.63.41', 27017) server_type: Unknown, rtt: None>]>"
+      }
+    },
+    "orthanc_api": {
+      "success": true,
+      "data": {
+        "version": "1.12.0",
+        "patient_count": 0,
+        "sample_patient": null
+      }
+    },
+    "openmrs_api": {
+      "success": false,
+      "data": {
+        "error": "API 응답 코드: 404"
+      }
+    },
+    "data_integration": {
+      "success": true,
+      "data": {
+        "mapping_count": 0,
+        "sample_mappings": []
+      }
+    }
+  },
+  "summary": {
+    "successful_tests": 4,
+    "total_tests": 7,
+    "success_rate": 57.14285714285714,
+    "status": "Partial Success"
+  }
+}

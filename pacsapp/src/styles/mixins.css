@@ -1,0 +1,365 @@
+/* src/styles/mixins.css */
+@import './variables.css';
+
+/* OHIF 스타일 버튼 */
+.btn-base {
+  border: 1px solid var(--border-primary);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: var(--font-md);
+  font-weight: 500;
+  transition: all var(--transition-normal);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.btn-base:hover {
+  background: var(--bg-quaternary);
+  border-color: var(--border-secondary);
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: var(--text-primary);
+  border-color: var(--color-primary);
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+}
+
+.btn-success {
+  background: var(--color-success);
+  color: var(--text-primary);
+  border-color: var(--color-success);
+}
+
+.btn-success:hover {
+  background: var(--color-medical-green);
+  border-color: var(--color-medical-green);
+}
+
+.btn-danger {
+  background: var(--color-danger);
+  color: var(--text-primary);
+  border-color: var(--color-danger);
+}
+
+.btn-danger:hover {
+  background: #dc2626;
+  border-color: #dc2626;
+}
+
+.btn-warning {
+  background: var(--color-warning);
+  color: var(--text-inverse);
+  border-color: var(--color-warning);
+}
+
+.btn-warning:hover {
+  background: var(--color-medical-yellow);
+  border-color: var(--color-medical-yellow);
+}
+
+.btn-info {
+  background: var(--color-info);
+  color: var(--text-primary);
+  border-color: var(--color-info);
+}
+
+.btn-info:hover {
+  background: #0891b2;
+  border-color: #0891b2;
+}
+
+.btn-secondary {
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  border-color: var(--border-primary);
+}
+
+.btn-secondary:hover {
+  background: var(--bg-quaternary);
+  border-color: var(--border-secondary);
+  color: var(--text-primary);
+}
+
+.btn-purple {
+  background: var(--color-purple);
+  color: var(--text-primary);
+  border-color: var(--color-purple);
+}
+
+.btn-purple:hover {
+  background: #7c3aed;
+  border-color: #7c3aed;
+}
+
+/* 버튼 크기 */
+.btn-sm {
+  padding: 4px 8px;
+  font-size: var(--font-sm);
+}
+
+.btn-md {
+  padding: 8px 15px;
+  font-size: var(--font-md);
+}
+
+.btn-lg {
+  padding: 10px 20px;
+  font-size: var(--font-lg);
+}
+
+/* 비활성화 버튼 */
+.btn-disabled {
+  background: var(--color-secondary);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* 카드 스타일 (OHIF 다크 테마) */
+.card {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm);
+}
+
+.card-body {
+  padding: var(--spacing-lg);
+}
+
+.card-header {
+  padding: var(--spacing-lg);
+  border-bottom: 1px solid var(--border-primary);
+  font-weight: 600;
+  color: var(--text-primary);
+  background: var(--bg-secondary);
+}
+
+/* OHIF 스타일 모달 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-overlay);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: var(--z-modal);
+  backdrop-filter: blur(4px);
+}
+
+.modal-overlay-dark {
+  background: var(--bg-overlay-dark);
+}
+
+.modal-content {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-lg);
+  max-height: 90vh;
+  overflow: auto;
+  color: var(--text-primary);
+}
+
+.modal-content-sm {
+  padding: var(--spacing-xxl);
+  min-width: 320px;
+}
+
+.modal-content-lg {
+  padding: var(--spacing-xxxl);
+  width: 90%;
+  max-width: 900px;
+}
+
+/* OHIF 폼 요소 */
+.input-base {
+  width: 100%;
+  padding: var(--spacing-md);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius);
+  font-size: var(--font-md);
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  transition: border-color var(--transition-normal);
+}
+
+.input-base:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.input-base::placeholder {
+  color: var(--text-muted);
+}
+
+.textarea-base {
+  width: 100%;
+  padding: var(--spacing-lg);
+  border: 2px solid var(--border-primary);
+  border-radius: var(--border-radius-lg);
+  font-size: var(--font-md);
+  font-family: inherit;
+  resize: vertical;
+  min-height: 120px;
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  transition: border-color var(--transition-normal);
+}
+
+.textarea-base:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.textarea-base::placeholder {
+  color: var(--text-muted);
+}
+
+/* OHIF 드롭다운 */
+.dropdown-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-primary);
+  color: var(--text-primary);
+}
+
+.dropdown-toggle:hover {
+  background: var(--bg-quaternary);
+  border-color: var(--border-secondary);
+}
+
+.dropdown-content {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+  max-height: 200px;
+  overflow-y: auto;
+  margin-top: var(--spacing-sm);
+}
+
+.dropdown-content-lg {
+  max-height: 150px;
+}
+
+.dropdown-item {
+  padding: var(--spacing-lg);
+  border-bottom: 1px solid var(--border-primary);
+  font-size: var(--font-base);
+  cursor: pointer;
+  color: var(--text-primary);
+  transition: background-color var(--transition-fast);
+}
+
+.dropdown-item:hover {
+  background: var(--bg-tertiary);
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.dropdown-empty {
+  padding: var(--spacing-xl);
+  color: var(--text-muted);
+  text-align: center;
+  font-size: var(--font-base);
+  font-style: italic;
+}
+
+/* 상태 표시 */
+.status-success {
+  color: var(--color-success);
+}
+
+.status-danger {
+  color: var(--color-danger);
+}
+
+.status-warning {
+  color: var(--color-warning);
+}
+
+.status-info {
+  color: var(--color-info);
+}
+
+/* 유틸리티 클래스 */
+.flex {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.gap-sm {
+  gap: var(--spacing-sm);
+}
+
+.gap-md {
+  gap: var(--spacing-md);
+}
+
+.gap-lg {
+  gap: var(--spacing-lg);
+}
+
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
+.font-mono {
+  font-family: monospace;
+}
+
+/* 반응형 그리드 */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--spacing-sm);
+}

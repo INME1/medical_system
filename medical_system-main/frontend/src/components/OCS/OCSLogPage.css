@@ -1,0 +1,316 @@
+/* OCSLogPage.css */
+
+/* --- 컨테이너 및 전역 스타일 --- */
+.ocs-log-container {
+  max-width: 1400px;  /* (1) 콘텐츠의 최대 너비를 1400px로 제한 */
+  width: 100%;        /* (2) 화면이 작아지면 너비에 맞게 줄어듦 */
+  margin: 0 auto;     /* (3) 화면 중앙에 위치하도록 정렬 */
+  padding: 30px 40px; /* (4) 안쪽 여백을 좀 더 줍니다. */
+  background-color: #f8f9fa;
+}
+
+.ocs-log-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+}
+
+/* --- 필터 박스 --- */
+.ocs-filter-box {
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: flex-end;
+}
+
+.filter-group {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.filter-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.filter-item label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #495057;
+}
+
+.filter-item input[type="date"],
+.filter-item input[type="text"] {
+  padding: 8px 12px;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+  min-width: 180px;
+  transition: border-color 0.2s;
+}
+
+.filter-item input:focus {
+  outline: none;
+  border-color: #0066cc;
+  box-shadow: 0 0 0 2px rgba(0,102,204,0.2);
+}
+
+.filter-actions {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+}
+
+/* --- 테이블 --- */
+.ocs-table-container {
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  overflow: hidden; /* 테이블 모서리를 둥글게 하기 위함 */
+}
+
+.ocs-table-container h3 {
+  font-size: 16px;
+  padding: 15px 20px;
+  border-bottom: 1px solid #e9ecef;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ocs-log-table {
+  width: 100%;
+  border-collapse: collapse; /* 테이블 선 겹침 방지 */
+}
+
+.ocs-log-table th,
+.ocs-log-table td {
+  padding: 14px 20px;
+  text-align: left;
+  font-size: 13px;
+  border-bottom: 1px solid #f1f3f5;
+  vertical-align: middle;
+}
+
+.ocs-log-table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #495057;
+}
+
+.ocs-log-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.ocs-log-table tbody tr:hover {
+  background-color: #dde9fc; /* 밝은 파란색 강조 */
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.ocs-log-table tbody tr:hover td {
+  font-weight: 500;           /* 살짝 굵게 */
+  color: #1c4e80;             /* 텍스트 색도 부드럽게 파랑 계열 */
+}
+
+.id-cell {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 12px;
+  color: #6c757d;
+}
+
+.tests-cell {
+  white-space: pre-wrap; /* 줄바꿈 유지 */
+  max-width: 300px;
+}
+
+.message-cell {
+  text-align: center;
+  padding: 40px;
+  color: #868e96;
+}
+
+.message-cell.error {
+  color: #dc3545;
+}
+
+/* --- 상태 배지 --- */
+.status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-badge.status-created {
+  background-color: #e3f2fd;
+  color: #0d47a1;
+}
+
+.status-badge.status-requested {
+  background-color: #fff3e0;
+  color: #e65100;
+}
+
+.status-badge.status-completed {
+  background-color: #e8f5e9;
+  color: #1b5e20;
+}
+
+/* --- 페이지네이션 --- */
+.ocs-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 25px 0;
+  gap: 15px;
+  font-size: 14px;
+}
+
+.ocs-pagination button {
+  padding: 8px 16px;
+  border: 1px solid #dee2e6;
+  background: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.ocs-pagination button:hover:not(:disabled) {
+  background: #f8f9fa;
+  border-color: #adb5bd;
+}
+
+.ocs-pagination button:disabled {
+  color: #adb5bd;
+  cursor: not-allowed;
+}
+
+/* --- 공용 버튼 스타일 (필터에서도 사용) --- */
+.btn-primary, .btn-secondary {
+  padding: 9px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+}
+
+.btn-primary {
+  background: #0066cc;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #0052a3;
+}
+
+.btn-secondary {
+  background: #f1f5f9;
+  color: #64748b;
+  border-color: #e2e8f0;
+}
+
+.btn-secondary:hover {
+  background: #e2e8f0;
+}
+
+
+/* --- 푸터 --- */
+.ocs-footer {
+  text-align: center;
+  margin-top: 40px; /* 위쪽 콘텐츠와의 간격 */
+  padding-top: 20px;
+  border-top: 1px solid #e9ecef; /* 구분선 */
+}
+
+.ocs-footer p {
+  font-size: 12px;
+  color: #868e96; /* 옅은 회색 글자 */
+  line-height: 1.5;
+}
+
+.ocs-footer a {
+  color: #6c757d; /* 링크 색상 */
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.ocs-footer a:hover {
+  color: #333;
+  text-decoration: underline; /* 마우스를 올리면 밑줄 */
+}
+
+/* back-button */
+.back-button {
+  position: fixed;
+  top: 50%;
+  left: 40px;
+  transform: translateY(-50%);
+  z-index: 100;
+  background-color: #e3f2fd;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.back-button:hover {
+  background-color: #006ce0;
+  transform: translateY(-50%) scale(1.05);
+}
+
+/* 상단 탭 */
+.ocs-tab-nav {
+  display: flex;
+  background-color: #ffffff;
+  padding: 12px 20px;
+  border-bottom: 1px solid #dee2e6;
+  position: sticky;
+  top: 0;
+  z-index: 900;
+}
+
+.tab-button {
+  background: none;
+  border: none;
+  font-size: 14px;
+  color: #495057;
+  margin-right: 20px;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.tab-button:hover {
+  color: #007bff;
+}
+
+.tab-button.active {
+  color: #013872;
+  font-weight: bold;
+  border-bottom: 10px solid #ececec;
+}

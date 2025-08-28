@@ -1,0 +1,31 @@
+/* src/components/home/CurrentWaitTime.css */
+
+.current-waittime {
+  /* 카드 패딩을 조금 줄여서 헤더가 더 위로 올라오게 */
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.cwt-title {
+  /* 기존 margin-bottom 대신 margin만 조정 */
+  margin: 0.5rem 0 0.25rem;
+  font-size: 1.2rem;       /* 키운 헤더 폰트 */
+  font-weight: 600;
+  color: #3f51b5;           /* 강조를 위해 블루 계열 사용 */
+  text-align: center;
+}
+
+.cwt-value {
+  /* 숫자 부분 강조 */
+  font-size: 2rem;
+  font-weight: bold;
+  color: #1e3a8a;
+  text-align: center;
+  margin-top: 0.5rem;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

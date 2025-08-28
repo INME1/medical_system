@@ -1,0 +1,8 @@
+.weekly-abnormal-chart {
+  margin-top: 30px;
+}
+
+.weekly-abnormal-chart .echart-container {
+  width: 100%;
+  height: 400px;
+}

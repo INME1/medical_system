@@ -1,0 +1,272 @@
+/* src/components/OHIFViewer/AnnotationTools/AnnotationTools.module.css */
+@import '../../../styles/variables.css';
+
+.annotationSection {
+  margin-bottom: var(--spacing-xl);
+}
+
+.sectionHeader {
+  margin-bottom: var(--spacing-lg);
+  color: var(--text-primary);
+  font-size: var(--font-lg);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+/* 그리기 모드 토글 버튼 */
+.drawingToggleButton {
+  width: 100%;
+  margin-bottom: var(--spacing-md);
+  font-size: var(--font-md);
+  font-weight: bold;
+  border: 1px solid;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+}
+
+.drawingToggleButton.active {
+  background: var(--color-danger);
+  color: var(--text-primary);
+  border-color: var(--color-danger);
+}
+
+.drawingToggleButton.active:hover {
+  background: #dc2626;
+  border-color: #dc2626;
+}
+
+.drawingToggleButton.inactive {
+  background: var(--color-success);
+  color: var(--text-primary);
+  border-color: var(--color-success);
+}
+
+.drawingToggleButton.inactive:hover {
+  background: var(--color-medical-green);
+  border-color: var(--color-medical-green);
+}
+
+/* 저장/불러오기 버튼들 */
+.actionButtons {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+.actionButton {
+  flex: 1;
+  border: 1px solid var(--border-primary);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: var(--font-sm);
+  font-weight: 500;
+  transition: all var(--transition-normal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.actionButton:hover:not(:disabled) {
+  background: var(--bg-quaternary);
+  border-color: var(--border-secondary);
+}
+
+.actionButton:disabled {
+  background: var(--color-secondary);
+  border-color: var(--color-secondary);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.saveButton {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.saveButton:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+}
+
+.loadButton {
+  background: var(--color-success);
+  border-color: var(--color-success);
+}
+
+.loadButton:hover {
+  background: var(--color-medical-green);
+  border-color: var(--color-medical-green);
+}
+
+/* 드롭다운 */
+.dropdownContainer {
+  margin-bottom: var(--spacing-md);
+}
+
+.dropdownToggle {
+  width: 100%;
+  background: var(--color-info);
+  border: 1px solid var(--color-info);
+  color: var(--text-primary);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: var(--font-sm);
+  transition: all var(--transition-normal);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dropdownToggle:hover {
+  background: #0891b2;
+  border-color: #0891b2;
+}
+
+.dropdownContent {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+  max-height: 200px;
+  overflow-y: auto;
+  margin-top: var(--spacing-sm);
+}
+
+.dropdownItem {
+  padding: var(--spacing-lg);
+  border-bottom: 1px solid var(--border-primary);
+  font-size: var(--font-base);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  transition: background-color var(--transition-fast);
+}
+
+.dropdownItem:hover {
+  background: var(--bg-tertiary);
+}
+
+.dropdownItem:last-child {
+  border-bottom: none;
+}
+
+.itemContent {
+  flex: 1;
+}
+
+.itemLabel {
+  font-weight: bold;
+  color: var(--color-danger);
+  font-size: var(--font-md);
+  margin-bottom: var(--spacing-xs);
+}
+
+.itemLocation {
+  color: var(--text-muted);
+  font-size: var(--font-xs);
+  font-family: monospace;
+  background: var(--bg-tertiary);
+  padding: 2px 4px;
+  border-radius: 2px;
+  margin-bottom: var(--spacing-xs);
+}
+
+.itemDoctor {
+  color: var(--color-primary);
+  font-size: var(--font-xs);
+  font-weight: 500;
+  margin-bottom: var(--spacing-xs);
+}
+
+.itemTime {
+  color: var(--text-muted);
+  font-size: var(--font-xs);
+}
+
+.itemDeleteButton {
+  background: var(--color-danger);
+  color: var(--text-primary);
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: var(--font-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: var(--spacing-md);
+  transition: all var(--transition-fast);
+}
+
+.itemDeleteButton:hover {
+  background: #dc2626;
+  transform: scale(1.1);
+}
+
+.dropdownEmpty {
+  padding: var(--spacing-xl);
+  color: var(--text-muted);
+  text-align: center;
+  font-size: var(--font-base);
+  font-style: italic;
+}
+
+/* 표시/숨김 토글 버튼 */
+.visibilityToggle {
+  width: 100%;
+  margin-bottom: var(--spacing-md);
+  font-size: var(--font-sm);
+  border: 1px solid var(--border-primary);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+}
+
+.visibilityToggle.visible {
+  background: var(--color-danger);
+  color: var(--text-primary);
+  border-color: var(--color-danger);
+}
+
+.visibilityToggle.visible:hover {
+  background: #dc2626;
+  border-color: #dc2626;
+}
+
+.visibilityToggle.hidden {
+  background: var(--color-info);
+  color: var(--text-primary);
+  border-color: var(--color-info);
+}
+
+.visibilityToggle.hidden:hover {
+  background: #0891b2;
+  border-color: #0891b2;
+}
+
+/* 상태 표시 */
+.statusInfo {
+  font-size: var(--font-base);
+  color: var(--text-muted);
+  margin-top: var(--spacing-sm);
+  text-align: center;
+}

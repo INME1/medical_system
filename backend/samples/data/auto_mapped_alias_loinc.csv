@@ -1,0 +1,6 @@
+sample_type,alias_name,test_type,loinc_code,component,loinc_name
+혈액,pneumonia,CRP,1988-5,C-reactive protein,C-reactive protein [Mass/volume] in Serum
+혈액,chf,NT-proBNP,33762-6,N-terminal pro-BNP,N-terminal pro-BNP [Mass/volume] in Serum
+혈액,pe,D-Dimer,48065-7,D-Dimer,D-Dimer [Units/volume] in Platelet poor plasma
+혈액,copd,pCO2,2019-8,pCO2,pCO2 [Partial pressure] in Arterial blood
+혈액,asthma,CBC,57021-8,Complete blood count panel,CBC panel with differential in Blood

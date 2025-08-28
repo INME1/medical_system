@@ -1,0 +1,808 @@
+/* src/components/EMR/EmrMainPage.css - 깔끔한 의료 전문가용 UI */
+
+/* ============================================================================
+   전역 설정 및 CSS 변수 - 의료 전문가용 깔끔한 컬러 팔레트
+============================================================================ */
+
+:root {
+  /* 🎨 의료 전문가용 깔끔한 컬러 팔레트 */
+  --primary-purple: #7c3aed;
+  --primary-purple-light: #a855f7;
+  --primary-purple-dark: #6d28d9;
+  
+  /* 🌈 배경 컬러 - 화이트스모크 기반 */
+  --background-primary: #f5f5f5;  /* 화이트스모크 */
+  --background-secondary: #fafafa;
+  --background-card: #ffffff;     /* 순백색 카드 */
+  
+  /* 🎯 중성 컬러 - 화이트 톤 */
+  --white: #ffffff;
+  --white-smoke: #f5f5f5;
+  --light-gray: #f8f9fa;
+  --border-gray: #e9ecef;
+  --text-light: #f8f9fa;
+  --text-primary: #ffffff;
+  --text-secondary: #e9ecef;
+  --text-muted: #adb5bd;
+  --text-dark: #343a40;
+  --text-medium: #6c757d;
+  
+  /* 📏 간격 및 크기 */
+  --border-radius: 12px;
+  --border-radius-sm: 6px;
+  --border-radius-lg: 16px;
+  --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-elevated: 0 8px 24px rgba(0, 0, 0, 0.12);
+  
+  /* 🚀 애니메이션 */
+  --transition-fast: all 0.15s ease;
+  --transition-base: all 0.2s ease;
+  --transition-slow: all 0.3s ease;
+}
+
+/* ============================================================================
+   기본 리셋 및 전체 레이아웃
+============================================================================ */
+
+html, body, #root, .App {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', 'Malgun Gothic', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+.emr-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: var(--background-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ============================================================================
+   🎨 깔끔한 헤더 - 보라색 포인트
+============================================================================ */
+
+.emr-header {
+  height: 70px;
+  background: var(--primary-purple);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-elevated);
+  z-index: 1000;
+  position: relative;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-base);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  letter-spacing: -0.5px;
+}
+
+.logo:hover {
+  transform: scale(1.02);
+  opacity: 0.9;
+}
+
+/* ============================================================================
+   🔧 메인 컨텐츠 영역
+============================================================================ */
+
+.emr-content {
+  display: flex;
+  flex: 1;
+  height: calc(100vh - 70px);
+  overflow: hidden;
+}
+
+/* ============================================================================
+   🎯 깔끔한 사이드바
+============================================================================ */
+
+.sidebar-col {
+  flex: 0 0 280px;
+  width: 280px;
+  background: var(--background-card);
+  border-right: 1px solid var(--border-gray);
+  overflow-y: auto;
+  box-shadow: var(--shadow-card);
+  position: relative;
+  padding: 2rem 1.5rem;
+  transition: var(--transition-slow);
+}
+
+.sidebar-col::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-col::-webkit-scrollbar-track {
+  background: var(--light-gray);
+  border-radius: 3px;
+}
+
+.sidebar-col::-webkit-scrollbar-thumb {
+  background: var(--border-gray);
+  border-radius: 3px;
+  transition: var(--transition-base);
+}
+
+.sidebar-col::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-purple-light);
+}
+
+/* ============================================================================
+   📱 콘텐츠 컬럼
+============================================================================ */
+
+.content-col {
+  flex: 1;
+  overflow-y: auto;
+  background: transparent;
+  position: relative;
+}
+
+.content-col::-webkit-scrollbar {
+  width: 8px;
+}
+
+.content-col::-webkit-scrollbar-track {
+  background: var(--light-gray);
+}
+
+.content-col::-webkit-scrollbar-thumb {
+  background: var(--border-gray);
+  border-radius: 4px;
+}
+
+/* ============================================================================
+   🏠 홈 대시보드 그리드 레이아웃 - 깔끔한 의료용
+============================================================================ */
+
+.doctor-dashboard-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    "calendar stats waittime"
+    "schedule urgent summary";
+  gap: 2rem;
+  height: calc(100vh - 70px);
+  padding: 2.5rem;
+  box-sizing: border-box;
+  background: var(--background-primary);
+}
+
+/* ============================================================================
+   🎨 깔끔한 대시보드 카드 - 의료 전문가용
+============================================================================ */
+
+.dashboard-card {
+  background: var(--background-card);
+  border: 1px solid var(--border-gray);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+  position: relative;
+  transition: var(--transition-slow);
+}
+
+.dashboard-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-elevated);
+  border-color: var(--primary-purple-light);
+}
+
+/* 🎯 카드별 보라색 포인트 - 깔끔한 스타일 */
+.card--calendar {
+  grid-area: calendar;
+  border-top: 3px solid var(--primary-purple);
+}
+
+.card--stats {
+  grid-area: stats;
+  border-top: 3px solid var(--primary-purple-light);
+}
+
+.card--waittime {
+  grid-area: waittime;
+  border-top: 3px solid var(--primary-purple-dark);
+}
+
+.card--schedule {
+  grid-area: schedule;
+  border-top: 3px solid var(--primary-purple);
+}
+
+.card--urgent {
+  grid-area: urgent;
+  border-top: 3px solid #dc2626;
+}
+
+.card--summary {
+  grid-area: summary;
+  border-top: 3px solid var(--primary-purple-light);
+}
+
+/* ============================================================================
+   📅 캘린더 스타일 개선 - 깔끔한 의료용
+============================================================================ */
+
+.react-calendar {
+  width: 100% !important;
+  background: transparent !important;
+  border: none !important;
+  font-family: inherit !important;
+  color: var(--text-dark) !important;
+}
+
+.react-calendar__navigation {
+  display: flex !important;
+  height: 48px !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.react-calendar__navigation button {
+  background: var(--primary-purple) !important;
+  border: none !important;
+  border-radius: var(--border-radius) !important;
+  color: var(--text-primary) !important;
+  font-weight: 600 !important;
+  transition: var(--transition-base) !important;
+  margin: 0 4px !important;
+  font-size: 16px !important;
+}
+
+.react-calendar__navigation button:hover {
+  background: var(--primary-purple-dark) !important;
+  transform: scale(1.02) !important;
+}
+
+.react-calendar__tile {
+  background: none !important;
+  border: none !important;
+  border-radius: var(--border-radius-sm) !important;
+  padding: 14px 8px !important;
+  transition: var(--transition-base) !important;
+  position: relative !important;
+  font-size: 16px !important;
+  color: var(--text-dark) !important;
+}
+
+.react-calendar__tile:hover {
+  background: var(--primary-purple-light) !important;
+  color: var(--text-primary) !important;
+  transform: scale(1.05) !important;
+}
+
+.react-calendar__tile--active {
+  background: var(--primary-purple) !important;
+  color: var(--text-primary) !important;
+  transform: scale(1.02) !important;
+  box-shadow: var(--shadow-card) !important;
+}
+
+.react-calendar__tile--now {
+  background: var(--light-gray) !important;
+  font-weight: 700 !important;
+  color: var(--primary-purple) !important;
+  border: 2px solid var(--primary-purple-light) !important;
+}
+
+/* ============================================================================
+   🚀 페이지 컨테이너들
+============================================================================ */
+
+.page-container-full {
+  width: 100%;
+  height: 100%;
+  padding: 2.5rem;
+  box-sizing: border-box;
+  overflow-y: auto;
+  background: var(--background-primary);
+}
+
+/* ============================================================================
+   🎨 섹션 타이틀 스타일 - 깔끔한 의료용
+============================================================================ */
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  position: relative;
+  letter-spacing: -0.5px;
+}
+
+.section-title::after {
+  content: '';
+  flex: 1;
+  height: 2px;
+  background: var(--primary-purple);
+  margin-left: 1.5rem;
+  border-radius: 1px;
+  opacity: 0.3;
+}
+
+/* ============================================================================
+   🔔 상태 표시 알림 - 화이트 톤
+============================================================================ */
+
+.status-indicator {
+  position: absolute;
+  top: 50%;
+  right: 2rem;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--border-radius-lg);
+  font-size: 0.9rem;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+  transition: var(--transition-base);
+  letter-spacing: -0.3px;
+  background: var(--background-card);
+  border: 1px solid var(--border-gray);
+  color: var(--text-dark);
+}
+
+.status-indicator.warning {
+  border-color: #f59e0b;
+  color: #f59e0b;
+}
+
+.status-indicator.error {
+  border-color: #dc2626;
+  color: #dc2626;
+}
+
+/* ============================================================================
+   🎯 버튼 스타일 개선 - 깔끔한 의료용
+============================================================================ */
+
+.btn-modern {
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: var(--border-radius-lg);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transition-base);
+  position: relative;
+  overflow: hidden;
+  letter-spacing: -0.3px;
+}
+
+.btn-primary {
+  background: var(--primary-purple);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-card);
+}
+
+.btn-primary:hover {
+  background: var(--primary-purple-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-elevated);
+}
+
+.btn-secondary {
+  background: var(--background-card);
+  color: var(--text-dark);
+  border: 1px solid var(--border-gray);
+}
+
+.btn-secondary:hover {
+  background: var(--light-gray);
+  transform: translateY(-1px);
+  border-color: var(--primary-purple-light);
+}
+
+/* ============================================================================
+   📊 카드 헤더 스타일링 - 깔끔한 의료용
+============================================================================ */
+
+.card-header {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  letter-spacing: -0.5px;
+  border-bottom: 1px solid var(--border-gray);
+  padding-bottom: 1rem;
+}
+
+.card-header .icon {
+  width: 24px;
+  height: 24px;
+  color: var(--primary-purple);
+}
+
+/* ============================================================================
+   📈 통계 카드 스타일
+============================================================================ */
+
+.stats-card {
+  background: var(--background-card);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-gray);
+  transition: var(--transition-base);
+}
+
+.stats-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-elevated);
+  border-color: var(--primary-purple-light);
+}
+
+.stats-value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--primary-purple);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.stats-label {
+  font-size: 1rem;
+  color: var(--text-medium);
+  font-weight: 500;
+  letter-spacing: -0.3px;
+}
+
+.status-indicator.warning {
+  background: rgba(249, 115, 22, 0.9);
+  color: var(--white);
+  box-shadow: var(--shadow-md);
+}
+
+.status-indicator.error {
+  background: rgba(239, 68, 68, 0.9);
+  color: var(--white);
+  box-shadow: var(--shadow-md);
+}
+
+/* ============================================================================
+   🎯 버튼 스타일 개선 - 한국 의료 시스템 친화적
+============================================================================ */
+
+.btn-modern {
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: var(--border-radius-lg);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transition-base);
+  position: relative;
+  overflow: hidden;
+  text-transform: none;
+  letter-spacing: -0.3px;
+}
+
+.btn-modern::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: var(--transition-slow);
+}
+
+.btn-modern:hover::before {
+  left: 100%;
+}
+
+.btn-primary {
+  background: var(--gradient-primary);
+  color: var(--white);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-secondary {
+  background: var(--gray-100);
+  color: var(--gray-700);
+  border: 1px solid var(--gray-300);
+}
+
+.btn-secondary:hover {
+  background: var(--gray-200);
+  transform: translateY(-1px);
+}
+
+/* ============================================================================
+   📊 카드 헤더 스타일링 - 이미지 기반
+============================================================================ */
+
+.card-header {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--gray-800);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  letter-spacing: -0.5px;
+  border-bottom: 2px solid var(--gray-100);
+  padding-bottom: 1rem;
+}
+
+.card-header .icon {
+  width: 24px;
+  height: 24px;
+  color: var(--primary-purple);
+}
+
+/* ============================================================================
+   📈 통계 카드 스타일
+============================================================================ */
+
+.stats-card {
+  background: var(--white);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--gray-200);
+  transition: var(--transition-base);
+}
+
+.stats-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.stats-value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--primary-purple);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.stats-label {
+  font-size: 1rem;
+  color: var(--gray-600);
+  font-weight: 500;
+  letter-spacing: -0.3px;
+}
+
+/* ============================================================================
+   📱 반응형 디자인 - 한국 모바일 환경 최적화
+============================================================================ */
+
+@media (max-width: 1400px) {
+  .doctor-dashboard-container {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "calendar stats"
+      "waittime urgent"
+      "schedule summary";
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 1.5rem;
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .sidebar-col {
+    flex: 0 0 240px;
+    width: 240px;
+    padding: 1.5rem 1rem;
+  }
+  
+  .doctor-dashboard-container {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "calendar"
+      "stats"
+      "waittime"
+      "urgent"
+      "schedule"
+      "summary";
+    grid-template-rows: repeat(6, auto);
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+  
+  .dashboard-card {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar-col {
+    flex: 0 0 60px;
+    width: 60px;
+    padding: 1rem 0.5rem;
+  }
+  
+  .doctor-dashboard-container {
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .dashboard-card {
+    padding: 1.5rem;
+  }
+  
+  .emr-header {
+    height: 60px;
+  }
+  
+  .logo {
+    font-size: 20px;
+  }
+
+  .card-header {
+    font-size: 1.1rem;
+  }
+
+  .section-title {
+    font-size: 1.25rem;
+  }
+}
+
+/* ============================================================================
+   ✨ 애니메이션 효과 - 한국 UI 트렌드 반영
+============================================================================ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.dashboard-card {
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.card--calendar { animation-delay: 0.1s; }
+.card--stats { animation-delay: 0.2s; }
+.card--waittime { animation-delay: 0.3s; }
+.card--schedule { animation-delay: 0.4s; }
+.card--urgent { animation-delay: 0.5s; }
+.card--summary { animation-delay: 0.6s; }
+
+/* ============================================================================
+   🌟 글로우 효과 - 의료 장비 느낌
+============================================================================ */
+
+.glow-effect {
+  position: relative;
+}
+
+.glow-effect::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: var(--gradient-primary);
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+  transition: var(--transition-base);
+}
+
+.glow-effect:hover::after {
+  opacity: 0.7;
+  filter: blur(12px);
+}
+
+/* ============================================================================
+   🏥 의료 시스템 특화 스타일
+============================================================================ */
+
+.medical-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius-lg);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+}
+
+.medical-badge.urgent {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.medical-badge.normal {
+  background: rgba(34, 197, 94, 0.1);
+  color: #16a34a;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.medical-badge.pending {
+  background: rgba(249, 115, 22, 0.1);
+  color: #ea580c;
+  border: 1px solid rgba(249, 115, 22, 0.2);
+}
+
+/* ============================================================================
+   📋 한국 의료진 친화적 폰트 및 간격 조정
+============================================================================ */
+
+.korean-text {
+  line-height: 1.6;
+  letter-spacing: -0.3px;
+  word-break: keep-all;
+}
+
+.medical-info {
+  background: var(--gray-50);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  border-left: 4px solid var(--primary-purple);
+  margin: 1rem 0;
+}
+
+.medical-info h4 {
+  color: var(--gray-800);
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+  letter-spacing: -0.3px;
+}
+
+.medical-info p {
+  color: var(--gray-600);
+  margin: 0.5rem 0;
+  line-height: 1.6;
+  letter-spacing: -0.2px;
+}
+

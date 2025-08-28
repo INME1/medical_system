@@ -1,0 +1,434 @@
+/* Schedule Panel */
+.schedule-panel {
+  background: white;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Schedule Header */
+.schedule-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid #e2e8f0;
+  background: #f8fafc;
+  flex-shrink: 0;
+}
+
+.schedule-info h2 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.25rem;
+  color: #1e293b;
+}
+
+.schedule-info p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.radiologist-legend {
+  margin-top: 1rem;
+}
+
+.radiologist-legend h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  color: #374151;
+}
+
+.legend-items {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.legend-color {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 0.25rem;
+}
+
+.radiologist-blue { background: #3b82f6; }
+.radiologist-green { background: #10b981; }
+.radiologist-purple { background: #8b5cf6; }
+.radiologist-orange { background: #f59e0b; }
+
+/* Schedule Table */
+.schedule-table-container {
+  flex: 1;
+  overflow: auto;
+}
+
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.schedule-table th {
+  background: #f8fafc;
+  padding: 0.75rem 0.5rem;
+  text-align: center;
+  font-weight: 600;
+  color: #374151;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 0.75rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.time-header {
+  width: 80px;
+}
+
+.room-type {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.time-cell {
+  background: #f8fafc;
+  padding: 0.75rem;
+  text-align: center;
+  font-weight: 600;
+  color: #374151;
+  border-right: 1px solid #e5e7eb;
+  width: 80px;
+}
+
+.room-cell {
+  padding: 0.5rem;
+  border-right: 1px solid #e5e7eb;
+  border-bottom: 1px solid #f3f4f6;
+  position: relative;
+  vertical-align: top;
+}
+
+.exam-container {
+  position: relative;
+  height: 100%;
+}
+
+/* Drop Zone */
+.drop-zone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  border: 2px dashed #d1d5db;
+  border-radius: 0.25rem;
+  color: #9ca3af;
+  font-size: 0.75rem;
+  transition: all 0.2s;
+}
+
+.drop-zone:hover {
+  border-color: #3b82f6;
+  background: #f0f9ff;
+  color: #3b82f6;
+}
+
+/* Exam Card */
+.exam-card {
+  position: absolute;
+  left: 10;
+  right: 10;
+  background: white;
+  border-radius: 0.375rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid;
+  overflow: hidden;
+  z-index: 1;
+  transition: box-shadow 0.2s;
+}
+
+.exam-card:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.exam-card.radiologist-blue { border-left-color: #3b82f6; }
+.exam-card.radiologist-green { border-left-color: #10b981; }
+.exam-card.radiologist-purple { border-left-color: #8b5cf6; }
+.exam-card.radiologist-orange { border-left-color: #f59e0b; }
+
+.exam-card-content {
+  padding: 0.5rem;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.exam-info {
+  flex: 1;
+  min-width: 0;
+}
+
+/* 🔧 환자명 + 검사 정보 한 줄로 (크기 조정) */
+.exam-patient-name {
+  font-weight: 600;
+  color: #1e293b;
+  font-size: 0.8rem;      /* 🔧 한 줄로 표시하기 위해 약간 작게 */
+  margin-bottom: 0.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.exam-type {
+  color: #6b7280;
+  font-size: 0.75rem;
+  margin-bottom: 0.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.exam-time {
+  color: #3b82f6;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.exam-doctor {
+  color: #374151;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 🔥 검사 액션 영역 너비 축소 */
+.exam-actions {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-end !important;
+  gap: 0.25rem !important;
+  flex-shrink: 0 !important;
+  min-width: 50px !important; /* 🔥 70px → 50px로 축소 */
+}
+
+/* 🔥 X 취소 버튼 */
+.exam-card .exam-cancel-btn {
+  position: absolute !important;
+  top: -6px !important; /* 🔥 -8px → -6px */
+  right: -6px !important; /* 🔥 -8px → -6px */
+  width: 18px !important; /* 🔥 20px → 18px */
+  height: 18px !important; /* 🔥 20px → 18px */
+  border: none !important;
+  background: rgba(239, 68, 68, 0.9) !important;
+  color: white !important;
+  border-radius: 50% !important;
+  font-size: 12px !important; /* 🔥 14px → 12px */
+  font-weight: bold !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+  z-index: 10 !important;
+  transition: all 0.2s ease !important;
+}
+
+.exam-card .exam-cancel-btn:hover {
+  background: #dc2626 !important;
+  transform: scale(1.1) !important;
+}
+
+/* 🔥 클릭 가능한 상태 버튼 - 너비 축소 */
+.exam-card .exam-status-clickable {
+  font-size: 0.65rem !important; /* 🔥 0.75rem → 0.65rem */
+  padding: 0.2rem 0.3rem !important; /* 🔥 패딩 축소 */
+  border: none !important;
+  border-radius: 0.25rem !important;
+  font-weight: 500 !important;
+  white-space: nowrap !important;
+  text-align: center !important;
+  min-width: 45px !important; /* 🔥 60px → 45px */
+  max-width: 45px !important; /* 🔥 60px → 45px */
+  width: 45px !important; /* 🔥 60px → 45px */
+  height: 22px !important; /* 🔥 24px → 22px */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  margin-bottom: 0.25rem !important;
+}
+
+.exam-card .exam-status-clickable:disabled {
+  cursor: default !important;
+  opacity: 0.7 !important;
+}
+
+.exam-card .exam-status-clickable:hover:not(:disabled) {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+.exam-card .exam-status-clickable.status-검사대기 {
+  background: #dbeafe !important;
+  color: #2563eb !important;
+}
+
+.exam-card .exam-status-clickable.status-검사중 {
+  background: #dcfce7 !important;
+  color: #16a34a !important;
+}
+
+.exam-card .exam-status-clickable.status-검사완료 {
+  background: #f3e8ff !important;
+  color: #9333ea !important;
+}
+
+/* 🔧 상태 배지 크기 축소 */
+.exam-status-small {
+  font-size: 0.65rem; /* 🔥 0.75rem → 0.65rem */
+  padding: 0.2rem 0.3rem; /* 🔥 패딩 축소 */
+  border-radius: 0.25rem;
+  font-weight: 500;
+  white-space: nowrap;
+  text-align: center;
+  min-width: 45px; /* 🔥 60px → 45px */
+  max-width: 45px; /* 🔥 60px → 45px */
+  box-sizing: border-box;
+  height: 22px; /* 🔥 24px → 22px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.exam-status-small.exam-status-검사대기 { background: #dbeafe; color: #2563eb; }
+.exam-status-small.exam-status-검사중 { background: #dcfce7; color: #16a34a; }
+.exam-status-small.exam-status-완료 { background: #f3e8ff; color: #9333ea; }
+
+/* 기존 exam-status-badge 클래스도 축소 */
+.exam-status-badge {
+  font-size: 0.65rem; /* 🔥 0.75rem → 0.65rem */
+  padding: 0.2rem 0.3rem; /* 🔥 패딩 축소 */
+  border-radius: 0.25rem;
+  font-weight: 500;
+  white-space: nowrap;
+  text-align: center;
+  min-width: 45px; /* 🔥 60px → 45px */
+  box-sizing: border-box;
+}
+
+.exam-status-badge.exam-status-검사대기 { background: #dbeafe; color: #2563eb; }
+.exam-status-badge.exam-status-검사중 { background: #dcfce7; color: #16a34a; }
+.exam-status-badge.exam-status-완료 { background: #f3e8ff; color: #9333ea; }
+
+/* 🔧 액션 버튼 크기 축소 */
+.action-btn {
+  font-size: 0.65rem; /* 🔥 0.75rem → 0.65rem */
+  padding: 0.2rem 0.3rem; /* 🔥 패딩 축소 */
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+  min-width: 45px; /* 🔥 60px → 45px */
+  max-width: 45px; /* 🔥 60px → 45px */
+  text-align: center;
+  box-sizing: border-box;
+  height: 22px; /* 🔥 24px → 22px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-btn:hover {
+  opacity: 0.8;
+}
+
+.start-btn {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.complete-btn {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.cancel-btn {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+/* 반응형 */
+@media (max-width: 1200px) {
+  .legend-items {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .exam-card-content {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  
+  .exam-actions {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    min-width: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .schedule-table {
+    font-size: 0.75rem;
+  }
+  
+  .schedule-table th,
+  .time-cell {
+    padding: 0.5rem 0.25rem;
+  }
+  
+  .room-cell {
+    padding: 0.25rem;
+  }
+  
+  .exam-card-content {
+    padding: 0.375rem;
+  }
+  
+  .action-btn {
+    font-size: 0.6rem; /* 🔥 0.625rem → 0.6rem */
+    padding: 0.15rem 0.2rem; /* 🔥 더 축소 */
+    min-width: 40px; /* 🔥 50px → 40px */
+  }
+  
+  .exam-status-small,
+  .exam-status-badge {
+    font-size: 0.6rem; /* 🔥 0.625rem → 0.6rem */
+    min-width: 40px; /* 🔥 50px → 40px */
+  }
+
+  /* 모바일에서 새로운 버튼들도 더 축소 */
+  .exam-card .exam-status-clickable {
+    font-size: 0.6rem !important; /* 🔥 0.625rem → 0.6rem */
+    min-width: 40px !important; /* 🔥 50px → 40px */
+    max-width: 40px !important; /* 🔥 50px → 40px */
+    width: 40px !important; /* 🔥 50px → 40px */
+    height: 20px !important; /* 🔥 높이도 축소 */
+  }
+
+  .exam-card .exam-cancel-btn {
+    width: 16px !important; /* 🔥 18px → 16px */
+    height: 16px !important; /* 🔥 18px → 16px */
+    font-size: 10px !important; /* 🔥 12px → 10px */
+  }
+}

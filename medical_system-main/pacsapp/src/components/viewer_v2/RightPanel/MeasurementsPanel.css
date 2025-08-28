@@ -1,0 +1,287 @@
+/* ========================================
+   Measurements Panel CSS - Clean Layout
+   ======================================== */
+
+/* 패널 콘텐츠 영역 */
+.mv-measurements-panel-content {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+  background-color: #1e293b;
+}
+
+/* 스크롤바 스타일 */
+.mv-measurements-panel-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.mv-measurements-panel-content::-webkit-scrollbar-track {
+  background: #334155;
+}
+
+.mv-measurements-panel-content::-webkit-scrollbar-thumb {
+  background: #64748b;
+  border-radius: 3px;
+}
+
+.mv-measurements-panel-content::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* 전체 통계 */
+.mv-measurements-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #334155;
+  border-radius: 6px;
+  padding: 12px 16px;
+  margin-bottom: 12px;
+  border-left: 3px solid #3b82f6;
+  font-size: 13px;
+  color: #94a3b8;
+}
+
+.mv-measurements-edit-exit-btn {
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.mv-measurements-edit-exit-btn:hover {
+  background-color: #dc2626;
+}
+
+/* 측정값 그룹 */
+.mv-measurements-group {
+  margin-bottom: 16px;
+}
+
+.mv-measurements-group-header {
+  font-size: 14px;
+  font-weight: 600;
+  color: #d1d5db;
+  margin-bottom: 8px;
+  padding: 8px 12px;
+  background-color: #475569;
+  border-radius: 4px;
+}
+
+/* 🔥 측정값 아이템 - 1줄 레이아웃 */
+.mv-measurements-item {
+  background-color: #374151;
+  border-radius: 6px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s ease;
+  border-left: 3px solid #fbbf24;
+  cursor: pointer;
+}
+
+.mv-measurements-item:hover {
+  background-color: #4b5563;
+  transform: translateX(2px);
+}
+
+.mv-measurements-item.selected {
+  background-color: #1e40af;
+  border-left-color: #60a5fa;
+  box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.2);
+}
+
+.mv-measurements-item.hidden {
+  opacity: 0.5;
+}
+
+.mv-measurements-item.editing {
+  background-color: #1e40af;
+  border-left-color: #3b82f6;
+}
+
+/* 🔥 메인 라인 - 타입|값|슬라이스|좌표 */
+.mv-measurements-main-line {
+  font-size: 13px;
+  font-weight: 500;
+  color: #e5e7eb;
+  line-height: 1.3;
+  word-break: break-all;
+  flex: 1;
+}
+
+/* 액션 버튼들 */
+.mv-measurements-actions {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-shrink: 0;
+  margin-left: 12px;
+}
+
+.mv-measurements-btn-edit {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  min-height: 24px;
+}
+
+.mv-measurements-btn-edit:hover {
+  color: #3b82f6;
+  background-color: rgba(59, 130, 246, 0.1);
+}
+
+.mv-measurements-btn-visibility {
+  padding: 4px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  min-height: 24px;
+}
+
+.mv-measurements-btn-visibility.visible {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+.mv-measurements-btn-visibility.hidden {
+  background-color: #4b5563;
+  color: #9ca3af;
+}
+
+.mv-measurements-btn-visibility:hover.visible {
+  background-color: #1d4ed8;
+}
+
+.mv-measurements-btn-visibility:hover.hidden {
+  background-color: #6b7280;
+}
+
+.mv-measurements-btn-delete {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  min-height: 24px;
+}
+
+.mv-measurements-btn-delete:hover {
+  color: #ef4444;
+  background-color: rgba(239, 68, 68, 0.1);
+}
+
+.mv-measurements-editing-indicator {
+  font-size: 11px;
+  color: #3b82f6;
+  font-weight: 600;
+  background-color: rgba(59, 130, 246, 0.1);
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+/* Empty State */
+.mv-measurements-empty-state {
+  text-align: center;
+  padding: 32px 16px;
+  color: #94a3b8;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.mv-measurements-empty-icon {
+  font-size: 48px;
+  color: #4b5563;
+  margin-bottom: 16px;
+}
+
+.mv-measurements-empty-state p {
+  margin: 8px 0;
+  color: white;
+  font-weight: 500;
+}
+
+.mv-measurements-empty-subtitle {
+  color: #94a3b8 !important;
+  font-weight: 400 !important;
+  font-size: 13px !important;
+}
+
+/* 타입별 색상 */
+.mv-measurements-item[data-type="length"] {
+  border-left-color: #fbbf24;
+}
+
+.mv-measurements-item[data-type="rectangle"] {
+  border-left-color: #22c55e;
+}
+
+.mv-measurements-item[data-type="circle"] {
+  border-left-color: #a78bfa;
+}
+
+/* 애니메이션 */
+.mv-measurements-item {
+  animation: fadeInUp 0.2s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Focus States */
+.mv-measurements-btn-edit:focus,
+.mv-measurements-btn-visibility:focus,
+.mv-measurements-btn-delete:focus,
+.mv-measurements-edit-exit-btn:focus {
+  outline: 2px solid #60a5fa;
+  outline-offset: 2px;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .mv-measurements-main-line {
+    font-size: 12px;
+    line-height: 1.2;
+  }
+  
+  .mv-measurements-item {
+    padding: 10px 12px;
+  }
+  
+  .mv-measurements-total {
+    padding: 10px 12px;
+  }
+}

@@ -1,0 +1,8 @@
+.test-result-ratio-chart {
+  margin-top: 30px;
+}
+
+.test-result-ratio-chart .echart-container {
+  width: 100%;
+  height: 400px;
+}

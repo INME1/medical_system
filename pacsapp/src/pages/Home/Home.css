@@ -1,0 +1,79 @@
+.home-container {
+  display: grid;
+  grid-template-columns: 360px 1fr 440px;
+  grid-template-rows: 440px auto; 
+  grid-template-areas: 
+    "profile notices calendar"
+    "profile bottom calendar";
+  gap: 1rem;
+  height: auto;
+  min-height: unset;
+}
+
+.profile-section {
+  grid-area: profile;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.notices-section {
+  grid-area: notices;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  padding: 0;  /* 기존 padding 제거 */
+}
+
+.system-notice {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+}
+
+.ris-notice {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+}
+
+.calendar-section {
+  grid-area: calendar;
+  grid-row: 1 / -1;  /* 모든 행에 걸치기 */
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex !important;
+  flex-direction: column !important;
+  min-height: calc(100vh - 300px) !important;  /* 강제 최소 높이 */
+  height: auto !important;
+}
+
+
+.bottom-section {
+  grid-area: bottom;
+  display: grid;
+  grid-template-columns: 4fr 6fr; 
+  gap: 1rem;
+  height: 460px;
+}
+
+.carousel-section {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.shortcuts-section {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}

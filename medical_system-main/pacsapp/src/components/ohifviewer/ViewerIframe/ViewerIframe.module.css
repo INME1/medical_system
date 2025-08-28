@@ -1,0 +1,195 @@
+/* src/components/OHIFViewer/ViewerIframe/ViewerIframe.module.css */
+@import '../../../styles/variables.css';
+
+/* 
+z-index 레이어 구조(참고) - 동적 z-index 시스템
+LabelModal (var(--z-modal), var(--z-modal) + 1) ← 모달 최상위
+어노테이션 레이어 (var(--z-annotation) ~ var(--z-annotation) + 2) ← 그리기 모드에서 클릭 받음
+디버그 정보 (10002, pointer-events: auto) ← 클릭 가능
+로딩/에러 (10001, pointer-events: auto) ← 클릭 차단
+바운딩 박스 (var(--z-ai) + 1, pointer-events: none) ← 보이지만 클릭 통과
+오버레이 컨테이너 (var(--z-ai), pointer-events: none) ← 클릭 통과
+iframe (var(--z-iframe), pointer-events: auto) ← 클릭 가능
+
+기본값: iframe(100) < ai(200) < annotation(300) < modal(400)
+활성값: 기본값 + 1000 (예: iframe 활성시 1100)
+*/
+
+.viewerContainer {
+  flex: 2;
+  height: 100%;
+  position: relative;
+  background: var(--bg-primary);
+  overflow: hidden;
+  /* CSS 변수 기본값 설정 */
+  --z-iframe: 100;
+  --z-ai: 200;
+  --z-annotation: 300;
+  --z-modal: 400;
+}
+
+.ohifIframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+  pointer-events: auto !important;
+  position: relative;
+  z-index: var(--z-iframe); /* 동적 z-index 사용 */
+}
+
+/* AI 결과 오버레이 컨테이너 */
+.aiOverlayContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* 클릭 이벤트 통과 */
+  z-index: 999999 !important; /* 최대값으로 강제 설정 */
+}
+
+/* AI 검출 결과 박스들 */
+.aiOverlayBox {
+  position: absolute;
+  pointer-events: none; /* 클릭 이벤트 통과 - 중요! */
+  font-size: var(--font-sm);
+  font-weight: bold;
+  z-index: 999999 !important; /* 최대값으로 강제 설정 */
+  box-shadow: var(--shadow-overlay);
+  overflow: hidden;
+  transition: all var(--transition-fast);
+}
+
+.aiOverlayBoxHigh {
+  border: 3px solid var(--color-high-confidence);
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--color-high-confidence);
+}
+
+.aiOverlayBoxLow {
+  border: 3px solid var(--color-low-confidence);
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--color-low-confidence);
+}
+
+/* AI 검출 라벨 */
+.aiOverlayLabel {
+  background: rgba(0, 0, 0, 0.8);
+  color: var(--text-primary);
+  padding: 3px 6px;
+  border-radius: var(--border-radius-sm);
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  display: inline-block;
+  pointer-events: none; /* 라벨도 클릭 통과 */
+}
+
+.aiOverlayLabelHigh {
+  font-size: 11px;
+}
+
+.aiOverlayLabelLow {
+  font-size: 10px;
+}
+
+/* 작은 박스일 때는 라벨 숨김 */
+.aiOverlayBoxSmall .aiOverlayLabel {
+  display: none;
+}
+
+/* 로딩 상태 */
+.loadingOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10001; /* 고정값 - 항상 상위 */
+  color: var(--text-primary);
+  font-size: var(--font-lg);
+  font-weight: bold;
+  pointer-events: auto; /* 로딩 중엔 클릭 차단 */
+}
+
+.loadingSpinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--border-primary);
+  border-top: 4px solid var(--color-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: var(--spacing-lg);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 에러 상태 */
+.errorOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(239, 68, 68, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10001; /* 로딩과 같은 레벨 */
+  color: var(--color-danger);
+  font-size: var(--font-lg);
+  font-weight: bold;
+  text-align: center;
+  padding: var(--spacing-xl);
+  pointer-events: auto; /* 에러 시에도 클릭 차단 */
+}
+
+/* 디버그 정보 (개발용) */
+.debugInfo {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  background: rgba(0, 0, 0, 0.8);
+  color: var(--text-primary);
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius);
+  font-size: var(--font-xs);
+  font-family: monospace;
+  z-index: 10002; /* 고정값 - 항상 보임 */
+  max-width: 300px;
+  word-break: break-all;
+  pointer-events: auto; /* 디버그 정보는 클릭 가능 */
+}
+
+.debugInfo.hidden {
+  display: none;
+}
+
+/* 반응형 조정 */
+@media (max-width: 768px) {
+  .viewerContainer {
+    flex: 1;
+    height: 100%;
+    position: relative;
+  }
+  
+  .aiOverlayLabel {
+    font-size: var(--font-xs);
+    padding: 2px 4px;
+  }
+  
+  .debugInfo {
+    font-size: 8px;
+    max-width: 200px;
+  }
+}

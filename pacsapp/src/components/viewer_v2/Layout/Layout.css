@@ -1,0 +1,144 @@
+/* Layout.css */
+.mv-layout {
+  display: flex;
+  height: 100vh;
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  overflow: hidden;
+}
+
+/* 로딩 상태 스타일 */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  color: white;
+  text-align: center;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #3b82f6;
+  border-top: 4px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-container p {
+  margin: 5px 0;
+  font-size: 16px;
+}
+
+/* 에러 상태 스타일 */
+.error-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+.error-container h2 {
+  color: #ef4444;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.error-container p {
+  margin-bottom: 20px;
+  max-width: 600px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.error-retry-button {
+  padding: 10px 20px;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.2s;
+}
+
+.error-retry-button:hover {
+  background-color: #2563eb;
+}
+
+.error-retry-button:active {
+  background-color: #1d4ed8;
+}
+
+/* 반응형 레이아웃 */
+@media (max-width: 768px) {
+  .mv-layout {
+    flex-direction: column;
+  }
+  
+  .loading-container,
+  .error-container {
+    padding: 15px;
+  }
+  
+  .loading-container p,
+  .error-container p {
+    font-size: 14px;
+  }
+  
+  .error-container h2 {
+    font-size: 20px;
+  }
+}
+
+/* 상태 표시 바 스타일 */
+.mv-status-bar {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 80%;
+}
+
+.mv-status-text {
+  font-size: 14px;
+}
+
+.mv-status-close {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mv-status-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+}

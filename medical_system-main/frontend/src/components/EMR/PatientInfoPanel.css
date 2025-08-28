@@ -1,0 +1,182 @@
+/* 미니 환자 정보 패널 스타일 */
+
+.compact-patient-info {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 0.75rem;
+  height: auto;
+  max-height: 250px; /* 높이를 절반으로 제한 */
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e9ecef;
+}
+
+/* 빈 상태 */
+.patient-info-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  text-align: center;
+  color: #6c757d;
+  gap: 0.5rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.empty-icon {
+  color: #adb5bd;
+}
+
+.patient-info-empty h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #495057;
+}
+
+.patient-info-empty p {
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+/* 헤더 */
+.patient-info-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.header-icon {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.patient-info-header h3 {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+/* 미니 세부 정보 */
+.patient-details-mini {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: #f8f9fa;
+  border-radius: 6px;
+  border: 1px solid #e9ecef;
+  transition: all 0.2s ease;
+}
+
+.detail-item:hover {
+  background: #e9ecef;
+}
+
+.detail-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: white;
+}
+
+.detail-icon.id {
+  background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+}
+
+.detail-icon.birthdate {
+  background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%);
+}
+
+.detail-icon.address {
+  background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+}
+
+.detail-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.detail-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #6c757d;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.detail-value {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #2c3e50;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .compact-patient-info {
+    padding: 0.5rem;
+    max-height: 200px;
+  }
+  
+  .detail-item {
+    padding: 0.4rem;
+  }
+  
+  .detail-label {
+    font-size: 0.65rem;
+  }
+  
+  .detail-value {
+    font-size: 0.75rem;
+  }
+}
+
+/* 스크롤바 스타일링 */
+.compact-patient-info::-webkit-scrollbar {
+  width: 4px;
+}
+
+.compact-patient-info::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 2px;
+}
+
+.compact-patient-info::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 2px;
+}
+
+.compact-patient-info::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}

@@ -1,0 +1,60 @@
+{
+  "name": "pacsapp-realtime",
+  "version": "1.0.0",
+  "description": "React 기반 PACS 앱과 실시간 메신저 서버 통합",
+  "private": true,
+  "main": "server.js",
+  "scripts": {
+    "start": "PORT=3020 react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "server": "node server.js",
+    "dev-server": "nodemon server.js"
+  },
+  "dependencies": {
+    "axios": "^1.10.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^3.0.1",
+    "lucide-react": "^0.525.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.20.1",
+    "react-scripts": "5.0.1",
+    "socket.io": "^4.7.4",
+    "web-vitals": "^5.0.3"
+  },
+  "devDependencies": {
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "nodemon": "^3.0.2"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "keywords": [
+    "pacsapp",
+    "realtime",
+    "chat",
+    "messenger",
+    "react",
+    "socket.io",
+    "nodejs",
+    "express"
+  ],
+  "author": "LaCID Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

@@ -1,0 +1,8 @@
+.test-count-chart {
+  margin-top: 30px;
+}
+
+.test-count-chart .echart-container {
+  width: 100%;
+  height: 400px;
+}

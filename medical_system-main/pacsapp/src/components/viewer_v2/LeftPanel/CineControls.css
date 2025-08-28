@@ -1,0 +1,74 @@
+.mv-cine-controls-container {
+  padding: 16px;
+  border-bottom: 1px solid #475569;
+}
+
+.mv-cine-controls-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.mv-cine-controls-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #10b981;
+  margin: 0;
+}
+
+.mv-cine-controls-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.mv-cine-control-btn {
+  flex: 1;
+  background-color: #374151;
+  border: none;
+  border-radius: 4px;
+  padding: 8px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.mv-cine-control-btn:hover:not(.mv-disabled) {
+  background-color: #4b5563;
+}
+
+.mv-cine-control-btn.mv-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.mv-cine-control-btn.mv-playing {
+  background-color: #dc2626;
+}
+
+.mv-cine-control-btn.mv-playing:hover {
+  background-color: #ef4444;
+}
+
+.mv-cine-control-btn.mv-paused {
+  background-color: #16a34a;
+}
+
+.mv-cine-control-btn.mv-paused:hover {
+  background-color: #22c55e;
+}
+
+/* 🔥 상태 표시 스타일 추가 */
+.mv-cine-status {
+  text-align: center;
+  margin-top: 8px;
+  font-size: 12px;
+  color: #10b981;
+}
+
+.mv-cine-status.mv-single-image {
+  color: #6b7280;
+}

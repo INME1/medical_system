@@ -1,0 +1,657 @@
+/* /home/medical_system/pacsapp/src/components/viewer_v2/RightPanel/ReportsPanel.css */
+
+/* /home/medical_system/pacsapp/src/components/viewer_v2/RightPanel/ReportsPanel.css */
+
+/* 🚀 기본 레포트 패널 컨테이너 - 스크롤 제거 및 레이아웃 개선 */
+.mv-panel-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #ffffff;
+  overflow: hidden; /* 🚀 전체 스크롤 제거 */
+}
+
+/* 🚀 헤더를 상단 고정으로 변경 */
+.reports-header {
+  padding: 16px;
+  border-bottom: 2px solid #e5e7eb;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  flex-shrink: 0; /* 🚀 고정 영역 */
+}
+
+.reports-title {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1e40af;
+  line-height: 1.3;
+}
+
+.reports-subtitle {
+  margin: 0 0 12px 0;
+  font-size: 13px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+/* 🚀 새 레포트 버튼 개선 - 깜빡거림 완전 제거 */
+.mv-new-report-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
+  animation: none !important; /* 🚀 깜빡거림 완전 제거 */
+}
+
+.mv-new-report-btn:hover {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(16, 185, 129, 0.3);
+}
+
+.mv-new-report-btn:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.mv-new-report-btn.primary {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+}
+
+.mv-new-report-btn.primary:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
+}
+
+/* 🚀 필터도 고정 영역 */
+.report-filters {
+  display: flex;
+  gap: 6px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #f1f5f9;
+  background: #fafafa;
+  flex-wrap: wrap;
+  flex-shrink: 0; /* 🚀 고정 영역 */
+}
+
+.filter-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  font-size: 11px;
+  font-weight: 500;
+  border: 1px solid #d1d5db;
+  border-radius: 16px;
+  background: white;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.filter-btn:hover {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.filter-btn.active {
+  background: #3b82f6;
+  color: white;
+  border-color: #3b82f6;
+}
+
+/* 🚀 현재 Study 섹션을 고정 */
+.current-study-section {
+  padding: 16px;
+  border-bottom: 1px solid #f1f5f9;
+  flex-shrink: 0; /* 🚀 고정 영역 */
+}
+
+.section-title {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0; /* 🚀 고정 */
+}
+
+/* 현재 Study 정보 */
+.current-study-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.study-uid-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 11px;
+  padding: 8px;
+  background: #f8fafc;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+}
+
+.study-label {
+  font-weight: 600;
+  color: #374151;
+}
+
+.study-uid {
+  color: #6b7280;
+  font-family: 'Courier New', monospace;
+}
+
+.current-report-card {
+  border: 2px solid #3b82f6;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.no-current-study-report {
+  padding: 16px;
+  text-align: center;
+  color: #666;
+  border: 2px dashed #ddd;
+  border-radius: 8px;
+  background: #f9fafb;
+}
+
+.no-study-info {
+  text-align: center;
+  padding: 20px;
+  color: #6b7280;
+  font-style: italic;
+}
+
+/* 🚀 레포트 목록만 스크롤 가능하게 */
+.reports-list {
+  padding: 16px;
+  flex: 1; /* 🚀 남은 공간 모두 차지 */
+  min-height: 0; /* 🚀 flex 아이템이 줄어들 수 있도록 */
+  display: flex;
+  flex-direction: column;
+}
+
+/* 🚀 레포트 그리드에 스크롤 */
+.reports-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  overflow-y: auto; /* 🚀 여기서만 스크롤 허용 */
+  padding-right: 4px;
+}
+
+/* 레포트 아이템 */
+.mv-report-item {
+  display: flex;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  animation: none !important; /* 🚀 애니메이션 제거 */
+}
+
+.mv-report-item:hover {
+  border-color: #3b82f6;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.15);
+  transform: translateY(-1px);
+}
+
+.mv-report-item.current-study {
+  border-color: #10b981;
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+}
+
+.mv-report-item.current-study:hover {
+  border-color: #059669;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.15);
+}
+
+/* 레포트 정보 */
+.mv-report-info {
+  flex: 1;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mv-report-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.mv-report-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1f2937;
+  line-height: 1.3;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+}
+
+.current-badge {
+  background: #10b981;
+  color: white;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.mv-report-status {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  font-size: 10px;
+  font-weight: 500;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+/* 메타 정보 */
+.mv-report-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mv-report-date {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: #6b7280;
+}
+
+.mv-report-updated {
+  font-size: 10px;
+  color: #9ca3af;
+}
+
+/* 레포트 미리보기 */
+.mv-report-preview {
+  font-size: 11px;
+  color: #4b5563;
+  line-height: 1.4;
+  background: #f8fafc;
+  padding: 8px;
+  border-radius: 4px;
+  border-left: 3px solid #e5e7eb;
+  margin-top: 4px;
+  transition: all 0.2s ease;
+}
+
+/* Study UID */
+.mv-report-study-uid {
+  font-size: 10px;
+  color: #9ca3af;
+  font-family: 'Courier New', monospace;
+  background: #f9fafb;
+  padding: 4px 6px;
+  border-radius: 3px;
+  margin-top: 4px;
+}
+
+/* 컨트롤 버튼들 */
+.mv-report-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+  background: #f8fafc;
+  border-left: 1px solid #e5e7eb;
+}
+
+.mv-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: white;
+  border: 1px solid #d1d5db;
+  animation: none !important; /* 🚀 애니메이션 제거 */
+}
+
+.mv-action-btn:hover {
+  transform: scale(1.05);
+}
+
+.mv-action-btn.mv-edit {
+  color: #3b82f6;
+}
+
+.mv-action-btn.mv-edit:hover {
+  background: #dbeafe;
+  border-color: #3b82f6;
+}
+
+.mv-action-btn.mv-view {
+  color: #10b981;
+}
+
+.mv-action-btn.mv-view:hover {
+  background: #dcfce7;
+  border-color: #10b981;
+}
+
+.mv-action-btn.mv-delete {
+  color: #ef4444;
+}
+
+.mv-action-btn.mv-delete:hover {
+  background: #fee2e2;
+  border-color: #ef4444;
+}
+
+/* 🚀 빈 상태 개선 */
+.no-reports {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 40px 20px;
+  text-align: center;
+  color: #6b7280;
+  flex: 1;
+  justify-content: center;
+}
+
+.no-reports-icon {
+  font-size: 48px;
+  opacity: 0.5;
+}
+
+.no-reports p {
+  margin: 0;
+  font-size: 14px;
+  font-style: italic;
+}
+
+/* 🚀 로딩 상태 개선 */
+.loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 40px 20px;
+  color: #6b7280;
+  flex: 1;
+}
+
+.loading-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #e5e7eb;
+  border-top: 2px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 🚀 푸터 제거 (상단으로 버튼 이동했으므로) */
+.reports-footer {
+  display: none; /* 🚀 하단 버튼 숨김 */
+}
+
+/* 기존 푸터 스타일 (숨김 처리) */
+.reports-footer {
+  padding: 16px;
+  border-top: 1px solid #e5e7eb;
+  background: #f8fafc;
+  margin-top: auto;
+  display: none; /* 🚀 완전히 숨김 */
+}
+
+/* 🚀 스크롤바 스타일 개선 */
+.reports-grid::-webkit-scrollbar {
+  width: 6px;
+}
+
+.reports-grid::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.reports-grid::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.reports-grid::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* 기존 전체 패널 스크롤바 스타일 (참고용 - 이제 사용 안함) */
+.mv-panel-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.mv-panel-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.mv-panel-content::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.mv-panel-content::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* 호버 효과 */
+.mv-report-item:hover .mv-report-preview {
+  background: #f0f9ff;
+  border-left-color: #3b82f6;
+}
+
+.mv-report-item.current-study:hover .mv-report-preview {
+  background: #f0fdf4;
+  border-left-color: #10b981;
+}
+
+/* 🚀 모든 깜빡거리는 애니메이션 제거 */
+@keyframes pulse {
+  /* 🚀 기존 pulse 애니메이션 무효화 */
+}
+
+* {
+  animation-duration: 0s !important;
+  animation-delay: 0s !important;
+  animation-iteration-count: 1 !important;
+}
+
+/* 단, 로딩 스피너와 hover 효과는 유지 */
+.loading-spinner {
+  animation: spin 1s linear infinite !important;
+}
+
+.mv-new-report-btn,
+.mv-action-btn,
+.mv-report-item {
+  animation: none !important;
+}
+
+/* 🚀 반응형 개선 */
+@media (max-width: 768px) {
+  .reports-header {
+    padding: 12px;
+  }
+  
+  .current-study-section {
+    padding: 12px;
+  }
+  
+  .reports-list {
+    padding: 12px;
+  }
+  
+  .mv-report-item {
+    flex-direction: column;
+  }
+  
+  .mv-report-controls {
+    flex-direction: row;
+    justify-content: center;
+    border-left: none;
+    border-top: 1px solid #e5e7eb;
+    padding: 8px 12px;
+  }
+  
+  .report-filters {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  
+  .filter-btn {
+    font-size: 10px;
+    padding: 4px 8px;
+  }
+  
+  .reports-title {
+    font-size: 14px;
+  }
+  
+  .reports-subtitle {
+    font-size: 12px;
+  }
+  
+  .mv-new-report-btn {
+    font-size: 13px;
+    padding: 10px 14px;
+  }
+}
+
+/* 🚀 접근성 개선 */
+.mv-new-report-btn:focus,
+.filter-btn:focus,
+.mv-action-btn:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.mv-new-report-btn:focus:not(:focus-visible),
+.filter-btn:focus:not(:focus-visible),
+.mv-action-btn:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* 🚀 다크모드 지원 (선택사항) */
+@media (prefers-color-scheme: dark) {
+  .mv-panel-content {
+    background: #1f2937;
+    color: #f9fafb;
+  }
+  
+  .reports-header {
+    background: linear-gradient(135deg, #374151 0%, #4b5563 100%);
+    border-bottom-color: #4b5563;
+  }
+  
+  .reports-title {
+    color: #60a5fa;
+  }
+  
+  .reports-subtitle {
+    color: #9ca3af;
+  }
+  
+  .mv-report-item {
+    background: #374151;
+    border-color: #4b5563;
+  }
+  
+  .mv-report-item:hover {
+    border-color: #60a5fa;
+  }
+  
+  .mv-report-preview {
+    background: #374151;
+    color: #d1d5db;
+  }
+  
+  .filter-btn {
+    background: #374151;
+    border-color: #4b5563;
+    color: #9ca3af;
+  }
+  
+  .filter-btn.active {
+    background: #60a5fa;
+    color: white;
+    border-color: #60a5fa;
+  }
+}
+
+/* 🚀 고대비 모드 지원 */
+@media (prefers-contrast: high) {
+  .mv-report-item {
+    border-width: 2px;
+  }
+  
+  .mv-action-btn {
+    border-width: 2px;
+  }
+  
+  .filter-btn {
+    border-width: 2px;
+  }
+  
+  .mv-new-report-btn {
+    border: 2px solid #047857;
+  }
+}
+
+/* 🚀 애니메이션 감소 모드 지원 */
+@media (prefers-reduced-motion: reduce) {
+  .mv-report-item,
+  .mv-action-btn,
+  .mv-new-report-btn,
+  .filter-btn {
+    transition: none;
+  }
+  
+  .mv-report-item:hover,
+  .mv-action-btn:hover,
+  .mv-new-report-btn:hover {
+    transform: none;
+  }
+}

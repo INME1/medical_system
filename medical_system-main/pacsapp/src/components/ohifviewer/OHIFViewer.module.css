@@ -1,0 +1,832 @@
+/* src/components/OHIFViewer/OHIFViewer.module.css */
+@import '../../styles/variables.css';
+
+.ohifViewerContainer {
+  display: flex;
+  height: 100vh;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 뷰어 영역 (왼쪽) */
+.viewerSection {
+  flex: 2;
+  position: relative;
+  min-width: 0; /* flex 오버플로우 방지 */
+}
+
+/* 분석 패널 (오른쪽) */
+.panelSection {
+  flex: 1;
+  min-width: var(--sidebar-width);
+  max-width: 400px;
+  background: var(--bg-secondary);
+  border-left: 1px solid var(--border-primary);
+  overflow: hidden;
+}
+
+/* 🔥 스터디 연동 알림 메시지 */
+.studySyncNotification {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  color: white;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--border-radius-lg);
+  font-size: var(--font-md);
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 9999;
+  max-width: 500px;
+  text-align: center;
+  animation: slideInFromTop 0.3s ease-out, fadeInScale 0.3s ease-out;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* 🔥 성공 메시지 스타일 */
+.studySyncNotification:has-text("✅") {
+  background: linear-gradient(135deg, var(--color-success), #16a34a);
+}
+
+/* 🔥 경고 메시지 스타일 */
+.studySyncNotification:has-text("⚠️") {
+  background: linear-gradient(135deg, var(--color-warning), #d97706);
+}
+
+/* 🔥 에러 메시지 스타일 */
+.studySyncNotification:has-text("❌") {
+  background: linear-gradient(135deg, var(--color-danger), #dc2626);
+}
+
+/* 🔥 알림 애니메이션 */
+@keyframes slideInFromTop {
+  0% {
+    transform: translateX(-50%) translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInScale {
+  0% {
+    transform: translateX(-50%) scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+  }
+}
+
+/* 반응형 디자인 */
+@media (max-width: 1024px) {
+  .ohifViewerContainer {
+    flex-direction: column;
+  }
+  
+  .viewerSection {
+    flex: 1;
+    height: 60vh;
+  }
+  
+  .panelSection {
+    flex: 1;
+    height: 40vh;
+    max-width: none;
+    border-left: none;
+    border-top: 1px solid var(--border-primary);
+  }
+
+  /* 🔥 모바일에서 알림 위치 조정 */
+  .studySyncNotification {
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    transform: none;
+    max-width: none;
+    font-size: var(--font-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+}
+
+@media (max-width: 768px) {
+  .viewerSection {
+    height: 50vh;
+  }
+  
+  .panelSection {
+    height: 50vh;
+  }
+}
+
+/* 전체화면 모드 */
+.ohifViewerContainer.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+}
+
+.ohifViewerContainer.fullscreen .panelSection {
+  display: none;
+}
+
+.ohifViewerContainer.fullscreen .viewerSection {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+}
+
+/* 🔥 전체화면 모드에서 알림 위치 조정 */
+.ohifViewerContainer.fullscreen .studySyncNotification {
+  z-index: 10000; /* 전체화면보다 위에 표시 */
+}
+
+/* 스크롤바 스타일링 (OHIF 테마에 맞게) */
+.panelSection::-webkit-scrollbar {
+  width: 8px;
+}
+
+.panelSection::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+.panelSection::-webkit-scrollbar-thumb {
+  background: var(--border-secondary);
+  border-radius: 4px;
+}
+
+.panelSection::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* 로딩 상태 */
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: var(--font-lg);
+  font-weight: bold;
+}
+
+.loadingSpinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid var(--border-primary);
+  border-top: 5px solid var(--color-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: var(--spacing-lg);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 에러 상태 */
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: var(--bg-primary);
+  color: var(--color-danger);
+  text-align: center;
+  padding: var(--spacing-xl);
+}
+
+.errorTitle {
+  font-size: var(--font-xxl);
+  font-weight: bold;
+  margin-bottom: var(--spacing-lg);
+}
+
+.errorMessage {
+  font-size: var(--font-lg);
+  margin-bottom: var(--spacing-xl);
+  max-width: 600px;
+}
+
+.errorRetryButton {
+  background: var(--color-primary);
+  color: var(--text-primary);
+  border: none;
+  padding: var(--spacing-lg) var(--spacing-xl);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: var(--font-md);
+  font-weight: bold;
+  transition: background-color var(--transition-normal);
+}
+
+.errorRetryButton:hover {
+  background: var(--color-primary-dark);
+}
+
+.panelToggleButtons {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 10px;
+  z-index: var(--z-ai, 200);
+  pointer-events: auto;
+}
+
+.panelToggleButton {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  color: white;
+  font-weight: 500;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  min-width: 80px;
+}
+
+.panelToggleButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.panelToggleButton.active {
+  background: linear-gradient(135deg, #42a5f5 0%, #478ed1 100%);
+  box-shadow: 0 4px 12px rgba(66, 165, 245, 0.4);
+  animation: pulse 2s infinite;
+}
+
+.panelToggleButton:disabled {
+  background: rgba(158, 158, 158, 0.3);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* 기존 panelSection 스타일 개선 (있다면 기존 것과 병합) */
+.panelSection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 100vh;
+  overflow-y: auto;
+  padding: 10px;
+  background: rgba(26, 26, 46, 0.95);
+  backdrop-filter: blur(10px);
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* SimCLR 관련 z-index */
+.ohifViewerContainer {
+  --z-simclr: 350;
+}
+
+/* 패널 전환 애니메이션 */
+.panelSection > * {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .panelToggleButtons {
+    top: 10px;
+    right: 10px;
+    gap: 5px;
+  }
+  
+  .panelToggleButton {
+    padding: 6px 8px;
+    font-size: 10px;
+    min-width: 60px;
+  }
+  
+  .panelSection {
+    padding: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .panelToggleButtons {
+    flex-direction: column;
+    width: 70px;
+  }
+  
+  .panelToggleButton {
+    font-size: 9px;
+    padding: 4px 6px;
+  }
+}
+
+/* pacsapp/src/components/ohifviewer/OHIFViewer.module.css */
+/* iframe 기반 OHIF 뷰어 위 SimCLR 오버레이 스타일 */
+
+.ohifContainer {
+  display: flex;
+  height: 100vh;
+  background: #1a1a1a;
+  overflow: hidden;
+}
+
+.viewerSection {
+  position: relative;  /* 🔥 오버레이를 위한 상대 위치 */
+  transition: width 0.3s ease;
+  background: #000;
+  border: 1px solid #333;
+}
+
+.panelSection {
+  width: 30%;
+  background: #1a1a1a;
+  border-left: 1px solid #333;
+  overflow-y: auto;
+}
+
+/* 🔥 SimCLR 히트맵 오버레이 (iframe 위에 절대 위치) */
+.simclrHeatmapOverlay {
+  border-radius: 8px;
+  overflow: hidden;
+  backdrop-filter: blur(1px);
+  animation: fadeInOverlay 0.5s ease-out;
+}
+
+@keyframes fadeInOverlay {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+}
+
+.heatmapImage {
+  border-radius: 8px;
+  filter: contrast(1.2) brightness(1.1);
+}
+
+/* 🔥 이상 패치 오버레이 */
+.anomalyPatchesOverlay {
+  /* 컨테이너 스타일 */
+}
+
+.anomalyPatch {
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(255, 87, 34, 0.8);
+  animation: anomalyPulse 2s infinite;
+  transition: all 0.3s ease;
+}
+
+.anomalyPatch:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 87, 34, 1);
+}
+
+@keyframes anomalyPulse {
+  0% {
+    box-shadow: 0 0 5px rgba(255, 87, 34, 0.7);
+    border-color: #FF5722;
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 87, 34, 1);
+    border-color: #FF3D00;
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(255, 87, 34, 0.7);
+    border-color: #FF5722;
+  }
+}
+
+/* 🔥 SimCLR 결과 정보 표시 (우상단 절대 위치) */
+.simclrOverlayInfo {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.9);
+  border: 2px solid #9C27B0;
+  border-radius: 12px;
+  padding: 16px;
+  min-width: 220px;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(156, 39, 176, 0.3);
+  animation: slideInFromTop 0.4s ease-out;
+}
+
+@keyframes slideInFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.overlayInfoHeader {
+  font-weight: 700;
+  color: #BB86FC;
+  margin-bottom: 12px;
+  font-size: 14px;
+  text-align: center;
+  border-bottom: 1px solid #9C27B0;
+  padding-bottom: 8px;
+  text-shadow: 0 0 5px rgba(187, 134, 252, 0.5);
+}
+
+.overlayInfoContent {
+  margin-bottom: 12px;
+}
+
+.overlayScore {
+  font-size: 13px;
+  color: #E1BEE7;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.overlayConfidence {
+  font-size: 13px;
+  color: #CE93D8;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.overlayDiagnosis {
+  font-weight: 700;
+  font-size: 13px;
+  text-align: center;
+  padding: 6px 12px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
+
+.overlayDiagnosis.normal {
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.3), rgba(76, 175, 80, 0.1));
+  color: #A5D6A7;
+  border: 1px solid #4CAF50;
+  box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+}
+
+.overlayDiagnosis.abnormal {
+  background: linear-gradient(135deg, rgba(244, 67, 54, 0.3), rgba(244, 67, 54, 0.1));
+  color: #FFAB91;
+  border: 1px solid #F44336;
+  box-shadow: 0 0 10px rgba(244, 67, 54, 0.3);
+  animation: warningPulse 3s infinite;
+}
+
+@keyframes warningPulse {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(244, 67, 54, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(244, 67, 54, 0.6);
+  }
+}
+
+.overlayPatchInfo {
+  font-size: 12px;
+  color: #B39DDB;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* 🔥 오버레이 토글 버튼 */
+.overlayToggleBtn {
+  width: 100%;
+  background: linear-gradient(135deg, #9C27B0, #673AB7);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
+
+.overlayToggleBtn:hover {
+  background: linear-gradient(135deg, #8E24AA, #5E35B1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(156, 39, 176, 0.4);
+}
+
+.overlayToggleBtn:active {
+  transform: translateY(0);
+}
+
+/* 🔥 iframe 기본 스타일 보정 */
+.viewerSection iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 8px;
+}
+
+/* 🔥 반응형 디자인 */
+@media (max-width: 1024px) {
+  .simclrOverlayInfo {
+    right: 15px;
+    top: 15px;
+    min-width: 200px;
+    padding: 12px;
+  }
+  
+  .overlayInfoHeader {
+    font-size: 13px;
+  }
+  
+  .overlayScore,
+  .overlayConfidence,
+  .overlayPatchInfo {
+    font-size: 11px;
+  }
+  
+  .overlayDiagnosis {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .ohifContainer {
+    flex-direction: column;
+  }
+  
+  .viewerSection {
+    width: 100% !important;
+    height: 60%;
+  }
+  
+  .panelSection {
+    width: 100%;
+    height: 40%;
+    border-left: none;
+    border-top: 1px solid #333;
+  }
+  
+  .simclrOverlayInfo {
+    position: relative;
+    top: 0;
+    right: 0;
+    margin: 10px;
+    width: calc(100% - 20px);
+    min-width: auto;
+  }
+  
+  /* 모바일에서는 오버레이 마진 조정 */
+  .simclrHeatmapOverlay,
+  .anomalyPatchesOverlay {
+    top: 30px !important;
+    left: 30px !important;
+    right: 30px !important;
+    bottom: 30px !important;
+  }
+}
+
+/* 🔥 고성능 렌더링을 위한 최적화 */
+.simclrHeatmapOverlay,
+.anomalyPatchesOverlay,
+.simclrOverlayInfo {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+/* 🔥 접근성 개선 */
+.simclrOverlayInfo:focus-within {
+  outline: 3px solid #9C27B0;
+  outline-offset: 2px;
+}
+
+.overlayToggleBtn:focus {
+  outline: 2px solid #BB86FC;
+  outline-offset: 2px;
+}
+
+/* 🔥 다크 테마 스크롤바 */
+.panelSection {
+  scrollbar-width: thin;
+  scrollbar-color: #444 #2a2a2a;
+}
+
+.panelSection::-webkit-scrollbar {
+  width: 8px;
+}
+
+.panelSection::-webkit-scrollbar-track {
+  background: #2a2a2a;
+  border-radius: 4px;
+}
+
+.panelSection::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 4px;
+}
+
+.panelSection::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* 🔥 로딩 상태 애니메이션 */
+.overlayLoading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.9);
+  color: #BB86FC;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  z-index: 1001;
+  border: 2px solid #9C27B0;
+  backdrop-filter: blur(10px);
+}
+
+.overlayLoading::after {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 24px;
+  margin: 12px auto 0;
+  border: 3px solid transparent;
+  border-top: 3px solid #BB86FC;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 🔥 오버레이 전환 애니메이션 */
+.simclrHeatmapOverlay.entering {
+  animation: zoomIn 0.4s ease-out;
+}
+
+.simclrHeatmapOverlay.exiting {
+  animation: zoomOut 0.3s ease-in;
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+}
+
+@keyframes zoomOut {
+  from {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
+
+/* 🔥 이상 패치 호버 효과 강화 */
+.anomalyPatch::before {
+  content: attr(title);
+  position: absolute;
+  bottom: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.9);
+  color: #FF5722;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 1002;
+}
+
+.anomalyPatch:hover::before {
+  opacity: 1;
+}
+
+/* 🔥 성능 최적화를 위한 GPU 가속 */
+.heatmapImage {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* 🔥 오버레이 상태별 스타일 */
+.simclrOverlayInfo.normal {
+  border-color: #4CAF50;
+  box-shadow: 0 8px 32px rgba(76, 175, 80, 0.2);
+}
+
+.simclrOverlayInfo.abnormal {
+  border-color: #F44336;
+  box-shadow: 0 8px 32px rgba(244, 67, 54, 0.3);
+  animation: alertBorder 4s infinite;
+}
+
+@keyframes alertBorder {
+  0%, 100% {
+    border-color: #F44336;
+  }
+  50% {
+    border-color: #FF5722;
+  }
+}
+
+/* 🔥 디버그 모드 스타일 */
+.debugOverlay {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #00FF00;
+  padding: 8px;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  z-index: 1003;
+  border: 1px solid #333;
+}
+
+/* 🔥 iframe 포커스 상태 */
+.viewerSection:focus-within {
+  outline: 2px solid #2196F3;
+  outline-offset: 2px;
+}
+
+/* 🔥 오버레이 버튼 그룹 (추후 확장용) */
+.overlayControls {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.overlayControlBtn {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.overlayControlBtn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+}

@@ -1,0 +1,886 @@
+/* /home/medical_system/pacsapp/src/components/viewer_v2/Common/ReportModal/ReportModal.css */
+
+.report-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.report-modal-content {
+  background: white;
+  border-radius: 12px;
+  width: 95%;
+  max-width: 900px;
+  max-height: 95vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.report-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e2e8f0;
+  background: #f8fafc;
+  border-radius: 12px 12px 0 0;
+}
+
+.report-modal-header h2 {
+  margin: 0;
+  color: #1e40af;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.report-modal-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #6b7280;
+  padding: 5px;
+  border-radius: 5px;
+  transition: background-color 0.2s;
+}
+
+.report-modal-close:hover {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+.report-section {
+  padding: 20px 24px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.report-section h3 {
+  margin: 0 0 16px 0;
+  color: #1f2937;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* 환자 정보 */
+.patient-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  background: #f8fafc;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.patient-info-grid div {
+  font-size: 14px;
+  color: #374151;
+}
+
+.patient-info-grid strong {
+  color: #1f2937;
+  margin-right: 8px;
+}
+
+/* Study 요약 */
+.study-summary {
+  background: #eff6ff;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #bfdbfe;
+}
+
+.study-summary p {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  color: #1e40af;
+}
+
+.study-summary p:last-child {
+  margin-bottom: 0;
+}
+
+/* 🔥 새로 추가된 스타일들 */
+
+/* 환자 정보 헤더 */
+.patient-info-header {
+  margin: 0 0 16px 0;
+  color: #1f2937;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.patient-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  background: #f8fafc;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.patient-grid-item {
+  font-size: 14px;
+  color: #374151;
+}
+
+.patient-grid-item strong {
+  color: #1f2937;
+  margin-right: 8px;
+}
+
+/* Study 요약 섹션 */
+.study-summary-header {
+  margin: 0 0 16px 0;
+  color: #1f2937;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.study-summary-content {
+  background: #eff6ff;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #bfdbfe;
+}
+
+.study-summary-content p {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  color: #1e40af;
+}
+
+.study-summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* 현재 인스턴스 섹션 */
+.current-instance-section {
+  padding: 20px 24px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.current-instance-header {
+  margin: 0 0 16px 0;
+  color: #1f2937;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* 소견 목록 */
+.findings-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.finding-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.finding-item:hover {
+  background: #f1f5f9;
+}
+
+.finding-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.finding-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  font-size: 12px;
+}
+
+.finding-badge.ai {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.finding-badge.manual {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.finding-label {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.finding-confidence {
+  font-size: 12px;
+  color: #6b7280;
+  background: #f3f4f6;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.finding-source {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.add-finding-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.add-finding-btn.available {
+  background: #10b981;
+  color: white;
+}
+
+.add-finding-btn.available:hover {
+  background: #059669;
+}
+
+.add-finding-btn.added {
+  background: #6b7280;
+  color: white;
+  cursor: not-allowed;
+}
+
+.no-findings {
+  text-align: center;
+  color: #6b7280;
+  font-style: italic;
+  padding: 20px;
+  background: #f9fafb;
+  border-radius: 6px;
+  border: 1px dashed #d1d5db;
+}
+
+/* 인스턴스 네비게이션 */
+.instance-navigation {
+  padding: 20px 24px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.instance-navigation-header {
+  margin: 0 0 16px 0;
+  color: #1f2937;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.instance-selector {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  background: white;
+  color: #374151;
+}
+
+.instance-selector:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* 선택된 소견 섹션 */
+.selected-findings {
+  padding: 20px 24px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.selected-findings-header {
+  margin: 0 0 16px 0;
+  color: #1f2937;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.selected-findings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.selected-finding-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background: #e0f2fe;
+  border: 1px solid #0891b2;
+  border-radius: 6px;
+}
+
+.selected-finding-text {
+  flex: 1;
+  font-size: 14px;
+  color: #0f172a;
+}
+
+.remove-finding-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.remove-finding-btn:hover {
+  background: #dc2626;
+}
+
+.clear-all-findings-btn {
+  background: #f59e0b;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background-color 0.2s;
+  margin-top: 8px;
+}
+
+.clear-all-findings-btn:hover {
+  background: #d97706;
+}
+
+.no-selected-findings {
+  text-align: center;
+  color: #6b7280;
+  font-style: italic;
+  padding: 20px;
+  background: #f9fafb;
+  border-radius: 6px;
+  border: 1px dashed #d1d5db;
+}
+
+/* STT 섹션 */
+.stt-section {
+  padding: 20px 24px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.stt-header {
+  margin: 0 0 16px 0;
+  color: #1f2937;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.stt-context {
+  background: #fff3cd;
+  border: 1px solid #ffeaa7;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 16px;
+}
+
+.stt-context-label {
+  margin: 0 0 8px 0;
+  font-weight: 600;
+  color: #92400e;
+}
+
+.stt-context-list {
+  margin: 0;
+  padding-left: 20px;
+  color: #92400e;
+}
+
+.stt-context-list li {
+  margin-bottom: 4px;
+  font-size: 13px;
+}
+
+.stt-controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* 버튼 스타일 */
+.button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.record-btn {
+  background: #3b82f6;
+  color: white;
+}
+
+.record-btn:hover:not(:disabled) {
+  background: #2563eb;
+}
+
+.record-btn:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+.recording-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.stop-btn {
+  background: #ef4444;
+  color: white;
+  animation: pulse 1s infinite;
+}
+
+.recording-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ef4444;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.recording-dot {
+  width: 8px;
+  height: 8px;
+  background: #ef4444;
+  border-radius: 50%;
+  animation: pulse 1s infinite;
+}
+
+.process-btn {
+  background: #10b981;
+  color: white;
+}
+
+.process-btn:hover:not(:disabled) {
+  background: #059669;
+}
+
+.process-btn:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+.spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* 오디오 재생 */
+.audio-playback {
+  margin-top: 16px;
+  padding: 16px;
+  background: #f8fafc;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+}
+
+.audio-controls {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.audio-hint {
+  margin: 0;
+  font-size: 13px;
+  color: #6b7280;
+  font-style: italic;
+}
+
+/* 권한 경고 */
+.permission-warning {
+  background: #fef3c7;
+  border: 1px solid #f59e0b;
+  border-radius: 6px;
+  padding: 16px;
+  margin-top: 16px;
+}
+
+.permission-warning strong {
+  color: #92400e;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.permission-warning p {
+  margin: 8px 0;
+  color: #92400e;
+  font-size: 14px;
+}
+
+.permission-button {
+  background: #f59e0b;
+  color: white;
+  margin-top: 12px;
+}
+
+.permission-button:hover {
+  background: #d97706;
+}
+
+/* AI 분석 결과 (기존 호환성) */
+.ai-results {
+  padding: 20px 24px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.ai-results-header {
+  margin: 0 0 16px 0;
+  color: #1f2937;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.ai-results-summary {
+  background: #eff6ff;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  color: #1e40af;
+}
+
+.detection-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.detection-item-high {
+  background: #dcfce7;
+  border-color: #22c55e;
+}
+
+.detection-item-low {
+  background: #fef3c7;
+  border-color: #f59e0b;
+}
+
+.detection-label {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.detection-label-high {
+  color: #166534;
+}
+
+.detection-label-low {
+  color: #92400e;
+}
+
+.detection-location {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.confidence-badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.confidence-badge-high {
+  background: #22c55e;
+  color: white;
+}
+
+.confidence-badge-low {
+  background: #f59e0b;
+  color: white;
+}
+
+/* 수동 어노테이션 (기존 호환성) */
+.annotations {
+  padding: 20px 24px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.annotations-header {
+  margin: 0 0 16px 0;
+  color: #1f2937;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.annotation-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background: #f0f9ff;
+  border: 1px solid #0ea5e9;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.annotation-label {
+  font-weight: 600;
+  color: #0c4a6e;
+  margin-bottom: 4px;
+}
+
+.annotation-location {
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+.annotation-doctor {
+  font-size: 12px;
+  color: #0891b2;
+}
+
+.annotation-badge {
+  background: #0ea5e9;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* 종합 소견 */
+.report-section-header {
+  margin: 0 0 16px 0;
+  color: #1f2937;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.report-textarea {
+  width: 100%;
+  min-height: 300px;
+  padding: 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.6;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  resize: vertical;
+  background: #fafafa;
+  box-sizing: border-box;
+}
+
+.report-textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  background: white;
+}
+
+.textarea-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* 레포트 상태 */
+.report-status-section {
+  padding: 20px 24px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.report-status-header {
+  margin: 0 0 16px 0;
+  color: #1f2937;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.status-selector {
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  background: white;
+  color: #374151;
+  min-width: 150px;
+}
+
+.status-selector:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* 푸터 */
+.report-modal-footer,
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 20px 24px;
+  background: #f8fafc;
+  border-radius: 0 0 12px 12px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.modal-btn,
+.cancel-button,
+.print-button,
+.save-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cancel-btn,
+.cancel-button {
+  background: #6b7280;
+  color: white;
+}
+
+.cancel-btn:hover,
+.cancel-button:hover {
+  background: #4b5563;
+}
+
+.print-button {
+  background: #8b5cf6;
+  color: white;
+}
+
+.print-button:hover {
+  background: #7c3aed;
+}
+
+.save-btn,
+.save-button {
+  background: #10b981;
+  color: white;
+}
+
+.save-btn:hover,
+.save-button:hover:not(:disabled) {
+  background: #059669;
+}
+
+.save-btn:disabled,
+.save-button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .report-modal-content {
+    width: 98%;
+    max-height: 98vh;
+  }
+  
+  .patient-info-grid,
+  .patient-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .stt-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .report-modal-footer,
+  .button-container {
+    flex-direction: column;
+  }
+  
+  .modal-btn,
+  .cancel-button,
+  .print-button,
+  .save-button {
+    justify-content: center;
+  }
+}
+
+/* 스크롤바 스타일링 */
+.report-modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.report-modal-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.report-modal-content::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.report-modal-content::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}

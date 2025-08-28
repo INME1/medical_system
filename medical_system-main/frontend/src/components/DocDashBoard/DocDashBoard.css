@@ -1,0 +1,797 @@
+/* frontend/src/components/DocDashBoard/DocDashBoard.css - 슬림하고 효율적인 의사 대시보드 */
+
+:root {
+  /* 🎨 회보라 톤 컬러 팔레트 */
+  --primary-gray-purple: #6366f1;
+  --primary-gray-purple-light: #818cf8;
+  --primary-gray-purple-dark: #4f46e5;
+  --secondary-purple: #8b5cf6;
+  --secondary-purple-light: #a78bfa;
+  --secondary-purple-dark: #7c3aed;
+  
+  /* 🌈 배경 컬러 - 회보라 톤 */
+  --background-primary: #f8fafc;
+  --background-card: #ffffff;
+  --background-secondary: #f1f5f9;
+  
+  /* 🎯 중성 컬러 */
+  --white: #ffffff;
+  --border-gray: #e2e8f0;
+  --text-dark: #1e293b;
+  --text-medium: #64748b;
+  --text-light: #94a3b8;
+  --success-green: #10b981;
+  --warning-orange: #f59e0b;
+  --danger-red: #ef4444;
+  
+  /* 📏 슬림한 간격 설정 */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 0.75rem;
+  --spacing-lg: 1rem;
+  --spacing-xl: 1.25rem;
+  
+  /* 🔄 애니메이션 */
+  --transition-fast: all 0.15s ease;
+  --transition-base: all 0.2s ease;
+}
+
+/* 전역 리셋 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 🏥 메인 의사 대시보드 컨테이너 */
+.doctor-dashboard {
+  height: 100vh;
+  width: 100%;
+  background: var(--background-primary);
+  display: flex;
+  flex-direction: column;
+  font-family: 'Segoe UI', 'Malgun Gothic', sans-serif;
+  color: var(--text-dark);
+  overflow: hidden;
+}
+
+/* 🎯 슬림한 대시보드 헤더 - 45px로 더 슬림하게 */
+.dashboard-header {
+  height: 45px;
+  background: linear-gradient(135deg, var(--primary-gray-purple) 0%, var(--secondary-purple) 100%);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--spacing-lg);
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.15);
+  z-index: 1000;
+  flex-shrink: 0;
+}
+
+.dashboard-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+}
+
+/* 🩺 의사 정보 패널 - 간소화 및 김의사 제거 */
+.doctor-info-panel {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  background: rgba(255, 255, 255, 0.1);
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: 6px;
+  backdrop-filter: blur(10px);
+}
+
+.doctor-avatar {
+  width: 28px;
+  height: 28px;
+  background: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-gray-purple);
+}
+
+.doctor-details h4 {
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--white);
+}
+
+.doctor-details p {
+  font-size: 0.7rem;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.current-time {
+  font-size: 0.8rem;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+/* 🔥 새로운 슬림한 메인 레이아웃 - z-index 문제 해결 */
+.dashboard-main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 280px 1fr 300px;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: 
+    "sidebar main-top controls"
+    "sidebar main-bottom controls";
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  overflow: hidden;
+  height: calc(100vh - 45px - 1.5rem);
+}
+
+/* 🔥 좌측 사이드바 - 환자 검색 (슬림화 및 z-index 수정) */
+.dashboard-sidebar {
+  grid-area: sidebar;
+  background: var(--background-card);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.08);
+  border: 1px solid var(--border-gray);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+
+.sidebar-section {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.section-header {
+  background: var(--primary-gray-purple);
+  color: var(--white);
+  padding: var(--spacing-md);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  flex-direction: column;
+  border-bottom: 1px solid var(--primary-gray-purple-dark);
+}
+
+.section-header h3 {
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.search-mode-toggle {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-sm);
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: 4px;
+  transition: var(--transition-base);
+}
+
+.radio-label:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.search-controls {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-bottom: 1px solid var(--border-gray);
+  display: flex;
+  gap: var(--spacing-xs);
+}
+
+.search-input {
+  flex: 1;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border: 1px solid var(--border-gray);
+  border-radius: 6px;
+  font-size: 0.75rem;
+  background: var(--white);
+  transition: var(--transition-base);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--primary-gray-purple);
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+}
+
+.search-button {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background: var(--primary-gray-purple);
+  color: var(--white);
+  border: none;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition-base);
+  white-space: nowrap;
+}
+
+.search-button:hover {
+  background: var(--primary-gray-purple-dark);
+  transform: translateY(-1px);
+}
+
+.search-results {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 🔥 슬림한 환자 카드 컨테이너 */
+.patient-card-container {
+  flex: 1;
+  padding: var(--spacing-xs);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+/* 🔥 슬림한 환자 카드 - z-index 및 겹침 문제 해결 */
+.collapsible-patient-card {
+  background: var(--background-card);
+  border: 1px solid var(--border-gray);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: var(--transition-base);
+  position: relative;
+  box-shadow: 0 1px 3px rgba(99, 102, 241, 0.05);
+  z-index: auto;
+  margin-bottom: 2px;
+}
+
+.collapsible-patient-card.selected {
+  border-color: var(--primary-gray-purple);
+  box-shadow: 0 2px 6px rgba(99, 102, 241, 0.15);
+  z-index: 2;
+}
+
+.collapsible-patient-card:hover {
+  box-shadow: 0 2px 6px rgba(99, 102, 241, 0.1);
+  transform: translateY(-1px);
+}
+
+/* 🔥 슬림한 환자 카드 헤더 */
+.patient-card-header {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--background-secondary);
+  border-bottom: 1px solid var(--border-gray);
+  transition: var(--transition-base);
+}
+
+.patient-card-header:hover {
+  background: rgba(99, 102, 241, 0.05);
+}
+
+.patient-card-header.selected {
+  background: rgba(99, 102, 241, 0.1);
+  border-bottom-color: var(--primary-gray-purple);
+}
+
+/* 🔥 슬림한 환자 기본 정보 */
+.patient-basic-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  flex: 1;
+}
+
+.patient-name-header {
+  font-weight: 600;
+  font-size: 0.75rem;
+  color: var(--text-dark);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.patient-id-header {
+  font-size: 0.65rem;
+  color: var(--primary-gray-purple);
+  font-family: 'Monaco', 'Menlo', monospace;
+  font-weight: 500;
+}
+
+.patient-basic-details {
+  font-size: 0.65rem;
+  color: var(--text-medium);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+/* 🔥 토글 아이콘 (슬림) */
+.patient-toggle-icon {
+  color: var(--text-medium);
+  transition: transform 0.3s ease, color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.patient-toggle-icon.expanded {
+  transform: rotate(180deg);
+  color: var(--primary-gray-purple);
+}
+
+/* 🔥 슬림한 환자 카드 상세 내용 */
+.patient-card-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  background: var(--background-card);
+}
+
+.patient-card-content.expanded {
+  max-height: 250px;
+}
+
+.patient-card-body {
+  padding: var(--spacing-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+/* 🔥 메인 콘텐츠 영역 - z-index 수정 및 전체 높이 활용 */
+.main-content-top {
+  grid-area: main-top;
+  background: var(--background-card);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.08);
+  border: 1px solid var(--border-gray);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+  height: 100%; /* 전체 높이 활용 */
+}
+
+.main-content-bottom {
+  grid-area: main-bottom;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
+  height: 100%; /* 전체 높이 활용 */
+}
+
+/* 🔥 우측 컨트롤 패널 - z-index 수정 */
+.dashboard-controls {
+  grid-area: controls;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  position: relative;
+  z-index: 1;
+}
+
+.control-card {
+  background: var(--background-card);
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(99, 102, 241, 0.06);
+  border: 1px solid var(--border-gray);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition-base);
+}
+
+.control-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(99, 102, 241, 0.1);
+}
+
+.control-header {
+  background: var(--secondary-purple);
+  color: var(--white);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-align: center;
+  border-bottom: 1px solid var(--secondary-purple-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+}
+
+.control-content {
+  padding: var(--spacing-xs);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 50px;
+}
+
+/* 🔥 슬림한 드롭다운 카드 - z-index 수정 및 전체 높이 활용 */
+.dropdown-card {
+  background: var(--background-card);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.08);
+  border: 1px solid var(--border-gray);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition-base);
+  position: relative;
+  z-index: 1;
+  height: 100%; /* 전체 높이 활용 */
+}
+
+.dropdown-header {
+  background: var(--primary-gray-purple);
+  color: var(--white);
+  padding: var(--spacing-sm) var(--spacing-md);
+  display: flex;
+  align-items: center;
+  transition: var(--transition-base);
+  border-bottom: 1px solid var(--primary-gray-purple-dark);
+  flex-shrink: 0; /* 헤더 크기 고정 */
+}
+
+.dropdown-title {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.dropdown-content {
+  flex: 1; /* 남은 공간 모두 활용 */
+  overflow: hidden;
+  background: var(--background-card);
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-content.expanded {
+  flex: 1; /* expanded 상태에서도 전체 공간 활용 */
+}
+
+.dropdown-body {
+  padding: var(--spacing-md);
+  flex: 1; /* 남은 공간 모두 활용 */
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 🔥 진료 종료 버튼 - 슬림화 */
+.end-consultation-btn {
+  position: fixed;
+  bottom: var(--spacing-lg);
+  right: var(--spacing-lg);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background: var(--danger-red);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 3px 12px rgba(239, 68, 68, 0.3);
+  transition: var(--transition-base);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.end-consultation-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(239, 68, 68, 0.4);
+  background: #dc2626;
+}
+
+/* 🔥 상태 메시지들 - 슬림화 */
+.loading-message,
+.error-message,
+.no-results,
+.search-prompt,
+.empty-message,
+.all-patients-grid {
+  text-align: center;
+  padding: var(--spacing-md);
+  color: var(--text-medium);
+  font-size: 0.75rem;
+  background: var(--background-secondary);
+  border-radius: 6px;
+  border: 1px dashed var(--border-gray);
+  margin: var(--spacing-xs) 0;
+}
+
+.all-patients-grid {
+  border: none;
+  background: transparent;
+  margin: 0;
+  padding: var(--spacing-xs);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.error-message {
+  color: var(--danger-red);
+  background: rgba(239, 68, 68, 0.05);
+  border-color: rgba(239, 68, 68, 0.2);
+}
+
+.no-patient-selected {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background: var(--background-secondary);
+}
+
+.empty-state {
+  text-align: center;
+  color: var(--text-medium);
+}
+
+.empty-icon {
+  font-size: 2.5rem;
+  margin-bottom: var(--spacing-xs);
+  opacity: 0.3;
+}
+
+.empty-state h3 {
+  font-size: 1.1rem;
+  margin-bottom: var(--spacing-xs);
+  color: var(--text-dark);
+}
+
+.empty-state p {
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+/* 🔥 스크롤바 스타일 */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-secondary);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-gray-purple);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-gray-purple-dark);
+}
+
+/* 🔥 반응형 디자인 */
+@media (max-width: 1400px) {
+  .dashboard-main {
+    grid-template-columns: 240px 1fr 260px;
+    gap: var(--spacing-sm);
+  }
+}
+
+@media (max-width: 1200px) {
+  .dashboard-main {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    grid-template-areas: 
+      "sidebar"
+      "main-top"
+      "main-bottom";
+    gap: var(--spacing-sm);
+  }
+  
+  .dashboard-sidebar {
+    max-height: 200px;
+  }
+  
+  .main-content-bottom {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+  }
+  
+  .dashboard-controls {
+    position: fixed;
+    top: 50px;
+    right: var(--spacing-md);
+    width: 160px;
+    z-index: 999;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-main {
+    padding: var(--spacing-xs);
+  }
+  
+  .dashboard-header {
+    padding: 0 var(--spacing-md);
+    height: 40px;
+  }
+  
+  .dashboard-title {
+    font-size: 1rem;
+  }
+  
+  .search-mode-toggle {
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+  
+  .end-consultation-btn {
+    bottom: var(--spacing-sm);
+    right: var(--spacing-sm);
+    padding: var(--spacing-xs) var(--spacing-md);
+    font-size: 0.75rem;
+  }
+}
+
+/* 🔥 추가 개선 사항 */
+.patient-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: 1px var(--spacing-xs);
+  border-radius: 6px;
+  font-size: 0.55rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.patient-status-badge.waiting {
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--warning-orange);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.patient-status-badge.in-progress {
+  background: rgba(99, 102, 241, 0.1);
+  color: var(--primary-gray-purple);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+}
+
+.patient-status-badge.completed {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--success-green);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+/* 🔥 카드 간격 및 정렬 개선 */
+.patient-detail-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.patient-detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-xs) 0;
+  border-bottom: 1px solid #f3f4f6;
+  font-size: 0.7rem;
+}
+
+.patient-detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-label {
+  font-weight: 500;
+  color: var(--text-medium);
+  min-width: 50px;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.detail-value {
+  color: var(--text-dark);
+  font-weight: 500;
+  text-align: right;
+  font-size: 0.7rem;
+}
+
+/* 🔥 버튼들 스타일 개선 */
+.patient-order-button,
+.patient-action-btn {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border: 1px solid var(--border-gray);
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+}
+
+.patient-order-button {
+  width: 100%;
+  background: var(--background-secondary);
+  color: var(--text-medium);
+}
+
+.patient-order-button:hover {
+  background: var(--primary-gray-purple);
+  color: var(--white);
+  border-color: var(--primary-gray-purple);
+}
+
+.patient-actions {
+  display: flex;
+  gap: var(--spacing-xs);
+  margin-top: var(--spacing-xs);
+}
+
+.patient-action-btn.assign {
+  background: var(--success-green);
+  color: var(--white);
+  border-color: var(--success-green);
+}
+
+.patient-action-btn.complete {
+  background: var(--danger-red);
+  color: var(--white);
+  border-color: var(--danger-red);
+}
+
+.patient-dropdown-select {
+  width: 100%;
+  padding: var(--spacing-xs);
+  border: 1px solid var(--border-gray);
+  border-radius: 4px;
+  background: var(--background-card);
+  font-size: 0.7rem;
+  color: var(--text-dark);
+  cursor: pointer;
+  transition: var(--transition-base);
+}

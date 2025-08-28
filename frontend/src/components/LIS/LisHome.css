@@ -1,0 +1,185 @@
+/* 📁 LisHome.css (달력과 그래프 간 충돌 해결 + 달력 라벨 깨짐 보완 포함) */
+
+.lis-dashboard-grid {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  grid-template-rows: auto;
+  gap: 1rem;
+  padding: 2rem;
+  min-height: 100vh;
+  background: #f9f9fb;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.lis-main-flex {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1rem;
+  width: 100%;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.lis-sidebar {
+  background: white;
+  padding: 0.8rem;
+  border-radius: 20px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: fit-content;
+}
+
+.lis-schedule-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.8;
+}
+
+.lis-center {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 1;
+  min-width: 680px; /* 👉 그래프 깨짐 방지용 확보 */
+}
+
+.lis-menu-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+}
+
+.lis-menu-bar button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 2rem 1.5rem;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  color: #2c3e50;
+}
+
+.lis-menu-bar button:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+  background: rgba(52, 152, 219, 0.05);
+}
+
+.lis-main-content {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  min-height: 500px;
+  overflow: visible;
+}
+
+.lis-rightbar {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 350px;
+  flex-shrink: 0;
+  min-width: 300px;
+}
+
+.calendar-box,
+.chat-widget,
+.system-status {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+.calendar-box h4,
+.chat-widget h4,
+.system-status h4 {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+}
+
+.chat-btn {
+  background: #2ecc71;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 0.7rem 1rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 0.5rem;
+  transition: background 0.2s ease;
+}
+
+.chat-btn:hover {
+  background: #27ae60;
+}
+
+.system-status ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.8;
+}
+
+.react-calendar__navigation__label {
+  display: flex;
+  align-items: center;     /* ✅ 수직 중앙 정렬 */
+  justify-content: center; /* ✅ 수평 중앙 정렬 */
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+
+@media (max-width: 1100px) {
+  .lis-dashboard-grid {
+    grid-template-columns: 1fr 2fr;
+    grid-template-areas:
+      \"left main\"
+      \"right right\";
+  }
+
+  .lis-leftbar {
+    grid-area: left;
+  }
+
+  .lis-maincontent {
+    grid-area: main;
+  }
+
+  .lis-rightbar {
+    grid-area: right;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .calendar-box {
+    width: 48%;
+  }
+
+  .status-box {
+    width: 48%;
+  }
+}

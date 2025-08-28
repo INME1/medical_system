@@ -1,0 +1,104 @@
+/* components/common/Modal.css */
+
+/* ✅ 모달 오버레이 기본 스타일 - 덜 어둡게 */
+.modal-overlay {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  background-color: rgba(0, 0, 0, 0.3) !important; /* ✅ 30% 투명도 */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 10000 !important; /* ✅ 로딩 오버레이보다 높게 */
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* 모달 컨텐츠 */
+.modal-content {
+  background: white !important;
+  border-radius: 12px !important;
+  padding: 2rem !important;
+  max-width: 500px !important;
+  width: 90% !important;
+  max-height: 90vh !important;
+  overflow-y: auto !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important;
+  position: relative !important;
+  animation: slideIn 0.3s ease-out;
+}
+
+/* 닫기 버튼 스타일 */
+.modal-close-button {
+  position: absolute !important;
+  top: 1rem !important;
+  right: 1rem !important;
+  background: none !important;
+  border: none !important;
+  font-size: 1.5rem !important;
+  cursor: pointer !important;
+  color: #6b7280 !important;
+  padding: 0.25rem !important;
+  border-radius: 4px !important;
+  line-height: 1 !important;
+  transition: color 0.2s, background-color 0.2s !important;
+}
+
+.modal-close-button:hover {
+  color: #374151 !important;
+  background-color: #f3f4f6 !important;
+}
+
+/* ✅ z-index 충돌 방지 - 명시적으로 설정 */
+.dashboard-main .modal-overlay {
+  z-index: 10000 !important;
+}
+
+.dashboard-main .loading-overlay {
+  z-index: 9999 !important;
+}
+
+/* ✅ 다른 CSS 프레임워크와 충돌 방지 */
+body.modal-open {
+  overflow: hidden;
+}
+
+/* 애니메이션 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* 모바일 대응 */
+@media (max-width: 768px) {
+  .modal-content {
+    margin: 1rem !important;
+    width: calc(100% - 2rem) !important;
+    max-height: calc(100vh - 2rem) !important;
+  }
+}
+
+/* ✅ 전역적으로 모든 모달 오버레이를 덜 어둡게 */
+[class*="modal-overlay"],
+[class*="Modal__overlay"],
+.modal-backdrop,
+.ReactModal__Overlay {
+  background-color: rgba(0, 0, 0, 0.3) !important;
+  z-index: 10000 !important;
+}
